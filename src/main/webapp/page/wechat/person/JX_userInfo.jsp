@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="${pageContext.request.contextPath}/source/bootstrap/css/common.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/source/css/cloud-admin.css" >
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap-datetimepicker.css" >
+
 </head>
 <style type="text/css">
 .jx_font {
@@ -52,12 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        format: 'YYYY-MM-DD',  
 	        locale: moment.locale('zh-cn')  
 	   });
-	   var birthday = "${birthday}";
-	   if(birthday != ""){
-	      $('#exampleInputBirth').removeAttr('style','display');
-	      $('#datetimepicker1').css('display','none');
-	   } 
-    });
+
     function saveUserInfo(){
        var name = $('#exampleInputName2').val();
        var mobile = $("#phoneNo").val();
@@ -84,16 +80,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             dataType:"JSON",
             data:formData,
             success: function(data){
-   
-                if(data.code == 1){             
-                   alert("保存成功！");
+            var info = null;
+                if(data.code == 1){
+                   info = "保存成功！";          
+                   dealWithAlert(info);
                    window.location.href = "PerCentral/jxPerson.do";
                 }else if(data.code == 2){
-                   alert("验证码有误，请重新输入!");
+                   info = "验证码有误，请重新输入!";          
+                   dealWithAlert(info);
+                  
                 }else if(data.code == 3){
-                   alert("两次输入的密码不一致，请重新输入!");
+                   info = "两次输入的密码不一致，请重新输入!";          
+                   dealWithAlert(info);
+                   
                 }else if(data.code == 0){
-                   alert("解绑新的手机号存在，不能解绑！");
+                   info = "解绑新的手机号存在，不能解绑！";          
+                   dealWithAlert(info);                 
                    alterPhone();
                 }else{
                    alert("保存失败!");
@@ -188,6 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="glyphicon glyphicon-calendar"></span>  
 				</span>  
 			</div>
+			 
 			<div id="exampleInputBirth" style="display: none;">
 			    <input type="text" class="form-control" readOnly="true" value="${birthday}" style="width: 220px;height: 30px;">
 			</div>

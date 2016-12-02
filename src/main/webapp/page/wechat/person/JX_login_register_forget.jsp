@@ -546,27 +546,27 @@ body {
 		         var info = null; 		
 	     	     if(data.code == 1){
 	     	        info = "新密码修改成功！";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		            reload();
 		         }else if(data.code == 2){
 		            info = "两次密码不一致，请重新输入！";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		           
 		         }else if(data.code == 3){
 		            info = "该用户受限制！";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		            
 		         }else if(data.code == 4){
 		            info = "该用户未注册！";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		            
 		         }else if(data.code == 5){
 		            info = "验证码错误！请重新输入";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		            
 		         }else {
 		            info = "修改密码失败！请重新修改密码";
-                    ealWithAlert(info);
+                    dealWithAlert(info);
 		            
 		         }		
 		     },

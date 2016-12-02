@@ -184,7 +184,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         for (i = 1; i <= aLi.length; i++) {
             aLi[i - 1].index = i;
 
-            //鼠标移过显示分数
+			//点击后进行评分处理
+            aLi[i - 1].onclick = function() {
+                iStar = this.index;
+                fnPoint(this.index);
+                $("#grade").val(this.index);
+                oP.style.display = "none";
+                /* oSpan.innerHTML = "<strong>" + (this.index) + " 分</strong> ("
+                        + aMsg[this.index - 1]+ ")" */
+                $(oSpan).html("<strong>" + (this.index) + " 分</strong> ("
+                        + aMsg[this.index - 1]/* .match(/\|(.+)/)[1] */ + ")");
+            }
+            
+            /* //鼠标移过显示分数
             aLi[i - 1].onmouseover = function() {
                 fnPoint(this.index);
                 //浮动层显示
@@ -203,16 +215,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 fnPoint();
                 //关闭浮动层
                 oP.style.display = "none"
-            };
+            }; */
 
-            //点击后进行评分处理
-            aLi[i - 1].onclick = function() {
-                iStar = this.index;
-                $("#grade").val(this.index);
-                oP.style.display = "none";
-                oSpan.innerHTML = "<strong>" + (this.index) + " 分</strong> ("
-                        + aMsg[this.index - 1]/* .match(/\|(.+)/)[1] */ + ")"
-            }
         }
 
     //评分处理

@@ -128,7 +128,8 @@
    <select id="getAutoKeyWord" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_auto
+    from t_auto 
+    where flag = 1
    </select>
    <select id="getAnswerByQuestion" resultMap="BaseResultMap" parameterType="com.jxlt.stage.model.Auto">
     select

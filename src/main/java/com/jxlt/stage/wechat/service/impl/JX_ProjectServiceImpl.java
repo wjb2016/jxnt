@@ -156,9 +156,24 @@ public class JX_ProjectServiceImpl implements JX_ProjectService {
 		projectImageMapper.updateProjectImgByProId(id);
 	}
 
+	/**
+	 * 取工程图图片
+	 */
 	@Override
 	public List<ProjectImage> getOrderImageList() {
-		List<ProjectImage> orderImageList = projectImageMapper.getProjectImageListInfo();
+		List<ProjectImage> orderImageList = null;
+		try {
+			orderImageList = projectImageMapper.getProjectImageListInfo();
+			for(ProjectImage p:orderImageList){
+				String mobile = p.getUserMobile().substring(3, 7);
+				mobile = p.getUserMobile().replace(mobile, "****");
+				p.setUserMobile(mobile);
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 		return orderImageList;
 	}
 

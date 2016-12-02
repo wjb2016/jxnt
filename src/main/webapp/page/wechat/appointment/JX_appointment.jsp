@@ -190,13 +190,13 @@ body {
         </div>
         
 	    <div style="margin-top: 30px;">
-	        <label> 咨询热线：(028)85554462，13689004567 <br>
-                                        公司名称：成都市精欣暖通工程有限公司  <br>
-                                        公司地址：四川省成都市武侯区金履一路  <br>                                          
-                   218号优博广场2栋4层2-403
-            </label>
+	        <span style="display: block;">咨询热线：(028)85554462,13689004567 </span>
+            <span style="display: block;">公司名称：成都市精欣暖通工程有限公司 </span>
+            <span style="display: block;">公司地址：四川省成都市武侯区金履一路 </span>                                         
+            <span style="display: block; margin-left: 63px;">218号优博广场2栋4层2-403</span>
+            
             <div id="car" style="display:none;">
-                 <label style="margin-right: 194px;">乘车路线:</label>	                   
+                 <span style="display: block; margin-right: 183px;">乘车路线：</span>	                   
                  <table>                       
                        <tr>
                           <td align="left"><span style="margin-left: 60px;">57路到川藏路武侯大道口下车步行760米</span></td>         

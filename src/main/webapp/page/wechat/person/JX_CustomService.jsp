@@ -25,7 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="${pageContext.request.contextPath}/source/bootstrap/css/common.css" type="text/css">
 
 <style type="text/css">
-
 html, body {
 	margin: 0;
 	padding: 0;
@@ -65,18 +64,27 @@ html, body {
 	height: 60px;
 	margin-top: -86px;
 }
-.custom{
-    background: #e1891e;
-    border: 1px solid #e1891e;        
+
+.custom {
+	background: #e1891e;
+	border: 1px solid #e1891e;
+	display: inline-block;
+	width: 18%;
+	height: 40px;
+	color: white;
+	
+	text-align: center;
+	padding-top: 4px;
+	line-height: 40px;
 }
 
-#message tr td{
-	padding:10px;
+#message tr td {
+	padding: 10px;
 }
 
- body{
-    overflow-x: hidden;
-} 
+body {
+	overflow-x: hidden;
+}
 </style>
 <script type="text/javascript">
     function showSendMessage(question){
@@ -91,7 +99,7 @@ html, body {
                 if(data.code == 1){
 					sendMessages(question,data.obj.answer);
 				}else{
-					sendMessages(question,"亲,请输入<span style='color:red;font-weight: bold;font-size：20px;'onclick='show()'>我需要帮助</span>查看信息关键词!");
+					sendMessages(question,"亲,请点击<span style='color:red;font-weight: bold;font-size：20px;'onclick='show()'>我需要帮助</span>查看信息关键词!");
 				}
                 
              },
@@ -158,16 +166,20 @@ html, body {
 	 
 	</div> 
     <div id="footer">
-      <table>
+      <input type="text" id="question" placeholder="请选择怎么勾搭客服小妹" onKeyDown="eKeyup(event)" style="width: 80%;line-height: 40px;height: 40px;border-radius: 0px;"/>
+      <a href="javascript:void(0);"></a><span class="custom" style=""
+       onclick="showSendMessage()">发送</span>
+      
+      <!-- <table>
         <tr>
-           <td style="width: 89.5%;">
-              <input type="text" class="custom_input" id="question" placeholder="请选择怎么勾搭客服小妹" onKeyDown="eKeyup(event)" style="width: 100%;height: 40px;border-radius: 0px;"/>
+           <td width = "85%;">
+              <input type="text" id="question" placeholder="请选择怎么勾搭客服小妹" onKeyDown="eKeyup(event)" style="width: 100%;line-height: 40px;height: 40px;border-radius: 0px;"/>
            </td>
-           <td>
-              <a href="javascript:void(0);"></a><button class="custom" style="width: 200%;height: 40px;color:white;margin-top:-10px;margin-left: 4px;" onclick="showSendMessage()">发送</button>
+           <td width = "15%;">
+              <a href="javascript:void(0);"></a><span class="custom" style="display:inline-block;width: 100%;height: 40px;color:white;margin-top:-10px;" onclick="showSendMessage()">发送</span>
            </td>
         </tr>
-      </table>
+      </table> -->
      </div> 
     </div> 
   </body>

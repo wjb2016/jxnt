@@ -9,9 +9,13 @@
     <result column="oper_id" property="operId" jdbcType="INTEGER" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="INTEGER" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, project_id, image_path, description, oper_id, message, permission
+  </sql>
+   <sql id="Base_Column_List1" >
+    t.id, t.project_id, t.image_path, t.description, t.oper_id, t.message, t.permission
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -145,9 +149,11 @@
   </select>
   <select id="getProjectImageListInfo" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from t_project_image 
-    where permission = 2
+    <include refid="Base_Column_List1" />,t2.mobile as user_mobile
+    from t_project_image t
+    left join t_project t1 on t.project_id=t1.id
+    left join t_order t2 on t2.id=t1.order_id
+    where t.permission = 2
   </select>
   <update id="updateProjectImgByProId" parameterType="java.lang.Integer">
   	update t_project_image

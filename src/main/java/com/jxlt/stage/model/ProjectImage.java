@@ -16,6 +16,8 @@ public class ProjectImage  extends Page{
     private String message;
 
     private Integer permission;
+    //用户手机号
+    private String userMobile;
 
     public Integer getId() {
         return id;
@@ -72,4 +74,12 @@ public class ProjectImage  extends Page{
     public void setPermission(Integer permission) {
         this.permission = permission;
     }
+
+	public String getUserMobile() {
+		return userMobile;
+	}
+
+	public void setUserMobile(String userMobile) {
+		this.userMobile = userMobile;
+	}
 }
