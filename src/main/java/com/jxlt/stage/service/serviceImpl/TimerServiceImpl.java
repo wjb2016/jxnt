@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.jxlt.stage.common.utils.DateUtil;
+import com.jxlt.stage.common.utils.MessageUtil;
 import com.jxlt.stage.dao.AutoMapper;
 import com.jxlt.stage.dao.GradeMapper;
 import com.jxlt.stage.dao.LogMapper;
@@ -139,17 +140,15 @@ public class TimerServiceImpl {
 	    		
 	    		 Calendar c = Calendar.getInstance();
 	    		 c.add(Calendar.DAY_OF_MONTH, 7);
-	    		 String ctime = c.getTime().toString().substring(0, 9);
+	    		 String ctime = DateUtil.sortFormat(c.getTime());
 	    		 String mobile = p.getMobile();
-	    		 String name = p.getName();
-	    		 String message = name+"您好，您的保修服务即将到期，到期时间"+ctime+"，如要办理延保服务请尽快联系我们，超出保修时间将无法办理，精欣暖通祝你生活愉快!";
-	    		 /*
-	    		  * 调用短信模板通知用户
-	    		  */
-	    		 System.out.println(mobile+":"+message);
-	    		 code++;
+	    		 String[] message = {p.getName(),ctime};
+	    		 boolean ref = false;
+	    		 ref = MessageUtil.sendMobileMessage(mobile,"137159", message);
+	    		 if(ref)
+	    		    code++;
 	    	 }
-	    	 log.setOper("当天推送保修到期短信"+code+"条。");
+	    	 log.setOper("成功推送保修到期短信"+code+"条。");
 	    	 if(code > 0)
 	    	     logMapper.insertSelective(log);
 	    	 System.out.println(log.getOper());

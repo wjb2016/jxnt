@@ -21,4 +21,6 @@ public interface GroupItemMapper {
 	List<GroupItem> getGroupItemByGroupId(Integer id);
     //个人加入团队数据列表
 	List<GroupItem> getItemListWithUserId(Integer id);
+    //删除个人在所有团队的成员信息
+	void deleteByUserId(Integer id);
 }

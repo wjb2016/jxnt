@@ -8,6 +8,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
      <result column="flag" property="flag" jdbcType="INTEGER" />
      <result column="count" property="count" jdbcType="INTEGER" />
+     <result column="description" property="description" jdbcType="VARCHAR" />
+     <result column="leader" property="leader" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     tgp.id, tgp.name, tgp.description, tgp.create_time,tgp.flag
@@ -97,7 +99,8 @@
   
    <select id="getGroupList" parameterType="com.jxlt.stage.model.Group" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List1" />,(select count(tgi.id) from t_group_item tgi where tgi.group_id = tg.id) as count
+    <include refid="Base_Column_List1" />,tu.name as leader,
+    (select count(tgi.id) from t_group_item tgi where tgi.group_id = tg.id) as count
       <include refid="sql_query" />
       <!--  order by group(utype) -->
        order by id DESC
@@ -113,6 +116,8 @@
   
    <sql id="sql_query">
   	 from t_group tg
+  	 left join t_group_item tgi on tgi.is_leader = 2 and tgi.group_id = tg.id
+  	 left join t_user tu on tgi.user_id = tu.id
   	 where tg.flag = 1
     <if test="searchName != null and searchName != ''">
 		and ( tg.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')

@@ -7,7 +7,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="is_leader" property="isLeader" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    
   </resultMap>
   <sql id="Base_Column_List" >
     id, group_id, user_id, is_leader
@@ -96,4 +96,8 @@
      from t_group_item
      where user_id = #{0}
   </select>
+   <delete id="deleteByUserId" parameterType="java.lang.Integer" >
+    delete from t_group_item
+    where user_id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

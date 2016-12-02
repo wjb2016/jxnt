@@ -175,8 +175,14 @@ public class UserServiceImpl extends BaseController implements UserService {
 						&& oldUser.getUtype() != user.getUtype()){
 					itemlist = groupItemMapper.getItemListWithUserId(user.getId());
 					if(itemlist.size() > 0){
-						js.setMessage("该用户是工程团队成员，不可改变类型!");
-						return js;
+						//员工删除团队记录
+						if(oldUser.getUtype() == 11){
+							groupItemMapper.deleteByUserId(oldUser.getId());
+						//项目经理带团时不能变更
+						}else{
+							js.setMessage("该用户是工程团队负责人，不可改变类型!");
+							return js;
+						}					
 					}
 				}
 				userMapper.updateByPrimaryKeySelective(user);
