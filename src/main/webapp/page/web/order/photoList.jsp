@@ -113,7 +113,7 @@ function openimg(id){
 			</c:forEach>
 		</div>
 		<div class="fl yw-lump" style="margin-top: 8px;">
-			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">未公开照片</span>
+			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">待公开照片</span>
 			<c:forEach var="image" items="${unOpenList }">
 				<div style="margin-right:10px;width: 200px;display: inline-block;margin-bottom: 3px;">
 					<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
