@@ -166,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			type:"post",
 			dataType:"json",
 			success:function(data){
-				alert(data.message);
+				dealWithAlert(data.message);
 			}
 		});
 	}
@@ -197,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if (!(/(?:jpg)$/i.test(obj.value))
 				&& !(/(?:jpeg)$/i.test(obj.value))
 				&& !(/(?:png)$/i.test(obj.value))) {
-			alert("选择上传图片文件格式错误！");
+			dealWithAlert("选择上传图片文件格式错误！");
 			if (window.ActiveXObject) {//for IE
 				obj.select();//lect the file ,and clear selection
 				document.selection.clear();
@@ -223,7 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              var img = "<div style='position: relative;display: block;margin:2px auto;width:300px;height:300px;'><image style='display:block;width:300px;height:300px;' src='<%=basePath %>"+ jsondata.obj.imagePath +"'></image><span style='position:absolute;width:40px;height: 25px;background-color: #e1891e;color: white;top:0;right:0;text-align: center;line-height: 25px;' onclick='delImg(this,"+ jsondata.obj.id +")'>X</span></div>";
 		        		  $("#imgList").append(img);
 		              }else{
-		              	  alert(jsondata.message);
+		              	  dealWithAlert(jsondata.message);
 		              }
 		          } 
 		     });  

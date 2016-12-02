@@ -396,7 +396,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function saveMessage(id){
 		var message = $("#messagebox").val();
 		if(!message){
-			alert("留言评价不能为空！");
+			dealWithAlert("留言评价不能为空！");
 			return;
 		}
 		var open = $("input:radio[name='openimg']:checked").val();
@@ -406,7 +406,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			dataType:"json",
 			success:function(data){
 				closeWindow();
-				alert(data.message);
+				dealWithAlert(data.message);
 			}
 		})
 	}
@@ -415,12 +415,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function saveProMessage(id){
 		var grade = $("#grade").val();
 		if(!grade){
-			alert("请评价分值！");
+			dealWithAlert("请评价分值！");
 			return;
 		}
 		var promessage = $("#promessage").val();
 		if(!promessage){
-			alert("请输入评价内容！")
+			dealWithAlert("请输入评价内容！")
 			return;
 		}
 		var permission = $("input:radio[name='permission']:checked").val();
@@ -429,7 +429,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			type:"post",
 			dataType:"json",
 			success:function(data){
-				alert(data.message);
+				dealWithAlert(data.message);
 				$("#showStar").hide();
 				$("#assessValue").text(data.obj.assessValue);
        			$("#assessMessage").text(data.obj.assessMessage);
