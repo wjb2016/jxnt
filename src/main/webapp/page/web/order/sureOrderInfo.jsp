@@ -226,7 +226,7 @@ function surePro(obj,id){
 								<input readonly="readonly" type="text" value="净水系统" class="easyui-validatebox" style="width:254px;height:28px;" />
 							</c:if>
 						</td>
-						<td width="8%" align="right">预约时间：</td>
+						<td width="8%" align="right">交付时间：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.appointTime}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
