@@ -55,7 +55,7 @@ public class TimerServiceImpl {
         List<User> userlist = new ArrayList<User>();
 		List<Auto> autolist = new ArrayList<Auto>();
 		List<Order> orderlist = new ArrayList<Order>();
-		List<Log> loglist = new ArrayList<Log>();
+		List<Grade> gradelist = new ArrayList<Grade>();
 		
 		//积分记录基本信息
 		grade.setId(0);
@@ -168,8 +168,29 @@ public class TimerServiceImpl {
 	    	 e.printStackTrace();
 	    	 System.err.println("订时服务之删除过期日志失败!");
 	     }
+	     
+	     //积分兑换超时还原
+	     code = 0;
+	     try{
+	    	 gradelist = gradeMapper.getExpiredGrade();	    	 
+	    	 for(Grade p:gradelist){
+	    		 user = new User();
+	    		 user.setId(p.getUserId());  
+	    		 user.setGrade(p.getUserGrade()-p.getGrade());
+	    		 userMapper.updateByPrimaryKeySelective(user);
+	    		 gradeMapper.deleteByPrimaryKey(p.getId());
+	    		 code++;
+	    	 }
+	    	 log.setOper("还原超时未兑换的积分记录"+code+"条。");
+	    	 if(code > 0)
+	    	     logMapper.insertSelective(log);
+	    	 System.out.println(log.getOper());
+	     }catch(Exception e){
+	    	 e.printStackTrace();
+	    	 System.err.println("订时服务之积分兑换超时还原失败!");
+	     }
 	}
-	
+
 	
 	
 }

@@ -50,7 +50,7 @@ function pagesearch(){
 	}
 }
 function DeleteUser(id){
-    var message = "是否删除该用户?(一旦删除不可恢复!)";
+    var message = "是否删除该用户?";
    
 	$.messager.confirm("操作确认",message,function(r){  
 		    if (r){   
@@ -175,27 +175,27 @@ function ChangeFlag(id,flag){
 								    <a href="javascript:void(0);" style="color:blue;margin-right:22px;" onclick="window.location.href='<%=basePath%>User/userInfo.do?id=${item.id}'">详情</a>	
 								</c:if>
 								 <c:if test="${!(item.utype == 10 && loginUser.utype == 13) && item.utype != 11 && item.utype != 12}">								 
-								    <a href="javascript:void(0);" style="color:black;margin-right:22px;" >详情</a>	
+								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;" >详情</a>	
 								</c:if>   
 							<!-- 删除 -->  
 								<c:if test="${!(item.utype == 10 && loginUser.utype == 10) && item.utype != 13}">								 
 								    <a href="javascript:void(0);" style="color:red;margin-right:22px;" onclick="DeleteUser(${item.id})">删除</a>	 												
 							     </c:if>
 							    <c:if test="${(item.utype == 10 && loginUser.utype == 10) || item.utype == 13}">								 
-								    <a href="javascript:void(0);" style="color:black;margin-right:22px;" >删除</a>	 												
+								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;" >删除</a>	 												
 							     </c:if> 
 							 <!-- 登录权限 -->
 							     <c:if test="${(item.utype == 1 ||( item.utype == 10 && loginUser.utype == 13))&& item.flag == 2}">
 								    <a href="javascript:void(0);" style="color:green;margin-right:22px;" onclick="ChangeFlag(${item.id},${item.flag})">允许登陆</a>			
 								</c:if>
 								<c:if test="${!(item.utype == 1 ||( item.utype == 10 && loginUser.utype == 13))&& item.flag == 2}">
-								    <a href="javascript:void(0);" style="color:black;margin-right:22px;")">允许登陆</a>			
+								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;")">允许登陆</a>			
 								</c:if>
 								<c:if test="${(item.utype == 1 ||( item.utype == 10 && loginUser.utype == 13))&& item.flag == 1}">
 								    <a href="javascript:void(0);" style="color:#FBAF43;margin-right:22px;" onclick="ChangeFlag(${item.id},${item.flag})">禁止登陆</a>							
 								</c:if>
 								<c:if test="${!(item.utype == 1 ||( item.utype == 10 && loginUser.utype == 13))&& item.flag == 1}">
-								    <a href="javascript:void(0);" style="color:black;margin-right:22px;" >禁止登陆</a>							
+								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;" >禁止登陆</a>							
 								</c:if>
 							</td>							
 						</tr>

@@ -75,7 +75,7 @@ function openimg(id){
 					window.location.href = "<%=basePath %>Order/photoList.do";
 				});
 			}else{
-				$.messager.alert("错误提示","图片公开失败！","error");
+				$.messager.alert("错误提示",data.message,"error");
 			}
 		}
 	})
@@ -97,36 +97,63 @@ function openimg(id){
 				<input type="hidden" id="pageNumber" name="pageNo" value="${ProjectImage.pageNo}" />
 			</div>
 		</form>
-		<div class="fl yw-lump" style="margin-top: 8px;">
-			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">已公开照片</span>
-			<c:forEach var="item" items="${openList }">
-				<div style="margin-right:10px;width: 200px;display: inline-block;margin-bottom: 3px;">
-					<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-					<c:if test="${item.message == null || item.message == '' }">
-						<textarea readonly="readonly" rows="5" style="width: 195px;">无评价</textarea>
-					</c:if>
-					<c:if test="${item.message != null && item.message != '' }">
-						<textarea readonly="readonly" rows="5" style="width: 195px;">${item.message }</textarea>
-					</c:if>
-					<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
-				</div>
+		<div style="margin-top: 8px;width:48%;margin-right: 10px;display: inline-block;">
+			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">待公开照片</span>
+			<c:forEach var="image" items="${unOpenList }" varStatus="status">
+				<c:if test="${status.index % 2 == 0 }">
+					<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;float:left;">
+						<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
+						<c:if test="${image.message == null || image.message == '' }">
+							<textarea readonly="readonly" rows="5" style="width:195px;">无评价</textarea>
+						</c:if>
+						<c:if test="${image.message != null && image.message != '' }">
+							<textarea readonly="readonly" rows="5" style="width:195px;">${image.message }</textarea>
+						</c:if>
+						<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
+					</div>
+				</c:if>
+				<c:if test="${status.index % 2 != 0 }">
+					<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;float: right;">
+						<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
+						<c:if test="${image.message == null || image.message == '' }">
+							<textarea readonly="readonly" rows="5" style="width:195px;">无评价</textarea>
+						</c:if>
+						<c:if test="${image.message != null && image.message != '' }">
+							<textarea readonly="readonly" rows="5" style="width:195px;">${image.message }</textarea>
+						</c:if>
+						<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
+					</div>
+				</c:if>
 			</c:forEach>
 		</div>
-		<div class="fl yw-lump" style="margin-top: 8px;">
-			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">未公开照片</span>
-			<c:forEach var="image" items="${unOpenList }">
-				<div style="margin-right:10px;width: 200px;display: inline-block;margin-bottom: 3px;">
-					<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-					<c:if test="${image.message == null || image.message == '' }">
-						<textarea readonly="readonly" rows="5" style="width:195px;">无评价</textarea>
-					</c:if>
-					<c:if test="${image.message != null && image.message != '' }">
-						<textarea readonly="readonly" rows="5" style="width:195px;">${image.message }</textarea>
-					</c:if>
-					<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
-				</div>
+		<div style="margin-top: 8px;width:48%;display: inline-block;border-left: 3px solid #D2D7DC;padding-left: 10px;">
+			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">已公开照片</span>
+			<c:forEach var="item" items="${openList }" varStatus="status">
+				<c:if test="${status.index % 2 == 0 }">
+					<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;float: left;">
+						<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
+						<c:if test="${item.message == null || item.message == '' }">
+							<textarea readonly="readonly" rows="5" style="width: 195px;">无评价</textarea>
+						</c:if>
+						<c:if test="${item.message != null && item.message != '' }">
+							<textarea readonly="readonly" rows="5" style="width: 195px;">${item.message }</textarea>
+						</c:if>
+						<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
+					</div>
+				</c:if>
+				<c:if test="${status.index % 2 != 0 }">
+					<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;float: right;">
+						<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
+						<c:if test="${item.message == null || item.message == '' }">
+							<textarea readonly="readonly" rows="5" style="width: 195px;">无评价</textarea>
+						</c:if>
+						<c:if test="${item.message != null && item.message != '' }">
+							<textarea readonly="readonly" rows="5" style="width: 195px;">${item.message }</textarea>
+						</c:if>
+						<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
+					</div>
+				</c:if>
 			</c:forEach>
-			<div class="page" id="pager"></div>
 		</div>
 	</div>
 </body>

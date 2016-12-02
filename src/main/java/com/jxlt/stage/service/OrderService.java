@@ -108,4 +108,6 @@ public interface OrderService {
 	List<User> getUserByMobile(String mobile);
 
 	void saveUser(User user);
+
+	int getPermissionPhotoCount();
 }

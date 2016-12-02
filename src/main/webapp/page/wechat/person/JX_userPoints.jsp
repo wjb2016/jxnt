@@ -96,16 +96,18 @@ function cashing(){
 function cancelAssess(){
      $('#win').css('display','none');
      $('#JS_mask').css('display','none');
+     $("#cash").val("");
+     $("#pointErrorInfo").text("");
 }
 // 确定兑换积分
 function submitCashing(id){
      var point = $('#cash').val();
-     var allPoint = ${user.grade};
+     var allPoint = $("#allPoint").val();
      if(point == ""){
         $('#pointErrorInfo').text('*兑换的积分不能为空');
         return false;
      }
-     if(point > allPoint){
+     if(point - allPoint > 0){
         $('#pointErrorInfo').text('*兑换的积分不能大于用户的积分，请重新输入！');
         return false;
      }
@@ -121,16 +123,34 @@ function submitCashing(id){
         data:{grade:point,id:id},
         success: function(data){
            if(data.code == 1){
-           
-               var info = "兑换积分申请已成功提交！相关人员审核通过即可生效";
-               dealWithAlert(info);
+               dealWithAlert("兑换积分申请已成功提交！相关人员审核通过即可生效");
                // 返回上一级并刷新
-			   location.replace(document.referrer);
+			   //location.replace(document.referrer);
+			   cancelAssess();
+			   $("#afterGrade").text(allPoint-point);
+			   $("#canUsedGrade").text(allPoint-point);
+			   $("#allPoint").val(allPoint-point);
+			   var html = "<tr><td align='left' style='width: 50%;'>兑换积分</td><td align='center' style='color: red'>"+(-point)+"</td><td align='right'>";
+			   html += getNowTime() + "</td></tr>";
+			   $("table").prepend(html);
            }else{               
-               alert("兑换失败！请重新操作");
+               dealWithAlert("兑换失败！请重新操作");
            }
         },
      });
+}
+function getNowTime(){
+	var myDate = new Date();
+	var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+	var month = myDate.getMonth()+ 1;       //获取当前月份(0-11,0代表1月)
+	var day = myDate.getDate();        //获取当前日(1-31)
+	if(month < 10){
+		month = "0" + month;
+	}
+	if(day < 10){
+		day = "0" + day;
+	}
+	return year + "-" + month + "-" + day;
 }
 </script>
 <body>
@@ -143,12 +163,12 @@ function submitCashing(id){
     </header>
     
     <div class="jx_margin userPoint_font">
-        <span style="margin-left: 10px;">积分: ${user.grade}</span>
+        <span style="margin-left: 10px;">积分: <span id="afterGrade">${user.grade}</span></span>
         <a href="javascript:void(0)" style="float: right;margin-right: 30px;"><span onclick="cashing()">兑换</span></a>
     </div>
    
     <div class="jx_margin userPoint_font">
-        <p>积分明细</p>
+        <p>积分明细</p><input type="hidden" value="${user.grade}" id="allPoint"/>
     </div>
     <c:forEach var="grade" items="${gradeObj}">
     <table style="width: 99%;font-size:16px;height:auto;">
@@ -168,7 +188,7 @@ function submitCashing(id){
 	        <div style="padding-left:-20px;">
 		        <div style="font-size:16px;padding:5px 0;text-align:center;font-weight:bold;color:black;">兑换积分</div>
 			        <div style="margin-left: 30px;">
-				        <div style="margin-top: 10px;">可用积分： ${user.grade}</div> 
+				        <div style="margin-top: 10px;">可用积分： <span id="canUsedGrade">${user.grade}</span></div> 
 				        <div style="margin-top: 10px;">本次兑换：<input type="text" id="cash" class="point" style="border: 1px solid #cec0c0;"/></div>
 				        <span id="pointErrorInfo" class="errFont"></span>
 				    </div> 
