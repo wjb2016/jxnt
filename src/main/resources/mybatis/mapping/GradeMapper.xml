@@ -10,6 +10,7 @@
     <result column="oper_id" jdbcType="INTEGER" property="operId" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+     <result column="user_grade" jdbcType="INTEGER" property="userGrade" />
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, grade, create_time, description, oper_id,mobile
@@ -120,7 +121,7 @@
     select 
     <include refid="Base_Column_List1" />,tu.name as user_name
       <include refid="sql_query" />
-       order by tg.id DESC
+       order by tg.oper_id,tg.grade
   	 <if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
         limit #{pageStart}, #{pageSize}
     </if>
@@ -169,4 +170,14 @@
      from t_grade
      where user_id = #{userId,jdbcType=INTEGER} order by id desc
    </select>
+    <select id="getExpiredGrade" parameterType="com.jxlt.stage.model.Grade" resultMap="BaseResultMap" >
+    select 
+     <include refid="Base_Column_List1" />,tu.grade as user_grade
+      from t_grade tg
+      left join t_user tu on tu.id=tg.user_id
+    where 1=1
+    and tg.oper_id = 0
+    and 0 > tg.grade
+    and DATEDIFF(now(),tg.create_time) > 1
+  </select>
 </mapper>

@@ -22,6 +22,8 @@ public class Grade extends Page{
     private Integer operId;
     //被推荐人手机号
     private String mobile;
+    //用户总积分
+    private Integer userGrade;
 
     public Integer getId() {
         return id;
@@ -93,5 +95,13 @@ public class Grade extends Page{
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public Integer getUserGrade() {
+		return userGrade;
+	}
+
+	public void setUserGrade(Integer userGrade) {
+		this.userGrade = userGrade;
 	}
 }
