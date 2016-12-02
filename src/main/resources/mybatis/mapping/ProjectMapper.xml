@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.Project" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_type_id" property="orderTypeId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="began_time" property="beganTime" jdbcType="TIMESTAMP" />
+    <result column="assess_value" property="assessValue" jdbcType="INTEGER" />
+    <result column="assess_message" property="assessMessage" jdbcType="VARCHAR" />
+    <result column="assess_user_id" property="assessUserId" jdbcType="INTEGER" />
+    <result column="permission" property="permission" jdbcType="INTEGER" />
+    <result column="groupName" property="groupName" jdbcType="VARCHAR" />
+    <result column="typeName" property="typeName" jdbcType="VARCHAR" />
+    <result column="assessUserName" property="assessUserName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="contract_number" property="contractNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tpj.id, tpj.name, tpj.group_id, tpj.order_id, tpj.order_type_id, tpj.start_time, tpj.end_time, tpj.status, tpj.finish_time, tpj.began_time, 
+    tpj.assess_value, tpj.assess_message, tpj.assess_user_id, tpj.permission,tpj.description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project tpj
+    where tpj.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.Project" >
+    insert into t_project (id, name, group_id, 
+      order_id, start_time, end_time, 
+      status, finish_time, began_time, 
+      assess_value, assess_message, assess_user_id, 
+      permission,description)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, #{beganTime,jdbcType=TIMESTAMP}, 
+      #{assessValue,jdbcType=INTEGER}, #{assessMessage,jdbcType=VARCHAR}, #{assessUserId,jdbcType=INTEGER}, 
+      #{permission,jdbcType=INTEGER},#{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.Project" >
+    insert into t_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderTypeId != null" >
+        order_type_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="beganTime != null" >
+        began_time,
+      </if>
+      <if test="assessValue != null" >
+        assess_value,
+      </if>
+      <if test="assessMessage != null" >
+        assess_message,
+      </if>
+      <if test="assessUserId != null" >
+        assess_user_id,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+       <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTypeId != null" >
+        #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beganTime != null" >
+        #{beganTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessValue != null" >
+        #{assessValue,jdbcType=INTEGER},
+      </if>
+      <if test="assessMessage != null" >
+        #{assessMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="assessUserId != null" >
+        #{assessUserId,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=INTEGER},
+      </if>
+        <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.Project" >
+    update t_project
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTypeId != null" >
+        order_type_id = #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beganTime != null" >
+        began_time = #{beganTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessValue != null" >
+        assess_value = #{assessValue,jdbcType=INTEGER},
+      </if>
+      <if test="assessMessage != null" >
+        assess_message = #{assessMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="assessUserId != null" >
+        assess_user_id = #{assessUserId,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=INTEGER},
+      </if>
+       <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.Project" >
+    update t_project
+    set name = #{name,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      began_time = #{beganTime,jdbcType=TIMESTAMP},
+      assess_value = #{assessValue,jdbcType=INTEGER},
+      assess_message = #{assessMessage,jdbcType=VARCHAR},
+      assess_user_id = #{assessUserId,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getProjectListById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />,tgp.name as groupName,tot.name as typeName
+    from t_project tpj
+    left join t_group tgp on tpj.group_id = tgp.id
+    left join t_order_type tot on tpj.order_type_id = tot.id 
+    where tpj.order_id = #{id}
+  </select>
+  
+  <select id="getProjectListByUserId" parameterType="java.lang.Integer" resultType="java.lang.String">
+  	select 
+  	DISTINCT tod.contract_number as contract_number  
+    from t_project tpj
+    join t_order tod on tod.id = tpj.order_id and tod.status = 4
+    join t_group tgp on tgp.id = tpj.group_id
+    join t_group_item tgi on tgi.group_id = tgp.id
+    <if test="userType != 1">
+	    and tgi.is_leader in (1,2) 
+    </if>
+    where tgi.user_id = #{userId}
+  </select>
+  <!-- 查找同一个项目里同名的工程数量 -->
+  <select id="getExistProjectByName" parameterType="com.jxlt.stage.model.Project" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from t_project tpj
+  	where 1 = 1
+  	<if test="orderId != null and orderId != 0" >
+        and tpj.order_id = #{orderId,jdbcType=INTEGER}
+    </if>
+    <if test="id != null and id != 0">
+    	and tpj.id != #{id,jdbcType=INTEGER}
+    </if>
+    <if test="name != null and name != ''">
+    	and tpj.name = #{name,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="getProjectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />,tus.name as assessUserName
+  	from t_project tpj
+  	left join t_user tus on tpj.assess_user_id = tus.id
+  	where tpj.id = #{id}
+  </select>
+  
+  <update id="updateProByOrderId" parameterType="java.lang.Integer">
+  	update t_project
+  	set status = 0
+  	where order_id = #{id} and status = 3
+  </update>
+  
+  <select id="getProjectListByConNum" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from t_project tpj
+  	left join t_order tod on tpj.order_id = tod.id
+  	<if test="userType != 1">
+	  	left join t_group tgp on tgp.id = tpj.group_id
+	    left join t_group_item tgi on tgi.group_id = tgp.id
+	</if>
+  	where tod.contract_number = #{contractNum}
+  	<if test="userType != 1">
+	  	and tpj.status in(0,1)
+	  	and tgi.user_id = #{userId}
+	  	and tgi.is_leader in (1,2)
+  	</if>
+  </select>
+  
+  <select id="getRemainProListById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from t_project tpj
+  	where tpj.order_id = #{id}
+  	and tpj.status in(0,1)
+  </select>
+  
+</mapper>

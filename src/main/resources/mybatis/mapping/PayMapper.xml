@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.PayMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.Pay" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="INTEGER" />
+    <result column="pay_price" property="payPrice" jdbcType="DOUBLE" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="pay_back_price" property="payBackPrice" jdbcType="DOUBLE" />
+    <result column="pay_back_time" property="payBackTime" jdbcType="TIMESTAMP" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="c_contract" property="cContract" jdbcType="VARCHAR" />
+    <result column="order_contract" property="orderContract" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, contract_id, pay_price, pay_time, pay_back_price, pay_back_time, pay_type
+  </sql>
+  <sql id="Base_Column_List1" >
+    tp.id, tp.order_id, tp.contract_id, tp.pay_price, tp.pay_time, tp.pay_back_price, tp.pay_back_time, tp.pay_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_pay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.Pay" >
+    insert into t_pay (id, order_id, contract_id, 
+      pay_price, pay_time, pay_back_price, 
+      pay_back_time, pay_type)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{contractId,jdbcType=INTEGER}, 
+      #{payPrice,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP}, #{payBackPrice,jdbcType=DOUBLE}, 
+      #{payBackTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.Pay" >
+    insert into t_pay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="payPrice != null" >
+        pay_price,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="payBackPrice != null" >
+        pay_back_price,
+      </if>
+      <if test="payBackTime != null" >
+        pay_back_time,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="payPrice != null" >
+        #{payPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payBackPrice != null" >
+        #{payBackPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payBackTime != null" >
+        #{payBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.Pay" >
+    update t_pay
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="payPrice != null" >
+        pay_price = #{payPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payBackPrice != null" >
+        pay_back_price = #{payBackPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payBackTime != null" >
+        pay_back_time = #{payBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.Pay" >
+    update t_pay
+    set order_id = #{orderId,jdbcType=INTEGER},
+      contract_id = #{contractId,jdbcType=INTEGER},
+      pay_price = #{payPrice,jdbcType=DOUBLE},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_back_price = #{payBackPrice,jdbcType=DOUBLE},
+      pay_back_time = #{payBackTime,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="getPayList" parameterType="com.jxlt.stage.model.Pay" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List1" />,
+        tod.contract_number as order_contract,tc.contract_number as c_contract
+      <include refid="sql_query" />
+       order by tp.id DESC
+  	 <if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="getPayCount" parameterType="com.jxlt.stage.model.Pay" resultType="java.lang.Integer">
+    select count(tp.id)
+    <include refid="sql_query" />
+  </select>
+
+  <sql id="sql_query">
+  	 from t_pay tp
+  	 left join t_contract tc on tp.contract_id = tc.id
+  	 left join t_order tod on tp.order_id = tod.id
+  	 where 1=1
+    <if test="searchName != null and searchName != ''">
+		and (tc.contract_number like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		    or tod.contract_number like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%') )
+	</if>
+	  <if test="startTime != null and endTime != ''">
+		and(tp.pay_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+	    	or tp.pay_back_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}) 
+	</if> 
+  </sql>
+   <resultMap id="VMResultMap" type="com.jxlt.stage.model.PayVM" >
+    <result column="orderCount" property="orderCount" jdbcType="INTEGER" />
+    <result column="orderAmount" property="orderAmount" jdbcType="DOUBLE" />
+   <result column="allCount" property="allCount" jdbcType="INTEGER" />
+   <result column="assessCount" property="assessCount" jdbcType="INTEGER" />
+    <result column="assessValue" property="assessValue" jdbcType="INTEGER" />
+     <result column="payCount" property="payCount" jdbcType="INTEGER" />
+     <result column="payAmount" property="payAmount" jdbcType="DOUBLE" />
+  </resultMap>
+  <!--  <select id="getSaleAmount" parameterType="com.jxlt.stage.model.Pay" resultMap="VMResultMap">
+  select 
+          sum(tp.pay_price - tp.pay_back_price) as payAmount,
+          count(tp.id) as payCount,
+          sum(tp1.pay_price - tp1.pay_back_price) as orderAmount,
+          count(tp1.id) as orderCount,
+          count(tod1.id) as allCount,
+          count(DISTINCT (Select count(t1.id) from t_project t1 where t1.order_id = tod.id and t1.assess_value > 0)) as assessCount,
+          sum(DISTINCT (Select sum(t1.assess_value) from t_project t1 where t1.order_id = tod.id and t1.assess_value > 0)) as assessValue
+    from t_pay tp
+         left join t_order tod1 on tp.order_id = tod1.id        
+         left join t_order tod on tod1.id = tod.id and tod.status = '6'       
+         left join t_pay tp1 on tp1.order_id = tod.id
+    where 1=1
+      <if test="startTime != null and endTime != ''">
+		and(tp.pay_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+	    	or tp.pay_back_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}) 
+	</if> 
+	  <if test="orderType != null and orderType > 0">
+		     and tod1.order_type_id = #{orderType,jdbcType=INTEGER}
+	     </if>
+  </select>
+   -->
+  <update id="updatePayByOrderId" parameterType="com.jxlt.stage.model.Pay">
+  	update t_pay
+  	set pay_back_time = #{payBackTime},
+  	pay_back_price = #{payBackPrice}
+  	where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <select id="getSaleAmount" parameterType="com.jxlt.stage.model.Pay" resultMap="VMResultMap">   
+    <!-- 支付表记录数(查询条件:支付、退款时间,订单类型) -->
+    select count(tp.id) as payCount,
+     <!-- 支付表记录总金额(查询条件:支付、退款时间,订单类型) -->
+     sum(tp.pay_price - tp.pay_back_price) as payAmount,
+     <!-- 有效订单总数(查询条件:下单时间,订单类型) -->
+    (select count(tod.id) 
+	    from t_order tod 
+	    where 1=1 and tod.status >= 2
+	    <include refid="sale_searchType" />
+	    <include refid="sale_searchCreateTime" />
+    ) as allCount,
+    <!-- 工程表记录评价总条数(查询条件:订单类型（同一订单存在多段工程评价）) -->
+     (select count(t2.id) 
+	     from t_project t2 left join t_order tod on t2.order_id = tod.id
+          where 1=1 
+          and t2.assess_value > 0 
+          <include refid="sale_searchType" />
+          <include refid="sale_searchCreateTime" />
+     ) as assessCount,
+      <!-- 工程表记录总值(查询条件:订单类型（同一订单存在多段工程评价）) -->
+     (select sum(t2.assess_value) 
+           from t_project t2 left join t_order tod on t2.order_id = tod.id
+          where 1=1
+          and t2.assess_value > 0 
+          <include refid="sale_searchType" />
+          <include refid="sale_searchCreateTime" />
+      ) as assessValue,
+      <!-- 支付表已成交订单记录数(查询条件:订单类型，支付、退款时间) -->
+	(select count(tp.id) 
+			from t_pay tp left join t_order tod on tod.id = tp.order_id 
+			where 1=1 
+			and tod.`status` = '6'
+	       <include refid="sale_searchType" /> 
+	       <include refid="sale_searchTime" />
+	 )as orderCount,
+	   <!-- 支付表已成交订单总金额(查询条件:订单类型，支付、退款时间) -->
+	(select sum(tp.pay_price - tp.pay_back_price)
+		 from t_pay tp left join t_order tod on tod.id = tp.order_id 
+		 where 1=1 
+		 and tod.`status` = '6'
+		 <include refid="sale_searchType" /> 
+		 <include refid="sale_searchTime" />
+	 )as orderAmount
+	from t_pay tp left join t_order tod on tod.id = tp.order_id
+	where 1=1
+	<include refid="sale_searchType" />
+	<include refid="sale_searchTime" />
+  </select>
+  
+  <sql id="sale_searchType">
+   <if test="orderType != null and orderType > 0">
+       and tod.order_type_id = #{orderType,jdbcType=INTEGER}
+    </if>
+    <if test="orderType == null or orderType == 0">
+       and tod.order_type_id in (1,2,3)
+    </if>
+ </sql>
+ <sql id="sale_searchTime">
+   <if test="startTime != null and endTime != ''">
+		and(tp.pay_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+	    	or tp.pay_back_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}) 
+   </if> 
+ </sql>
+ <sql id="sale_searchCreateTime">
+   <if test="startTime != null and endTime != ''">
+		and tod.create_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE} 
+   </if> 
+ </sql>
+</mapper>

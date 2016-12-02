@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxlt.stage.dao.OrderTypeMapper">
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.OrderType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="acount" property="childrenCount" jdbcType="INTEGER" />
+    <result column="parentName" property="parentName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tot.id, tot.parent_id, tot.name, tot.description, tot.image_path, tot.flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_type tot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update t_order_type
+    set flag = 0
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.OrderType">
+    insert into t_order_type (id, parent_id, name, 
+      description, image_path)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.OrderType" useGeneratedKeys="true" keyProperty="id">
+    insert into t_order_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.OrderType">
+    update t_order_type
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.OrderType">
+    update t_order_type
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <sql id="common">
+  	from t_order_type tot
+  	left join t_order_type tot2 on tot.parent_id = tot2.id
+  	where 1 = 1
+  	<if test="parentId != null" >
+        and tot.parent_id = #{parentId,jdbcType=INTEGER}
+    </if>
+  	<if test="searchName != null and searchName !=''" >
+        and tot.NAME like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+     </if>
+  </sql>
+  
+  <!-- 根据条件获取品牌节点集合 -->
+  <select id="getItemList" parameterType="com.jxlt.stage.model.OrderType" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>,
+  	(select count(*) from t_order_type tot1 where tot1.parent_id = tot.id and tot1.flag = 1) as acount,  	
+  	tot2.name as parentName
+  	<include refid="common"/>
+  	order by tot.id desc
+  	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+  
+  <!-- 根据条件获取品牌总数 -->
+  <select id="getTotalCount" parameterType="com.jxlt.stage.model.OrderType" resultType="java.lang.Integer">
+  	select count(tot.id)
+  	<include refid="common"/>
+  </select>
+  
+  <!-- 根据id获取品牌 -->
+  <select id="getOrderTypeById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>,
+  	tot2.name as parentName
+  	from t_order_type tot
+  	left join t_order_type tot2 on tot.parent_id = tot2.id
+  	where tot.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 取品牌名称相同的品牌数量 -->
+  <select id="getExistType" parameterType="com.jxlt.stage.model.OrderType" resultType="int">
+  	select count(id)
+  	from t_order_type
+  	where name = #{name} and id != #{id}
+  </select>
+  
+  <!-- 获取订单品牌类型所属的所有品牌 -->
+  <select id="getTypeByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from t_order_type tot
+  	where tot.flag = 1
+  	and tot.parent_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

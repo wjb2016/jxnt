@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.ProjectImageMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.ProjectImage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="oper_id" property="operId" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_id, image_path, description, oper_id, message, permission
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_project_image
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.ProjectImage" >
+    insert into t_project_image (id, project_id, image_path, 
+      description, oper_id, message, 
+      permission)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{imagePath,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{operId,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, 
+      #{permission,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.ProjectImage" keyProperty="id" useGeneratedKeys="true">
+    insert into t_project_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="operId != null" >
+        oper_id,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.ProjectImage" >
+    update t_project_image
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="operId != null" >
+        oper_id = #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.ProjectImage" >
+    update t_project_image
+    set project_id = #{projectId,jdbcType=INTEGER},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      oper_id = #{operId,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <sql id="common">
+  	from t_project_image
+  	where 1=1
+  	<if test="permission != null">
+  		and permission = #{permission,jdbcType=INTEGER}
+  	</if>
+  </sql>
+  <select id="getImageById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    from t_project_image
+    where project_id = #{projectId}
+  </select>
+  
+  <select id="getImageList" parameterType="com.jxlt.stage.model.ProjectImage" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	<include refid="common"/>
+  	order by id DESC
+ 	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+       limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+  
+  <select id="getImageCount" parameterType="com.jxlt.stage.model.ProjectImage" resultType="java.lang.Integer">
+  	select count(id)
+  	<include refid="common"/>
+  </select>
+  <select id="getProjectImageListInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_project_image 
+    where permission = 2
+  </select>
+  <update id="updateProjectImgByProId" parameterType="java.lang.Integer">
+  	update t_project_image
+  	set permission = 1
+  	where project_id = #{projectId}
+  </update>
+</mapper>

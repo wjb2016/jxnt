@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxlt.stage.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="ref_user" jdbcType="INTEGER" property="refUser" />
+    <result column="share" jdbcType="VARCHAR" property="share" />
+    <result column="utype" jdbcType="INTEGER" property="utype" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="psd" jdbcType="VARCHAR" property="psd" />
+     <result column="sex" jdbcType="INTEGER" property="sex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, mobile, address, ref_user, share, utype, grade, flag,psd,sex,birth
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.User">
+    insert into t_user (id, name, mobile, 
+      address, ref_user, share, 
+      utype, grade, flag,psd,sex)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{refUser,jdbcType=INTEGER}, #{share,jdbcType=VARCHAR}, 
+      #{utype,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER},
+       #{psd,jdbcType=VARCHAR},#{sex,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.User" keyProperty="id" useGeneratedKeys="true">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="refUser != null">
+        ref_user,
+      </if>
+      <if test="share != null">
+        share,
+      </if>
+      <if test="utype != null">
+        utype,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+       <if test="psd != null">
+        psd,
+      </if>
+       <if test="sex != null">
+        sex,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="refUser != null">
+        #{refUser,jdbcType=INTEGER},
+      </if>
+      <if test="share != null">
+        #{share,jdbcType=VARCHAR},
+      </if>
+      <if test="utype != null">
+        #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+       <if test="psd != null">
+        #{psd,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.User">
+    update t_user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="refUser != null">
+        ref_user = #{refUser,jdbcType=INTEGER},
+      </if>
+      <if test="share != null">
+        share = #{share,jdbcType=VARCHAR},
+      </if>
+      <if test="utype != null">
+        utype = #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="psd != null">
+        psd = #{psd,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+       <if test="birth != null">
+        birth = #{birth,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.User">
+    update t_user
+    set name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      ref_user = #{refUser,jdbcType=INTEGER},
+      share = #{share,jdbcType=VARCHAR},
+      utype = #{utype,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      psd = #{psd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="common">
+  	from t_user
+    where 1=1 and (flag = 1 or flag = 2)
+  	<if test="mobile != null">
+	   and mobile = #{mobile,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="getUserByMobile" parameterType="com.jxlt.stage.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    <include refid="common"/>
+  </select>
+
+  <select id="getUserList" parameterType="com.jxlt.stage.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+      <include refid="sql_query" />
+      <!--  order by group(utype) -->
+       order by id DESC
+  	 <if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="getUserCount" parameterType="com.jxlt.stage.model.User" resultType="java.lang.Integer">
+    select count(*)
+    <include refid="sql_query" />
+  </select>
+
+  <sql id="sql_query">
+  	 from t_user 
+  	 where flag != 0
+    <if test="searchName != null and searchName != ''">
+		and ( name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		or mobile like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		or address like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%'))
+	</if>
+	  <if test="searchUtype != null and searchUtype > 0">
+		and utype = #{searchUtype,jdbcType=INTEGER}
+	</if> 
+  </sql>
+  
+  <select id="getExistUser" parameterType="com.jxlt.stage.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+      from t_user
+      where flag != 0
+      and id != #{id,jdbcType=INTEGER}
+      and mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getUserOnlyByMobile" parameterType="com.jxlt.stage.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+      from t_user
+      where 1=1
+      and mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getUserByUtype" parameterType="com.jxlt.stage.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+      from t_user
+      where flag != 0
+      and utype = #{utype,jdbcType=INTEGER}
+      order by id desc
+  </select>
+  
+  <select id="getBirthList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where flag=1
+    and  month(birth)=month(NOW()) 
+     and day(birth)=day(now())
+  </select>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.Group" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+     <result column="flag" property="flag" jdbcType="INTEGER" />
+     <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tgp.id, tgp.name, tgp.description, tgp.create_time,tgp.flag
+  </sql>
+  <sql id="Base_Column_List1" >
+    tg.id, tg.name, tg.description, tg.create_time,tg.flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_group tgp
+    where tgp.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.Group" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_group ( name, description, 
+      create_time,flag)
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP},#{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.Group" >
+    insert into t_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.Group" >
+    update t_group
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.Group" >
+    update t_group
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="getGroupList" parameterType="com.jxlt.stage.model.Group" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List1" />,(select count(tgi.id) from t_group_item tgi where tgi.group_id = tg.id) as count
+      <include refid="sql_query" />
+      <!--  order by group(utype) -->
+       order by id DESC
+  	 <if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="getGroupCount" parameterType="com.jxlt.stage.model.Group" resultType="java.lang.Integer">
+    select count(id)
+    <include refid="sql_query" />
+  </select>
+  
+   <sql id="sql_query">
+  	 from t_group tg
+  	 where tg.flag = 1
+    <if test="searchName != null and searchName != ''">
+		and ( tg.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		or tg.description like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		)	
+	</if>
+  </sql>
+  
+    <select id="getExsitGroup" parameterType="com.jxlt.stage.model.Group" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+      from t_group tgp
+      where flag = 1
+      and id != #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllGroup" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />,
+    (select count(tgi.id) from t_group_item tgi where tgi.group_id = tgp.id) as count
+    from t_group tgp
+    where tgp.flag = 1
+  </select>
+  
+  <select id="getGroupLeaderPhone" resultType="java.lang.String" parameterType="java.lang.Integer">
+  	select tu.mobile from t_group tgp
+  	left join t_group_item tgi on tgp.id = tgi.group_id
+  	left join t_user tu on tgi.user_id = tu.id
+  	where tgp.id = #{id} and tgi.is_leader = 2
+  </select>
+</mapper>

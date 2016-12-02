@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="oper_time" property="operTime" jdbcType="TIMESTAMP" />
+    <result column="oper" property="oper" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, oper_time, oper
+  </sql>
+  <sql id="Base_Column_List1" >
+    tl.id, tl.user_id, tl.oper_time, tl.oper
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.Log" >
+    insert into t_log (id, user_id, oper_time, 
+      oper)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{operTime,jdbcType=TIMESTAMP}, 
+      #{oper,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.Log" >
+    insert into t_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="operTime != null" >
+        oper_time,
+      </if>
+      <if test="oper != null" >
+        oper,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oper != null" >
+        #{oper,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.Log" >
+    update t_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="operTime != null" >
+        oper_time = #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oper != null" >
+        oper = #{oper,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.Log" >
+    update t_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      oper_time = #{operTime,jdbcType=TIMESTAMP},
+      oper = #{oper,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+   <select id="getLogList" parameterType="com.jxlt.stage.model.Log" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List1" />,tu.name as user_name
+      <include refid="sql_query" />
+       order by tl.id DESC
+  	 <if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="getLogCount" parameterType="com.jxlt.stage.model.Log" resultType="java.lang.Integer">
+    select count(tl.id)
+    <include refid="sql_query" />
+  </select>
+
+  <sql id="sql_query">
+  	 from t_log tl
+  	 left join t_user tu on tu.id = tl.user_id
+  	 where 1=1
+    <if test="searchName != null and searchName != '0'">
+		and tu.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')	
+	</if>
+	 <if test=" userId == 0">
+		and tl.user_id = 0 
+	</if>
+	  <if test="startTime != null and endTime != ''">
+		and (tl.oper_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE})
+	</if> 
+  </sql>
+  <delete id="deleteExpiredLog"  >
+    delete from t_log
+    where 1=1
+    and DATEDIFF(now(),oper_time) > 180
+  </delete>
+</mapper>

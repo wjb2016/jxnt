@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="appointment" property="appointment" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="order_type_id" property="orderTypeId" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="depost_flag" property="depostFlag" jdbcType="TINYINT" />
+    <result column="new_flag" property="newFlag" jdbcType="TINYINT" />
+    <result column="measure_flag" property="measureFlag" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="service_start" property="serviceStart" jdbcType="TIMESTAMP" />
+    <result column="service_end" property="serviceEnd" jdbcType="TIMESTAMP" />
+    <result column="oper_id" property="operId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="oper_message" property="operMessage" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="ref_mobile" property="refMobile" jdbcType="VARCHAR" />
+    <result column="contract_number" property="contractNumber" jdbcType="VARCHAR" />
+    <result column="house_type" property="houseType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tod.id, tod.name,tod.appointment, tod.create_time, tod.order_type_id, tod.area, tod.home_address, tod.message, 
+    tod.depost_flag, tod.new_flag, tod.measure_flag, tod.status, tod.finish_time, tod.service_start, tod.service_end, 
+    tod.oper_id, tod.amount, tod.oper_message, tod.mobile, tod.ref_mobile, tod.contract_number,tod.house_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order tod
+    where tod.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.Order" >
+    insert into t_order (id, name, user_id, 
+      appointment, create_time, order_type_id, 
+      area, home_address, message, 
+      depost_flag, new_flag, measure_flag, 
+      status, finish_time, service_start, 
+      service_end, oper_id, amount, 
+      oper_message, mobile, ref_mobile,house_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{appointment,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{orderTypeId,jdbcType=INTEGER}, 
+      #{area,jdbcType=DOUBLE}, #{homeAddress,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{depostFlag,jdbcType=TINYINT}, #{newFlag,jdbcType=TINYINT}, #{measureFlag,jdbcType=TINYINT}, 
+      #{status,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, #{serviceStart,jdbcType=TIMESTAMP}, 
+      #{serviceEnd,jdbcType=TIMESTAMP}, #{operId,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, 
+      #{operMessage,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{refMobile,jdbcType=VARCHAR},
+      #{houseType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.Order" keyProperty="id" useGeneratedKeys="true">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="appointment != null" >
+        appointment,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="orderTypeId != null" >
+        order_type_id,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="homeAddress != null" >
+        home_address,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="depostFlag != null" >
+        depost_flag,
+      </if>
+      <if test="newFlag != null" >
+        new_flag,
+      </if>
+      <if test="measureFlag != null" >
+        measure_flag,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="serviceStart != null" >
+        service_start,
+      </if>
+      <if test="serviceEnd != null" >
+        service_end,
+      </if>
+      <if test="operId != null" >
+        oper_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="operMessage != null" >
+        oper_message,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="refMobile != null" >
+        ref_mobile,
+      </if>
+      <if test="contractNumber != null" >
+        contract_number,
+      </if>
+      <if test="houseType != null" >
+        house_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="appointment != null" >
+        #{appointment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTypeId != null" >
+        #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="depostFlag != null" >
+        #{depostFlag,jdbcType=TINYINT},
+      </if>
+      <if test="newFlag != null" >
+        #{newFlag,jdbcType=TINYINT},
+      </if>
+      <if test="measureFlag != null" >
+        #{measureFlag,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceStart != null" >
+        #{serviceStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceEnd != null" >
+        #{serviceEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="operMessage != null" >
+        #{operMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refMobile != null" >
+        #{refMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNumber != null" >
+        #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        #{houseType,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.Order" >
+    update t_order
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="appointment != null" >
+        appointment = #{appointment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTypeId != null" >
+        order_type_id = #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="homeAddress != null" >
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="depostFlag != null" >
+        depost_flag = #{depostFlag,jdbcType=TINYINT},
+      </if>
+      <if test="newFlag != null" >
+        new_flag = #{newFlag,jdbcType=TINYINT},
+      </if>
+      <if test="measureFlag != null" >
+        measure_flag = #{measureFlag,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceStart != null" >
+        service_start = #{serviceStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceEnd != null" >
+        service_end = #{serviceEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operId != null" >
+        oper_id = #{operId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="operMessage != null" >
+        oper_message = #{operMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refMobile != null" >
+        ref_mobile = #{refMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNumber != null" >
+        contract_number = #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.Order" >
+    update t_order
+    set name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      appointment = #{appointment,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_type_id = #{orderTypeId,jdbcType=INTEGER},
+      area = #{area,jdbcType=DOUBLE},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      depost_flag = #{depostFlag,jdbcType=TINYINT},
+      new_flag = #{newFlag,jdbcType=TINYINT},
+      measure_flag = #{measureFlag,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      service_start = #{serviceStart,jdbcType=TIMESTAMP},
+      service_end = #{serviceEnd,jdbcType=TIMESTAMP},
+      oper_id = #{operId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      oper_message = #{operMessage,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      ref_mobile = #{refMobile,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 公共sql -->
+  <sql id="common">
+  	from t_order tod
+  	where 1=1
+  	<if test="searchName != '' and searchName != null">
+  		and (
+	  		tod.name like concat("%",#{searchName,jdbcType=VARCHAR},"%")
+	  		or
+	  		tod.mobile like concat("%",#{searchName,jdbcType=VARCHAR},"%") 
+	  		or
+	  		tod.contract_number = #{searchName,jdbcType=VARCHAR}
+  		)
+  	</if>
+  	<if test="orderTypeId != null and orderTypeId != 0">
+  		and tod.order_type_id = #{orderTypeId,jdbcType=INTEGER}
+  	</if>
+  	<if test="status != null and status != -1">
+  		<!-- 未确认及已导出未确认订单 -->
+  		<if test="status == 0">
+			and tod.status in (0,1)
+  		</if>
+  		<!-- 其他订单 -->
+  		<if test="status != 0">
+			and tod.status = #{status,jdbcType=INTEGER}
+  		</if>
+  	</if>
+  	<if test="startTimes != null and endTimes != null and startTimes != '' and endTimes != ''">
+  		and tod.create_time between #{startTimes} and #{endTimes}
+  	</if>
+  	<if test="startTimes != null and startTimes != '' and (endTimes == null or endTimes == '')">
+  		and tod.create_time <![CDATA[ >= ]]> #{startTimes}
+  	</if>
+  	<if test="(startTimes == null or startTimes == '') and endTimes != null and endTimes != ''">
+  		and tod.create_time <![CDATA[ <= ]]> #{endTimes}
+  	</if>
+  	<if test="contractNumber != null and contractNumber != ''">
+  		and tod.contract_number = #{contractNumber,jdbcType=VARCHAR}
+  	</if>
+  </sql>
+  
+  <!-- 根据条件获取订单总数 -->
+  <select id="getTotalCount" parameterType="com.jxlt.stage.model.Order" resultType="java.lang.Integer">
+  	select count(tod.id)
+  	<include refid="common"/>
+  </select>
+  
+  <!-- 根据条件获取订单列表 -->
+  <select id="getOrderList" parameterType="com.jxlt.stage.model.Order" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	<include refid="common"/>
+  	order by tod.id DESC
+ 	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+       limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+  <select id="getOrderListByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from t_order tod
+    where tod.mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <select id="getUnsureOrderCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select count(id)
+  	from t_order
+  	where status = #{status}
+  </select>
+  
+  <select id="getOrderByConNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from t_order tod
+  	where tod.contract_number = #{num}
+  </select>
+  
+   <select id="getExpiredOrder" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order tod
+    where tod.status = 6
+    and datediff(tod.service_end,now()) = 7
+  </select>
+  
+  <select id="getContractNumList" parameterType="java.lang.Integer" resultType="java.lang.String">
+  	select tod.contract_number
+  	from t_order tod
+  	join t_user tus on tod.mobile = tus.mobile
+  	where tus.id = #{id} and tod.contract_number IS NOT NULL
+  </select>
+</mapper>

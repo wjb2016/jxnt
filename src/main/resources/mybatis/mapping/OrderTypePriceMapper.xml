@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxlt.stage.dao.OrderTypePriceMapper" >
+  <resultMap id="BaseResultMap" type="com.jxlt.stage.model.OrderTypePrice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_type_id" property="orderTypeId" jdbcType="INTEGER" />
+    <result column="keep1_price" property="keep1Price" jdbcType="DOUBLE" />
+    <result column="keep2_price" property="keep2Price" jdbcType="DOUBLE" />
+    <result column="keep3_price" property="keep3Price" jdbcType="DOUBLE" />
+    <result column="keep_sys_price" property="keepSysPrice" jdbcType="DOUBLE" />
+    <result column="keep_device_price" property="keepDevicePrice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_type_id, keep1_price, keep2_price, keep3_price, keep_sys_price, keep_device_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_type_price
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_type_price
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jxlt.stage.model.OrderTypePrice" >
+    insert into t_order_type_price (id, order_type_id, keep1_price, 
+      keep2_price, keep3_price, keep_sys_price, 
+      keep_device_price)
+    values (#{id,jdbcType=INTEGER}, #{orderTypeId,jdbcType=INTEGER}, #{keep1Price,jdbcType=DOUBLE}, 
+      #{keep2Price,jdbcType=DOUBLE}, #{keep3Price,jdbcType=DOUBLE}, #{keepSysPrice,jdbcType=DOUBLE}, 
+      #{keepDevicePrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxlt.stage.model.OrderTypePrice" >
+    insert into t_order_type_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderTypeId != null" >
+        order_type_id,
+      </if>
+      <if test="keep1Price != null" >
+        keep1_price,
+      </if>
+      <if test="keep2Price != null" >
+        keep2_price,
+      </if>
+      <if test="keep3Price != null" >
+        keep3_price,
+      </if>
+      <if test="keepSysPrice != null" >
+        keep_sys_price,
+      </if>
+      <if test="keepDevicePrice != null" >
+        keep_device_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderTypeId != null" >
+        #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="keep1Price != null" >
+        #{keep1Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keep2Price != null" >
+        #{keep2Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keep3Price != null" >
+        #{keep3Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keepSysPrice != null" >
+        #{keepSysPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="keepDevicePrice != null" >
+        #{keepDevicePrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxlt.stage.model.OrderTypePrice" >
+    update t_order_type_price
+    <set >
+      <if test="orderTypeId != null" >
+        order_type_id = #{orderTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="keep1Price != null" >
+        keep1_price = #{keep1Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keep2Price != null" >
+        keep2_price = #{keep2Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keep3Price != null" >
+        keep3_price = #{keep3Price,jdbcType=DOUBLE},
+      </if>
+      <if test="keepSysPrice != null" >
+        keep_sys_price = #{keepSysPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="keepDevicePrice != null" >
+        keep_device_price = #{keepDevicePrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxlt.stage.model.OrderTypePrice" >
+    update t_order_type_price
+    set order_type_id = #{orderTypeId,jdbcType=INTEGER},
+      keep1_price = #{keep1Price,jdbcType=DOUBLE},
+      keep2_price = #{keep2Price,jdbcType=DOUBLE},
+      keep3_price = #{keep3Price,jdbcType=DOUBLE},
+      keep_sys_price = #{keepSysPrice,jdbcType=DOUBLE},
+      keep_device_price = #{keepDevicePrice,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
