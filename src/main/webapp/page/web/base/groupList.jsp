@@ -105,7 +105,8 @@ function DeleteGroup(id){
 				<table class="yw-cm-table yw-center yw-bg-hover">
 					<tr style="background-color:#D6D3D3;font-weight: bold;">
 						<th  style="display:none">&nbsp;</th>
-						<th width="15%">团队名称</th>  
+						<th width="15%">团队名称</th> 
+						<th width="10%">项目经理</th>  
 						<th style="text-align: left;">描述</th> 
 						<th width="10%">人数</th> 
 						<th width="15%">创建时间</th>  
@@ -115,6 +116,7 @@ function DeleteGroup(id){
 						<tr>
 							<td  style="display:none">${item.id}</td>
 							<td ><span>${item.name}</span></td>  
+							<td ><span>${item.leader}</span></td>
 							<td style="text-align: left;"><span >${item.description}</span></td>
 							<td ><span>${item.count}</span></td> 
 							<td ><span>${item.createTimes}</span></td>  
