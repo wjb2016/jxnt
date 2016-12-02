@@ -436,7 +436,7 @@ public class OrderController extends BaseController {
 		}else if(order.getStatus() == 8 || order.getStatus() == 10){
 			return "web/order/breakOrderInfo"; 
 		}else{
-			return "web/order/cancelOrderInfo";
+			return "";
 		}
 	}
 	
@@ -552,7 +552,7 @@ public class OrderController extends BaseController {
 				return js;
 			}
 			if(order.getAppointTime() == null || order.getAppointTime() == ""){
-				js.setMessage("请设置预约时间！");
+				js.setMessage("请设置项目交付时间！");
 				return js;
 			}else{
 				order.setAppointment(sdf.parse(order.getAppointTime()));

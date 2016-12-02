@@ -190,7 +190,7 @@ function falseOrder(){
 								</select>
 								<input id="orderTypeId" name="orderTypeId" type="hidden" value="${order.orderTypeId}"/>
 							</td>
-							<td width="8%" align="right">预约时间：</td>
+							<td width="8%" align="right">交付时间：</td>
 							 <td>
 							 	<input id="appointTime" name="appointTime" onblur="valueTrim(this);" type="text" value="${order.appointTime}" class="easyui-datetimebox" data-options="showSeconds:false,editable:false" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 	<input id="appoint" type="hidden" value="${order.appointTime}"/>

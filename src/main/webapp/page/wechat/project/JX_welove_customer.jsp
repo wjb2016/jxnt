@@ -375,6 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#fadeshow").show();
 				}else{
 					$(".div_li").text("提交评价").attr("onclick","saveMessage("+id+");");
+					$($("[name=openimg]:radio").get(0)).prop("checked",true); 
 					$("#imgRadio").show();
 					$("#lightshow").show();
 					$("#fadeshow").show();
@@ -594,7 +595,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div>
 			<div style="margin-right: 10px;float:right;display: none" id="imgRadio"> 
-				<input type="radio" name="openimg" value="0" style="vertical-align:text-bottom; margin-bottom:2px;"/> 不公开
+				<input type="radio" name="openimg" value="0" style="vertical-align:text-bottom; margin-bottom:2px;" checked="checked"/> 不公开
 				<input type="radio" name="openimg" value="1" style="vertical-align:text-bottom; margin-bottom:2px;"/> 公开
 			</div>
 			<div style="margin-right: 10px;float:right;display: none;color:#8d8585" id="imgInput"> 
