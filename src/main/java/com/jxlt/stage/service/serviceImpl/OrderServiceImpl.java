@@ -338,4 +338,9 @@ public class OrderServiceImpl implements OrderService {
 			userMapper.updateByPrimaryKeySelective(user);
 		}
 	}
+
+	@Override
+	public int getPermissionPhotoCount() {
+		return projectImageMapper.getPermissionPhotoCount();
+	}
 }

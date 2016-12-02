@@ -154,4 +154,10 @@
   	set permission = 1
   	where project_id = #{projectId}
   </update>
+  
+  <select id="getPermissionPhotoCount" resultType="java.lang.Integer">
+  	select count(id)
+  	from t_project_image
+  	where permission = 2;
+  </select>
 </mapper>

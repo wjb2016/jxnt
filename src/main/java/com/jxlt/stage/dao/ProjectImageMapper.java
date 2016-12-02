@@ -32,4 +32,6 @@ public interface ProjectImageMapper {
     
 	// 获取客服公开的工程图信息
 	List<ProjectImage> getProjectImageListInfo();
+
+	int getPermissionPhotoCount();
 }

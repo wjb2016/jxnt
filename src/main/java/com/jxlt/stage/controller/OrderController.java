@@ -1359,7 +1359,12 @@ public class OrderController extends BaseController {
 			if(status == 0){
 				pi.setPermission(1);
 			}else if(status == 1){
-				pi.setPermission(2);
+				int count = orderService.getPermissionPhotoCount();
+				if(count >= 12){
+					js.setMessage("公开图片数量12张已达上限！");
+				}else{
+					pi.setPermission(2);
+				}
 			}else{
 				pi.setPermission(0);
 			}
