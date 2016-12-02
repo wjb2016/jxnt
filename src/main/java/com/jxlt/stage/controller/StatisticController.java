@@ -480,11 +480,11 @@ public class StatisticController extends BaseController {
 				st1.setCellValue("起始时间");
 				sheet.autoSizeColumn(0);
 				
-				String startTime = pay.getEndTimes();
-				if(!StringUtil.isEmpty(startTime))
-					startTime = startTime.replace("-", "");				
+				String startTime = pay.getStartTimes();							
 				Cell st2 = row_s.createCell(1, Cell.CELL_TYPE_STRING);
-				st2.setCellValue(pay.getStartTimes());
+				if(StringUtil.isEmpty(startTime))
+					startTime = "null";
+				st2.setCellValue(startTime);
 				sheet.autoSizeColumn(1);
 				
 				/**
@@ -498,7 +498,6 @@ public class StatisticController extends BaseController {
 				String endTime = pay.getEndTimes();
 				if(StringUtil.isEmpty(endTime))
 					endTime = DateUtil.sortFormat(new Date());
-				//endTime = endTime.replace("-", "");
 				Cell et2 = row_e.createCell(1, Cell.CELL_TYPE_STRING);
 				et2.setCellValue(endTime);
 				sheet.autoSizeColumn(1);

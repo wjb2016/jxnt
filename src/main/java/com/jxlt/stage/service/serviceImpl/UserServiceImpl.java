@@ -84,31 +84,31 @@ public class UserServiceImpl extends BaseController implements UserService {
 		List<User> list = new ArrayList<User>();
 		list = userMapper.getUserList(user);
 		//排序
-		int[] arr = new int[]{1,20,11,12,10,13};
-		list = sortUser(list,arr);					
+//		int[] arr = new int[]{1,20,11,12,10,13};
+//		list = sortUser(list,arr);					
 		return list;
 	}
 	
-	/**
-	 * User根据utype排序方法
-	 * @param list
-	 * @param arr
-	 * @return
-	 */
-	private List<User> sortUser(List<User> list,int[] arr){
-		if(list.size() == 0)
-			return null;
-		if(arr.length == 0)
-			return list;
-		List<User> list1 = new ArrayList<User>();
-		for(int i=0;i<arr.length;i++){
-			for(User u:list){
-				if(u.getUtype() == arr[i])
-					list1.add(u);
-			}
-		}	
-		return list1;		
-	}
+//	/**
+//	 * User根据utype排序方法
+//	 * @param list
+//	 * @param arr
+//	 * @return
+//	 */
+//	private List<User> sortUser(List<User> list,int[] arr){
+//		if(list.size() == 0)
+//			return null;
+//		if(arr.length == 0)
+//			return list;
+//		List<User> list1 = new ArrayList<User>();
+//		for(int i=0;i<arr.length;i++){
+//			for(User u:list){
+//				if(u.getUtype() == arr[i])
+//					list1.add(u);
+//			}
+//		}	
+//		return list1;		
+//	}
 
 	@Override
 	public User getUserById(Integer id) {

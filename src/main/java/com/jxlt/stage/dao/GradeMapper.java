@@ -25,4 +25,6 @@ public interface GradeMapper {
 
 	// 通过userid获取积分信息
 	List<Grade> getGradeByUserId(Integer id);
+    //超时未兑换积分
+	List<Grade> getExpiredGrade();
 }
