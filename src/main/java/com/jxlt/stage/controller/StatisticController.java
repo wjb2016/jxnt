@@ -497,7 +497,7 @@ public class StatisticController extends BaseController {
 				String startTime = pay.getStartTimes();							
 				Cell st2 = row_s.createCell(1, Cell.CELL_TYPE_STRING);
 				if(StringUtil.isEmpty(startTime))
-					startTime = "null";
+					startTime = "无";
 				st2.setCellValue(startTime);
 				sheet.autoSizeColumn(1);
 				
