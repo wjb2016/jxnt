@@ -125,6 +125,7 @@ function openimg(id){
 					</div>
 				</c:if>
 			</c:forEach>
+			<div class="page" id="pager" style="clear: both;"></div>
 		</div>
 		<div style="margin-top: 8px;width:48%;display: inline-block;border-left: 3px solid #D2D7DC;padding-left: 10px;">
 			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">已公开照片</span>
