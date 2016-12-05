@@ -24,6 +24,8 @@ public class Grade extends Page{
     private String mobile;
     //用户总积分
     private Integer userGrade;
+    //兑换积分人数
+    private Integer convertCount;
 
     public Integer getId() {
         return id;
@@ -103,5 +105,13 @@ public class Grade extends Page{
 
 	public void setUserGrade(Integer userGrade) {
 		this.userGrade = userGrade;
+	}
+
+	public Integer getConvertCount() {
+		return convertCount;
+	}
+
+	public void setConvertCount(Integer convertCount) {
+		this.convertCount = convertCount;
 	}
 }
