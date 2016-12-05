@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <base href="<%=basePath%>"> 
     <meta charset="UTF-8">
-    <title>用户注册协议</title>
+    <title>地暖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="format-detection" content="telephone=no">
@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <header id="JS_mll_header" class="mll-header borderOnePx">
         <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
         <div class="layout-middle">
-            <div id="JS_header_page_title" class="text">用户注册协议</div>
+            <div id="JS_header_page_title" class="text">地暖</div>
         </div>
     </header>
    

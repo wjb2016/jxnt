@@ -69,7 +69,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    margin-right: auto;
 	    text-align: center;
     }
-
+    .jx_person_top{
+        margin-top: 10px;
+    }
 </style>
 <script type="text/javascript">
     $(function(){      
@@ -126,11 +128,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span style="font-weight: bold;margin-left: 3px;"><a href="javascript:void(0);" onclick="userPoints(${sessionScope.ID})" style="color:#db891e;">积分查询</a></span>
          </ul>
     </div>
-    <div class="jx_margin" style="padding: 0 10px;">
+    <div class="jx_margin" style="padding: 0 20px;">
         <label style="color:#db891e;">使用方法及售后事项：</label>
-        <p>1.xxxxxxx</p>
-        <p>2.xxxxxxx</p>
-        <p>3.xxxxxxx</p>
+        <a href="PerCentral/jxAirConditioning.do"><span>1.中央空调</span></a><br>
+        <div class="jx_person_top"></div>
+        <a href="PerCentral/jxFloor_heating.do"><span>2.地暖</span></a><br>
+        <div class="jx_person_top"></div>
+        <a href="PerCentral/jxWater.do"><span>3.净水系统</span></a>
     </div>
 
     <jsp:include page="/page/wechat/footer.jsp"></jsp:include>
