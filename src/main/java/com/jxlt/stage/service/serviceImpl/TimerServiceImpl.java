@@ -41,7 +41,7 @@ public class TimerServiceImpl {
 	private GradeMapper gradeMapper;
 	
 	/**
-	 * 定时服务
+	 * 定时服务:清除过期自动应答(30),清除过期未确认订单(30),生日送积分(0),维修到期提醒(7),日志清理(180),积分兑换超时还原(2)
 	 */
 	public void work(){				
         System.out.println("定时服务启动！");
@@ -159,7 +159,7 @@ public class TimerServiceImpl {
 	     //日志清理
 	     code = 0;
 	     try{
-	    	 //保修即将到期（一周）
+	    	 //过期日志（半年）
 	    	 code = logMapper.deleteExpiredLog();	    	
 	    	 if(code > 0)
 	    		 log.setOper("清理过期日志"+code+"条。");

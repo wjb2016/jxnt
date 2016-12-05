@@ -110,7 +110,7 @@
   </select>
 
   <select id="getGroupCount" parameterType="com.jxlt.stage.model.Group" resultType="java.lang.Integer">
-    select count(id)
+    select count(tg.id)
     <include refid="sql_query" />
   </select>
   
