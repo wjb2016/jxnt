@@ -110,6 +110,9 @@
 	 <if test=" userId == 0">
 		and tl.user_id = 0 
 	</if>
+	 <if test=" userId > 0">
+		and tl.user_id in(0,#{userId,jdbcType=INTEGER}) 
+	</if>
 	  <if test="startTime != null and endTime != ''">
 		and (tl.oper_time between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE})
 	</if> 
