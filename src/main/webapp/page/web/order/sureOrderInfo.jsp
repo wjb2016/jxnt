@@ -362,12 +362,8 @@ function surePro(obj,id){
 								<td>${item.startTimes }</td>
 								<td>${item.endTimes }</td>
 								<td>
-									<c:if test="${order.status == 2}">
-										<a onclick="delPro(${item.status},${item.id },${item.orderId })" style="margin-right: 10px;color:red">删除</a>
-									</c:if>
-									<c:if test="${item.status == 1 }">
-										<a onclick="breakPro(${item.status},${item.id },${item.orderId })" style="margin-right: 10px;color:#FF8D41">中断</a>
-									</c:if>
+									<a onclick="delPro(${item.status},${item.id },${item.orderId })" style="margin-right: 10px;color:red">删除</a>
+									<a style="margin-right: 10px;color:#D3D3D3">中断</a>
 									<a onclick="window.location.href='<%=basePath %>Order/proInfo.do?id=${item.id }'+'&orderTypeId=${order.orderTypeId}'+'&orderId=${order.id }'" style="color:blue">查看</a>
 								</td>
 							</tr>

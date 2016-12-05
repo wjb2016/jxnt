@@ -88,7 +88,7 @@ public class OrderController extends BaseController {
 		
 		try {
 			String endTime = null;
-			if(order.getEndTimes() != null){
+			if(order.getEndTimes() != null && !"".equals(order.getEndTimes())){
 				String endTimes = order.getEndTimes();
 				endTime = order.getEndTimes();
 				Date endDate = DateUtil.parse(endTimes, "yyyy-MM-dd");
