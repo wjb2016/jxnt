@@ -149,7 +149,7 @@ public class StatisticController extends BaseController {
 			totalCount = gradeService.getTotalCount(grade);
 			for(Grade s:gradelist){
 				s.setCreateTimes(DateUtil.sortFormat(s.getCreateTime()));
-				if(s.getUserId() == 0 && s.getGrade() < 0)
+				if(s.getOperId() == 0 && s.getGrade() < 0)
 					convertCount++;
 			}
 			grade.setConvertCount(convertCount);
