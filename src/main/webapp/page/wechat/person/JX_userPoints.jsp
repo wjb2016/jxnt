@@ -156,7 +156,7 @@ function getNowTime(){
 <body>
 <div class="container bg1">
     <header id="JS_mll_header" class="mll-header borderOnePx">
-        <a class="layout-back" onclick="javascript:history.go(-1);"></a>
+        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text">积分详情</div>
         </div>

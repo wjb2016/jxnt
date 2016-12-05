@@ -145,7 +145,7 @@ body {
 <body>
   <div id="container"> 
     <header id="JS_mll_header" class="mll-header borderOnePx" style="background: #e1891e;">
-        <a class="layout-back" onclick="javascript:history.go(-1);"></a>
+        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text"style="color: white;">客服小妹</div>
         </div>
