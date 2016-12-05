@@ -41,10 +41,16 @@ $(document).ready(function(){
 
 //根据父节点加载子节点列表
 function getItemListByParentId(pid){
-	  $("#parentId").val(pid);
-	  var pageNumber = $("#pageNumber").val();
+	  var prepid = $("#parentId").val();
+	  var pageNumber;
+	  if(pid == prepid){
+		pageNumber = $("#pageNumber").val();
+	  }else{
+	  	pageNumber = 1;
+	  	$("#parentId").val(pid);
+	  }
 	  $.ajax({
-		url:"<%=basePath %>Order/jsonLoadItemListById.do?pid="+pid+"&pageNumber="+pageNumber,
+		url:"<%=basePath %>Order/jsonLoadItemListByParentId.do?pid="+pid+"&pageNumber="+pageNumber,
 		type:"post",  
 		dataType:"json",
 		success:function(data) { 
@@ -56,7 +62,7 @@ function getItemListByParentId(pid){
 				    buttonClickCallback:PageClick2                     /* 表示点击分页数按钮调用的方法 */                  
 				});
 				$("#typeList").html("");
-				$("#pageNumber").val("");
+				//$("#pageNumber").val("");
 				$("#pagecount").val(data.obj.totalCount);
 				fillItemList(data.list);
   			}else{
@@ -121,7 +127,7 @@ function pagesearch(){
 function pagesearch2(){
 	var pid = $("#parentId").val();
 	getItemListByParentId(pid);
-	$("#parentId").val("");
+	//$("#parentId").val("");
 }
 
 //删除品牌

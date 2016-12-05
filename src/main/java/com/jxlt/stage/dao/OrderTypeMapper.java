@@ -31,4 +31,8 @@ public interface OrderTypeMapper {
 
 	//获取订单品牌类型所属的所有品牌
 	List<OrderType> getTypeByParentId(Integer orderTypeId);
+
+	List<OrderType> getItemListByParentId(OrderType item);
+
+	int getTotalCountByParentId(OrderType item);
 }
