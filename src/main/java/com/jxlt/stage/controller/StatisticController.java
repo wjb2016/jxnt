@@ -112,6 +112,10 @@ public class StatisticController extends BaseController {
 			log.setSearchName(null);
 		}	
 		try{
+			//管理员可见自己日志以及系统记录
+			User user = this.getLoginUser();
+			if(user.getUtype() == 10 && log.getUserId() == null)
+				log.setUserId(user.getId());
 			loglist = logService.getLogList(log);
 			totalCount = logService.getTotalCount(log);
 			for(Log s:loglist)
@@ -121,6 +125,7 @@ public class StatisticController extends BaseController {
 		}
 		if("系统".equals(searchName) || "系统操作".equals(searchName)){
 			log.setSearchName(searchName);
+			log.setUserId(null);
 		}
 		log.setTotalCount(totalCount);
 		request.setAttribute("Log", log);
@@ -149,7 +154,7 @@ public class StatisticController extends BaseController {
 			totalCount = gradeService.getTotalCount(grade);
 			for(Grade s:gradelist){
 				s.setCreateTimes(DateUtil.sortFormat(s.getCreateTime()));
-				if(s.getUserId() == 0 && s.getGrade() < 0)
+				if(s.getOperId() == 0 && s.getGrade() < 0)
 					convertCount++;
 			}
 			grade.setConvertCount(convertCount);

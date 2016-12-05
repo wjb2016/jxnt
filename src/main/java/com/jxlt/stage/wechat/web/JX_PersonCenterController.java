@@ -232,4 +232,28 @@ public class JX_PersonCenterController {
 		return "wechat/person/JX_userRegisterAgreement";
 		
 	}
+	
+	// 中央空调
+	@RequestMapping(value="jxAirConditioning.do")
+	public String JX_AirConditioning(){
+		
+		return "wechat/person/JX_Air_Conditioning";
+		
+	}
+		
+	// 地暖
+	@RequestMapping(value="jxFloor_heating.do")
+	public String JX_Floor_heating(){
+		
+		return "wechat/person/JX_Floor_heating";
+		
+	}
+		
+	// 净水
+	@RequestMapping(value="jxWater.do")
+	public String JX_Water(){
+		
+		return "wechat/person/JX_Water";
+		
+	}
 }

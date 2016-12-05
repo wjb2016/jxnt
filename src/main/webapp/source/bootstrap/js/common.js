@@ -36,7 +36,7 @@ function F_Open_dialog()
 }
 
 //判断用户是否登录
-function isLogin(){
+function isLogin(){	
 	 var userName = $('#username').text();
      if(userName !="未登录"){
          $('#exit').removeClass('exit');

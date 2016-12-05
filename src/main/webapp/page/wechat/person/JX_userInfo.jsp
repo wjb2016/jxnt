@@ -15,16 +15,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-	<script src="${pageContext.request.contextPath}/source/bootstrap/js/jquery-1.9.1.js"></script>
-    <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/source/bootstrap/js/common.js"></script>   
-    <script src="${pageContext.request.contextPath}/source/bootstrap/js/moment-with-locales.js"></script>
-    <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap-datetimepicker.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/source/bootstrap/css/lyz.calendar.css" >
     <link href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/source/bootstrap/css/common.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/source/css/cloud-admin.css" >
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap-datetimepicker.css" >
+    
+    <script src="${pageContext.request.contextPath}/source/bootstrap/js/jquery-1.9.1.js"></script>
+    <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/source/bootstrap/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/source/bootstrap/js/lyz.calendar.min.js"></script>
 
 </head>
 <style type="text/css">
@@ -49,11 +47,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
        isLogin();   
        //日期控件
-	   $('#datetimepicker1').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	   });
 
+       $("#txtEndDate").calendar();
+       var birthday = "${birthday}";
+	   if(birthday != ""){
+	      $('#exampleInputBirth').removeAttr('style','display');
+	      $('#txtEndDate').css('display','none');
+	   } 
+    });
     function saveUserInfo(){
        var name = $('#exampleInputName2').val();
        var mobile = $("#phoneNo").val();
@@ -166,43 +167,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        }
 </script>
 <body class="userInfo_font">
-
-<div class="container">
-    <header id="JS_mll_header" class="mll-header borderOnePx">
-        <a class="layout-back" onclick="javascript:history.go(-1);"></a>
+<header id="JS_mll_header" class="mll-header borderOnePx">
+        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text">个人资料</div>
         </div>
-    </header>
+</header>
+<div class="container">
     
-     <form role="form" id="userInfo1" method="post" style="text-align: center;">
-    
-        <div class="form-group-1 jx_margin " >          
+    <form role="form" id="userInfo1" style="text-align: center;">
+      <div class="form-group jx_margin " >          
             <label class="jx_font jx_ntFount">姓名</label>
-            <input type="text" class="form-control" placeholder="请输入您的姓名" id="exampleInputName2" name="name" value="${user.name}" style="width: 220px;height: 30px;">
+            <input type="text" class="form-control" placeholder="请输入您的姓名" id="exampleInputName2" name="name" value="${user.name}">
             <input type="hidden" name="id" id="userid" value="${user.id}"/>
-        </div>
-        <div class="form-group-1 jx_margin " style="margin-top:-1px;">          
+      </div>
+      <div class="form-group  " >          
             <label class="jx_font jx_ntFount">生日</label>
-            <div class="input-group date" id="datetimepicker1" >  
-				<input type="text" class="form-control" name="birthday"  placeholder="请输入您的出生年月日" style="border-radius:6px 0 0 6px;width: 160px;height: 30px;position: relative;left: 70px;">  
-				<span class="input-group-addon" style="width: 60px;position: relative;left: 70px;">  
-					<span class="glyphicon glyphicon-calendar"></span>  
-				</span>  
-			</div>
-			 
-			<div id="exampleInputBirth" style="display: none;">
-			    <input type="text" class="form-control" readOnly="true" value="${birthday}" style="width: 220px;height: 30px;">
-			</div>
-        </div>
-        <div class="form-group-1" style="margin-top: 10px;">
+        <input type="text" class="form-control" id="txtEndDate" name="birthday" placeholder="请输入您的出生年月日"/>
+        <div id="exampleInputBirth" style="display: none;">
+			  <input type="text" class="form-control" readOnly="true" value="${birthday}">
+		</div>
+       </div>
+       <div class="form-group">
             <label class="jx_font jx_ntFount">地址</label>
-            <input type="text" class="form-control" placeholder="请输入您的地址" id="address" name="address" value="${user.address}" style="width: 220px;height: 30px;">
+            <input type="text" class="form-control" placeholder="请输入您的地址" id="address" name="address" value="${user.address}">
         </div>
        
-        <div class="form-group-1" >
+        <div class="form-group" >
             <label class="jx_font jx_ntFount" style="margin-left: 15px;">手机号</label>
-            <input type="number" class="form-control" placeholder="请输入手机号" readOnly="true"  id="phoneNo" name="mobile"  value="${user.mobile}" style="border-radius:6px 0 0 6px;width: 160px;height: 30px;">
+            <input type="number" class="form-control" placeholder="请输入手机号" readOnly="true"  id="phoneNo" name="mobile"  value="${user.mobile}" style="border-radius:6px 0 0 6px;width: 146px;">
             <input type="button" id="unbundling" class="input-group-addon" style="border: 1px solid #e1891e;width: 55px;height: 30px;margin-bottom: 10px;border-radius: 0 6px 6px 0px;"
              onclick="alterPhone()" value="解绑"/>
             <div style="margin-right: 60px;">
@@ -210,9 +203,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
            
         </div>
-         <div id="alter" class="form-group-1" style="display: none;">
+         <div id="alter" class="form-group" style="display: none;">
 	            <label class="jx_font jx_ntFount" style="margin-left: 15px;">验证码</label>
-	            <input type="number" class="form-control" placeholder="请输入验证码" id="" name="sendCode" style="border-radius:6px 0 0 6px;width: 160px;height: 30px;">
+	            <input type="number" class="form-control" placeholder="请输入验证码" id="" name="sendCode" style="border-radius:6px 0 0 6px;width: 146px;">
 	            <input type="button" id="btnSendCode" class="input-group-addon" style="border: 1px solid #e1891e;width: 54px;height: 30px;margin-bottom: 10px;border-radius: 0 6px 6px 0px;"
 	             onclick="sendMessage()" value="获取"/>
 	            <div style="margin-right: 60px;">
@@ -220,17 +213,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            </div>
 	            
         </div>
-        <div id="alterPsd" class="form-group-1" style="display: none;">           
+        <div id="alterPsd" class="form-group" style="display: none;">           
             <label class="jx_font jx_ntFount" style="margin-left: 15px;">新密码</label>
-            <input type="password" class="form-control" placeholder="请输入新密码" id="first" name="firstPsd" style="width: 220px;height: 30px;">
+            <input type="password" class="form-control" placeholder="请输入新密码" id="first" name="firstPsd">
             <div style="margin-right: 60px;">
               <span id="firstPsdErrInfo" class="errFont"></span>
             </div>
         </div>
         
-        <div id="alterSurePsd" class="form-group-1" style="display: none;">
+        <div id="alterSurePsd" class="form-group" style="display: none;">
             <label class="jx_font jx_ntFount" style="margin-left: 30px;">确认密码</label>
-            <input type="password" class="form-control" placeholder="请输入再次输入新密码" id="surePsd" name="psd" style="width: 220px;height: 30px;">
+            <input type="password" class="form-control" placeholder="请输入再次输入新密码" id="surePsd" name="psd">
                <div style="margin-right: 60px;">
               <span id="psdErrInfo" class="errFont"></span>
             </div>
