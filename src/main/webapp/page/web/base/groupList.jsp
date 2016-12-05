@@ -92,8 +92,8 @@ function DeleteGroup(id){
 		        	 <div class="fl">  				
 				     </div>
 				     <div class="fr">				     
-						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord"
-						 class="easyui-validatebox" placeholder="团队名或描述搜索" value="${Group.searchName}" type="hidden"/> 						
+						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord" style="width: 145px;"
+						 class="easyui-validatebox" placeholder="团队名/项目经理搜索" value="${Group.searchName}" type="hidden"/> 						
 						<span class="yw-btn bg-blue ml30 cur" onclick="search();" style="display: inline-block;width: 65px;text-align: center">搜索</span>
 					</div>
 					<div class="cl"></div> 

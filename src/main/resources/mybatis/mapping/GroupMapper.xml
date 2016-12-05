@@ -121,7 +121,7 @@
   	 where tg.flag = 1
     <if test="searchName != null and searchName != ''">
 		and ( tg.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
-		or tg.description like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+		or tu.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
 		)	
 	</if>
   </sql>
