@@ -144,7 +144,7 @@ public class TimerServiceImpl {
 	    		 String mobile = p.getMobile();
 	    		 String[] message = {p.getName(),ctime};
 	    		 boolean ref = false;
-	    		 ref = MessageUtil.sendMobileMessage(mobile,"137159", message);
+	    		 ref = MessageUtil.sendMobileMessage(mobile,"137812", message);
 	    		 if(ref)
 	    		    code++;
 	    	 }
