@@ -105,10 +105,10 @@ function openimg(id){
 						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
 							<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
 							<c:if test="${image.message == null || image.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;">无评价</textarea>
+								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">无评价</textarea>
 							</c:if>
 							<c:if test="${image.message != null && image.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;">${image.message }</textarea>
+								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">${image.message }</textarea>
 							</c:if>
 							<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
 						</div>
@@ -117,10 +117,10 @@ function openimg(id){
 						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
 							<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
 							<c:if test="${image.message == null || image.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;">无评价</textarea>
+								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">无评价</textarea>
 							</c:if>
 							<c:if test="${image.message != null && image.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;">${image.message }</textarea>
+								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">${image.message }</textarea>
 							</c:if>
 							<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
 						</div>
@@ -137,10 +137,10 @@ function openimg(id){
 						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
 							<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
 							<c:if test="${item.message == null || item.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;">无评价</textarea>
+								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">无评价</textarea>
 							</c:if>
 							<c:if test="${item.message != null && item.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;">${item.message }</textarea>
+								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">${item.message }</textarea>
 							</c:if>
 							<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
 						</div>
@@ -149,10 +149,10 @@ function openimg(id){
 						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
 							<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
 							<c:if test="${item.message == null || item.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;">无评价</textarea>
+								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">无评价</textarea>
 							</c:if>
 							<c:if test="${item.message != null && item.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;">${item.message }</textarea>
+								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">${item.message }</textarea>
 							</c:if>
 							<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
 						</div>

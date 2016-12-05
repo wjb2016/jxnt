@@ -343,4 +343,15 @@ public class OrderServiceImpl implements OrderService {
 	public int getPermissionPhotoCount() {
 		return projectImageMapper.getPermissionPhotoCount();
 	}
+
+	@Override
+	public List<OrderType> getItemListByParentId(OrderType item) {
+		return orderTypeMapper.getItemListByParentId(item);
+	}
+
+	@Override
+	public int getTotalCountByParentId(OrderType item) {
+		// TODO Auto-generated method stub
+		return orderTypeMapper.getTotalCountByParentId(item);
+	}
 }

@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -85,10 +87,25 @@ public class OrderController extends BaseController {
 		List<Order> orderlist = new ArrayList<Order>(); //订单集合
 		
 		try {
+			String endTime = null;
+			if(order.getEndTimes() != null){
+				String endTimes = order.getEndTimes();
+				endTime = order.getEndTimes();
+				Date endDate = DateUtil.parse(endTimes, "yyyy-MM-dd");
+				Calendar calendar = new GregorianCalendar(); 
+				calendar.setTime(endDate); 
+				calendar.add(Calendar.DAY_OF_MONTH,1);//把日期往后增加一天.整数往后推,负数往前移动 
+				endDate=calendar.getTime();
+				endTimes = DateUtil.format(endDate, "yyyy-MM-dd");
+				order.setEndTimes(endTimes);
+			}
 			//获取订单集合及总数，姓名模糊匹配，手机号全匹配
 			totalCount = orderService.getTotalCount(order);
 			orderlist = orderService.getOrderList(order);
 			
+			if(endTime != null){
+				order.setEndTimes(endTime);
+			}
 			//格式化订单创建日期
 			if(orderlist.size() > 0){
 				for(Order o:orderlist){
@@ -1203,6 +1220,49 @@ public class OrderController extends BaseController {
 	}
 	
 	/**
+	 * 品牌节点加载
+	 * @param pid
+	 * @param pageNumber
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/jsonLoadItemListByParentId.do", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
+	public JsonResult<OrderType> jsonLoadItemListByParentId(
+			@RequestParam(value = "pid", required = false) Integer pid,
+			@RequestParam(value = "pageNumber", required = false) String pageNumber,
+			HttpServletRequest request, HttpServletResponse response){
+		JsonResult<OrderType> js = new JsonResult<OrderType>();
+		js.setCode(1);
+		js.setMessage("加载节点失败!");
+		try {
+			OrderType item = new OrderType();
+			List<OrderType> list = new ArrayList<OrderType>();
+			int total = 0;
+			if(pid != null){
+				item.setParentId(pid);
+			}
+			if (pageNumber != null && !pageNumber.endsWith("undefined") && pageNumber != ""){
+				item.setPageNo(Integer.valueOf(pageNumber));
+			}else{
+				item.setPageNo(1);
+			}
+			item.setPageSize(Constants.DEFAULT_PAGE_SIZE);
+			list = orderService.getItemListByParentId(item);
+			total = orderService.getTotalCountByParentId(item);
+			item.setTotalCount(total);
+			js.setCode(0);
+			js.setList(list);
+			js.setObj(item);
+			js.setMessage("加载列表成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return js;
+	}
+	
+	/**
 	 * 品牌详情界面
 	 * @param typeId
 	 * @param req
@@ -1242,7 +1302,7 @@ public class OrderController extends BaseController {
 		js.setCode(1);
 		js.setMessage("保存品牌失败！");
 		
-		if(OrderType.getParentId() == null || OrderType.getParentId() == 0){
+		if(OrderType.getParentId() == null || OrderType.getParentId() == 4){
 			js.setMessage("请选择品牌类型！");
 			return js;
 		}

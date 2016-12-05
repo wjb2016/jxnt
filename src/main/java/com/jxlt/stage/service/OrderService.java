@@ -110,4 +110,8 @@ public interface OrderService {
 	void saveUser(User user);
 
 	int getPermissionPhotoCount();
+
+	List<OrderType> getItemListByParentId(OrderType item);
+
+	int getTotalCountByParentId(OrderType item);
 }
