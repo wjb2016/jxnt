@@ -159,7 +159,9 @@ function CheckGrade(id,message,flag){
 						<th >积分</th> 
 						<th >创建时间</th>  
 						<th style="text-align: left;">描述</th>		
-						<th >操作</th>  		
+					<c:if test="${Grade.convertCount > 0}">
+					    <th width="12%">操作</th>			
+					</c:if>		
 					</tr>
 					<c:forEach var="item" items="${gradelist}">
 						<tr>
@@ -167,14 +169,15 @@ function CheckGrade(id,message,flag){
 							<td ><span>${item.userName}</span></td>  
 							<td ><span >${item.grade}</span></td> 
 							<td ><span>${item.createTimes}</span></td> 
-							<td style="text-align: left;"><span >${item.description}</span></td>  
+							<td style="text-align: left;"><span >${item.description}</span></td> 
+						<c:if test="${Grade.convertCount > 0}"> 
 							 <td>
 								<c:if test="${item.grade < 0 && item.operId == 0}">
 								   <a style="margin-left:15px;color:blue"  onclick="SureGrade(${item.id})">兑换</a> 
 								   <a style="margin-left:15px;color:red"  onclick="ReturnGrade(${item.id})">取消</a> 								
-								</c:if>		
-															
-							</td>							
+								</c:if>																	
+							</td>		
+						</c:if>					
 						</tr>
 					</c:forEach>
 				</table>

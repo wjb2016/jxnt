@@ -126,8 +126,8 @@ function ChangeFlag(id,flag){
 		        <!-- 	 <span class="yw-btn bg-green mr10" onclick="changePsd()">修改密码</span> -->
 		        	  </div>
 				     <div class="fr">				     
-						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord"
-						 class="easyui-validatebox" placeholder="姓名或手机号或地址搜索" value="${User.searchName}" type="hidden"/> 						
+						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord"  style="width:150px;height:30px;"
+						 class="easyui-validatebox" placeholder="姓名/手机号/地址搜索" value="${User.searchName}" type="hidden"/> 						
 						<select class="easyui-combobox"  id="searchUtypes" style="width:150px;height:32px;"  
 		                 	data-options="editable:false,onSelect:function(record){ $('#searchUtype').val(record.value) }">
 		                 	 <option  value="0" >=请选择用户类型=</option>	

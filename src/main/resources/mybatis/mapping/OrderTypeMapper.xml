@@ -128,10 +128,34 @@
     </if>
   </select>
   
+  <select id="getItemListByParentId" parameterType="com.jxlt.stage.model.OrderType" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />,
+	tot2.name as parentName
+	from t_order_type tot
+	left join t_order_type tot2 on tot.parent_id = tot2.id
+	where 1 = 1
+	and (tot.parent_id = #{parentId,jdbcType=INTEGER}
+	or tot.id = #{parentId,jdbcType=INTEGER})
+	order by tot.id desc
+  	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
+        limit #{pageStart}, #{pageSize}
+    </if>
+  </select>
+  
   <!-- 根据条件获取品牌总数 -->
   <select id="getTotalCount" parameterType="com.jxlt.stage.model.OrderType" resultType="java.lang.Integer">
   	select count(tot.id)
   	<include refid="common"/>
+  </select>
+  
+  <select id="getTotalCountByParentId" parameterType="com.jxlt.stage.model.OrderType" resultType="java.lang.Integer">
+  	select count(tot.id)
+  	from t_order_type tot
+	left join t_order_type tot2 on tot.parent_id = tot2.id
+	where 1 = 1
+	and (tot.parent_id = #{parentId,jdbcType=INTEGER}
+	or tot.id = #{parentId,jdbcType=INTEGER})
   </select>
   
   <!-- 根据id获取品牌 -->

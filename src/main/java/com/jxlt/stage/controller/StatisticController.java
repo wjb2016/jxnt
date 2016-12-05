@@ -106,6 +106,11 @@ public class StatisticController extends BaseController {
 		log = CheckSearch(log);
 		List<Log> loglist = new ArrayList<Log>();
 		int totalCount = 0;
+		String searchName = log.getSearchName();
+		if("系统".equals(searchName) || "系统操作".equals(searchName)){
+			log.setUserId(0);
+			log.setSearchName(null);
+		}	
 		try{
 			loglist = logService.getLogList(log);
 			totalCount = logService.getTotalCount(log);
@@ -113,6 +118,9 @@ public class StatisticController extends BaseController {
 				s.setOperTimes(DateUtil.sortFormat(s.getOperTime()));
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		if("系统".equals(searchName) || "系统操作".equals(searchName)){
+			log.setSearchName(searchName);
 		}
 		log.setTotalCount(totalCount);
 		request.setAttribute("Log", log);
@@ -135,11 +143,16 @@ public class StatisticController extends BaseController {
 		grade = CheckSearch(grade);
 		List<Grade> gradelist = new ArrayList<Grade>();		
 		int totalCount = 0;
+		int convertCount = 0;
 		try{
 			gradelist = gradeService.getGradeList(grade);
 			totalCount = gradeService.getTotalCount(grade);
-			for(Grade s:gradelist)
+			for(Grade s:gradelist){
 				s.setCreateTimes(DateUtil.sortFormat(s.getCreateTime()));
+				if(s.getOperId() == 0 && s.getGrade() < 0)
+					convertCount++;
+			}
+			grade.setConvertCount(convertCount);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -303,12 +316,8 @@ public class StatisticController extends BaseController {
 		//查询转码
 		if (log.getSearchName() != null	&& log.getSearchName().length() > 0) 
 		{
-			String searchName = new String(log.getSearchName().getBytes("iso8859-1"), "utf-8");
-			if("系统".equals(searchName) || "系统操作".equals(searchName)){
-				log.setUserId(0);
-			}else{
-				log.setSearchName(searchName);	
-			}				
+			String searchName = new String(log.getSearchName().getBytes("iso8859-1"), "utf-8");			
+			log.setSearchName(searchName);										
 		}
 		//分页设置
 		if (log.getPageNo() == null)

@@ -92,8 +92,8 @@ function DeleteGroup(id){
 		        	 <div class="fl">  				
 				     </div>
 				     <div class="fr">				     
-						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord"
-						 class="easyui-validatebox" placeholder="团队名或描述搜索" value="${Group.searchName}" type="hidden"/> 						
+						<span>查询：</span><input type="text" name="searchName"   validType="SpecialWord" style="width: 145px;"
+						 class="easyui-validatebox" placeholder="团队名/项目经理搜索" value="${Group.searchName}" type="hidden"/> 						
 						<span class="yw-btn bg-blue ml30 cur" onclick="search();" style="display: inline-block;width: 65px;text-align: center">搜索</span>
 					</div>
 					<div class="cl"></div> 
@@ -109,8 +109,8 @@ function DeleteGroup(id){
 						<th width="10%">项目经理</th>  
 						<th style="text-align: left;">描述</th> 
 						<th width="10%">人数</th> 
-						<th width="15%">创建时间</th>  
-						<th width="12%">操作</th>				
+						<th width="15%">创建时间</th>
+					    <th width="12%">操作</th>		
 					</tr>
 					<c:forEach var="item" items="${groupList}">
 						<tr>
@@ -119,13 +119,11 @@ function DeleteGroup(id){
 							<td ><span>${item.leader}</span></td>
 							<td style="text-align: left;"><span >${item.description}</span></td>
 							<td ><span>${item.count}</span></td> 
-							<td ><span>${item.createTimes}</span></td>  
+							<td ><span>${item.createTimes}</span></td>	
 							<td>
-								<a href="javascript:void(0);" style="color:blue;" onclick="window.location.href='<%=basePath %>Group/groupInfo.do?id=${item.id}'">详情</a>
-								
-								<a style="margin-left:15px;color:red"  onclick="DeleteGroup(${item.id})">删除</a> 
-								
-							</td>							
+								<a href="javascript:void(0);" style="color:blue;" onclick="window.location.href='<%=basePath %>Group/groupInfo.do?id=${item.id}'">详情</a>								
+								<a style="margin-left:15px;color:red"  onclick="DeleteGroup(${item.id})">删除</a> 							
+							</td>					
 						</tr>
 					</c:forEach>
 				</table>

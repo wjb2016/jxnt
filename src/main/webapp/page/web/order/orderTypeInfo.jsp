@@ -17,49 +17,9 @@ $(function(){
 	if(parentId){
 		$("#ordertype").combobox("setValue",parentId);
 	}else{
-		$("#ordertype").combobox("setValue",0);
+		$("#ordertype").combobox("setValue",4);
 	}
 
-	//加载品牌节点树
-	<%-- $("#cmbParentItem").combotree({
-		 url: '<%=basePath %>Order/jsonLoadItemTreeList.do',  
-		 required: false,
-		 onBeforeExpand:function(node){
-		 	$('#cmbParentItem').combotree('tree').tree('options').url = '<%=basePath %>Order/jsonLoadItemTreeList.do?pid='+ node.id;
-		 },
-		 onSelect:function(record){
-		 	 //获取品牌id
-		 	 var typeId = $("#typeId").val();
-		 	 if(typeId){
-		 	 	if(record != null ){
-				 	 if(typeId == record.id){
-				 	 	$.messager.alert('错误信息',"不能选择当前品牌为所属品牌",'error',function(){
-				 	 		return;
-      					});
-				 	 	$("#cmbParentItem").combotree("clear");
-			 	 		$("#cmbParentItem").combotree("reload",'<%=basePath %>Order/jsonLoadItemTreeList.do?pid='+0);
-				 	 	$("#cmbParentItem").combotree("setText","=请选择品牌类型=");
-				 	 }else{
-				 	 	$("#cmbParentItem").combotree("setText",record.name);
-				 	 	$("#parentId").val(record.id);
-				 	 }
-			 	}
-			 }else{
-			 	if(record != null){
-			 		$("#cmbParentItem").combotree("setText",record.name);
-				 	$("#parentId").val(record.id);
-			 	}
-			}
- 			},
- 			onLoadSuccess:function(){
-				var parentName = $("#parentName").val();
-				if(parentName){
-					$("#cmbParentItem").combotree("setText",parentName);
-				}else{
-					$("#cmbParentItem").combotree("setText","=请选择品牌类型=");
-				}
- 			}
-	}); --%>
 })
 
 function chooseFile() {
@@ -154,19 +114,24 @@ function saveType(obj){
 							 	 <input type="hidden" id="parentId" name="parentId" value="${orderType.parentId }" />
 							 	 <input type="hidden" id="parentName" name="parentName" value="${orderType.parentName }" />
 							 	 <!-- <input id ="cmbParentItem" type="text"  class="easyui-combotree" required="false" style="width:254px;height:28px;" /> -->
-							 	 <select id="ordertype" class="easyui-combobox" data-options="editable:false,required:true,onSelect:function(record){ $('#parentId').val(record.value) }" style="width:254px;height:28px;">
-									 <option value="0">=请选择品牌类型=</option>
-									 <option value="1">地暖</option>
-									 <option value="2">中央空调</option>
-									 <option value="3">净水系统</option>
-								</select>
+							 	 <c:if test="${orderType.parentId == 0}">
+							 	 	<input type="text" value="父类型" class="easyui-validatebox" style="width:254px;height:28px;" readonly="readonly"/>
+							 	 </c:if>
+							 	 <c:if test="${orderType.parentId != 0}">
+								 	 <select id="ordertype" class="easyui-combobox" data-options="editable:false,required:true,onSelect:function(record){ $('#parentId').val(record.value) }" style="width:254px;height:28px;">
+										 <option value="4">=请选择品牌类型=</option>
+										 <option value="1">地暖</option>
+										 <option value="2">中央空调</option>
+										 <option value="3">净水系统</option>
+									</select>
+							 	 </c:if>
 							 	 <span style="color:red">*</span>
 							 </td>
 						</tr>	
 						<tr>						 
 							 <td width="8%" align="right">品牌描述：</td>
 						     <td>
-						     	<textarea name="description" onblur="valueTrim(this);" type="text" style="width:250px;height:100px;margin-top:15px;margin-bottom:15px;vertical-align: middle;" class="textarea easyui-validatebox">${orderType.description}</textarea>
+						     	<textarea name="description" onblur="valueTrim(this);" type="text" style="width:250px;height:100px;margin-top:15px;margin-bottom:15px;vertical-align: middle;resize:none" class="textarea easyui-validatebox">${orderType.description}</textarea>
 							 </td>
 						</tr>										  
 						<tr>

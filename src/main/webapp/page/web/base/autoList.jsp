@@ -96,7 +96,7 @@ function ChangeAuto(id,flag){
 				     </div>
 				     <div class="fr">				     
 						<span>查询：</span><input type="text" name="searchName"  validType="SpecialWord"
-						 class="easyui-validatebox" placeholder="关键字或答复搜索" value="${Auto.searchName}" type="hidden"/> 						
+						 class="easyui-validatebox" placeholder="关键字/答复搜索" value="${Auto.searchName}" type="hidden"/> 						
 						<span class="yw-btn bg-blue ml30 cur" onclick="search();" style="display: inline-block;width: 65px;text-align: center">搜索</span>
 					</div>
 					<div class="cl"></div> 

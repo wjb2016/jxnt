@@ -66,7 +66,7 @@ public class MessageUtil {
 			Set<String> keySet = data.keySet();
 			for(String key:keySet){
 				Object object = data.get(key);
-				System.out.println(key +" = "+object);
+				//System.out.println(key +" = "+object);
 			}
 			res = true;
 		}else{

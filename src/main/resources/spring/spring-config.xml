@@ -118,7 +118,7 @@
         </property>
         <property name="cronExpression">
            <!-- <value>0/30 * * * * ?</value>  -->
-           <value>0 0 7 * * ?</value>
+           <value>0 45 11 * * ?</value>
         </property>
     </bean>
     

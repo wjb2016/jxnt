@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
+
 import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.MessageUtil;
 import com.jxlt.stage.dao.AutoMapper;
@@ -41,7 +43,7 @@ public class TimerServiceImpl {
 	private GradeMapper gradeMapper;
 	
 	/**
-	 * 定时服务
+	 * 定时服务:清除过期自动应答(30),清除过期未确认订单(30),生日送积分(0),维修到期提醒(7),日志清理(180),积分兑换超时还原(2)
 	 */
 	public void work(){				
         System.out.println("定时服务启动！");
@@ -144,7 +146,7 @@ public class TimerServiceImpl {
 	    		 String mobile = p.getMobile();
 	    		 String[] message = {p.getName(),ctime};
 	    		 boolean ref = false;
-	    		 ref = MessageUtil.sendMobileMessage(mobile,"137159", message);
+	    		 ref = MessageUtil.sendMobileMessage(mobile,"137812", message);
 	    		 if(ref)
 	    		    code++;
 	    	 }
@@ -159,10 +161,11 @@ public class TimerServiceImpl {
 	     //日志清理
 	     code = 0;
 	     try{
-	    	 //保修即将到期（一周）
-	    	 code = logMapper.deleteExpiredLog();	    	
+	    	 //过期日志（半年）
+	    	 code = logMapper.deleteExpiredLog();	  
+	    	 log.setOper("清理过期日志"+code+"条。");
 	    	 if(code > 0)
-	    		 log.setOper("清理过期日志"+code+"条。");
+	    		 logMapper.insertSelective(log);
 	    	 System.out.println(log.getOper());
 	     }catch(Exception e){
 	    	 e.printStackTrace();
@@ -191,6 +194,5 @@ public class TimerServiceImpl {
 	     }
 	}
 
-	
 	
 }
