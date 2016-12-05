@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
+
 import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.MessageUtil;
 import com.jxlt.stage.dao.AutoMapper;
@@ -160,9 +162,10 @@ public class TimerServiceImpl {
 	     code = 0;
 	     try{
 	    	 //过期日志（半年）
-	    	 code = logMapper.deleteExpiredLog();	    	
+	    	 code = logMapper.deleteExpiredLog();	  
+	    	 log.setOper("清理过期日志"+code+"条。");
 	    	 if(code > 0)
-	    		 log.setOper("清理过期日志"+code+"条。");
+	    		 logMapper.insertSelective(log);
 	    	 System.out.println(log.getOper());
 	     }catch(Exception e){
 	    	 e.printStackTrace();
@@ -191,6 +194,5 @@ public class TimerServiceImpl {
 	     }
 	}
 
-	
 	
 }
