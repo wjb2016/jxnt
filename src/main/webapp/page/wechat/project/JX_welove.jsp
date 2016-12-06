@@ -266,10 +266,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		          url: '<%=basePath%>Project/jsonLoadFile.do',  
 		          type: 'post',  
 		          data: formData,  
-		          async: false,  
 		          cache: false,  
 		          contentType: false,  
-		          processData: false,  
+		          processData: false,
 		          success: function (data) {
 		          	  var jsondata = eval("("+data+")");    
 		              if(jsondata.code == 0){
@@ -292,13 +291,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	var index = 0;
+	var timer;
 	function doProgress() {
 		$("#lightshow").show();
 		$("#fadeshow").show();
 		if(index == 100){
-			clearProgress();
+			index = 1;
 		}
-		setTimeout("doProgress()",200);
+		timer = setTimeout("doProgress()",50);
 		SetProgress(index);
 		index++;
 	}
@@ -306,7 +306,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function clearProgress(){
 		$("#lightshow").hide();
 		$("#fadeshow").hide();
-		clearTimeout("doProgress()");
+		clearTimeout(timer);
 		index = 0;
 		return;
 	}
@@ -397,6 +397,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div style="height: 80px;"></div>
 	<div id="lightshow" class="div_content">
+		<div style="text-align: center;font-size: 24px;font-weight: bold;padding-top: 10px;margin-bottom: -10px;">照片上传中...</div>
 		<div id="loading_center">
 			<div id="loading">
 				<div></div>
