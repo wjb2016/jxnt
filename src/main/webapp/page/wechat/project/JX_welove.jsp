@@ -15,7 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/jquery-1.9.1.js"></script>
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.min.js"></script>
@@ -24,7 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap-select.min.js"></script>
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/common.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <link href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/source/bootstrap/css/common.css" type="text/css">
@@ -53,23 +51,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	text-align: center;
 }
 
+#loading_center {
+	margin: 50px auto;
+	width: 250px;
+}
 
+#loading {
+	width: 250px;
+	height: 20px;
+	background: url(source/img/bak.jpg) no-repeat;
+	background-size: 250px 20px;
+}
+
+#loading div {
+	width: 0px;
+	height: 20px;
+	background: url(source/img/pro.jpg) no-repeat;
+	background-size: 250px 20px;
+	color: #edab4b;
+	text-align: center;
+	font-family: Tahoma;
+	font-size: 12px;
+	line-height: 48px;
+	padding-top: 8px;
+}
+
+.div_overlay {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1010;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 80);
+}
+
+.div_content {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 280px;
+	margin-left: -140px;
+	height: 150px;
+	margin-top: -80px;
+	padding: 0;
+	border: 5px solid 5c2905;
+	background-color: #F0F5F8;
+	_position: absolute;
+	z-index: 1011;
+	overflow: hidden;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
 		isLogin();
 	});
-	
+
 	//选择合同号
-	function selectContract(){
-	   $("#erropMsg").text("");
-	   $("#proList").html("<option>请先选择合同编号</option>");
-	   $("#proList").selectpicker('refresh');
-	   $("#proInfo").hide();
-	   // 选中的合同编号
-	   var contractNum = $('#contract').val();
-	   $.ajax({
-	        url:"<%=basePath%>Project/jsonLoadProList.do",
+	function selectContract() {
+		$("#erropMsg").text("");
+		$("#proList").html("<option>请先选择合同编号</option>");
+		$("#proList").selectpicker('refresh');
+		$("#proInfo").hide();
+		// 选中的合同编号
+		var contractNum = $('#contract').val();
+		$.ajax({
+			url : "<%=basePath%>Project/jsonLoadProList.do",
 	        type:"POST",
 	        dataType:"JSON",
 	        data:{contractNum:contractNum},
@@ -208,6 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				obj.value = "";//for FF,Chrome,Safari
 			return;
 		} else {
+			 doProgress();
 			 var formData = new FormData($("#proform")[0]);  
 		     $.ajax({  
 		          url: '<%=basePath%>Project/jsonLoadFile.do',  
@@ -222,13 +275,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		              if(jsondata.code == 0){
 			              var img = "<div style='position: relative;display: block;margin:2px auto;width:300px;height:300px;'><image style='display:block;width:300px;height:300px;' src='<%=basePath %>"+ jsondata.obj.imagePath +"'></image><span style='position:absolute;width:40px;height: 25px;background-color: #e1891e;color: white;top:0;right:0;text-align: center;line-height: 25px;' onclick='delImg(this,"+ jsondata.obj.id +")'>X</span></div>";
 		        		  $("#imgList").append(img);
+		        		  clearProgress();
 		              }else{
+		              	  clearProgress();
 		              	  dealWithAlert(jsondata.message);
 		              }
 		          } 
 		     });  
 		}
 	}
+	
+	function SetProgress(progress) {
+		if (progress) {
+			$("#loading > div").css("width", String(progress) + "%"); //控制#loading div宽度 
+			$("#loading > div").html(String(progress) + "%"); //显示百分比 
+		}
+	}
+	var index = 0;
+	function doProgress() {
+		$("#lightshow").show();
+		$("#fadeshow").show();
+		if(index == 100){
+			clearProgress();
+		}
+		setTimeout("doProgress()",200);
+		SetProgress(index);
+		index++;
+	}
+	
+	function clearProgress(){
+		$("#lightshow").hide();
+		$("#fadeshow").hide();
+		clearTimeout("doProgress()");
+		index = 0;
+		return;
+	}
+	
 </script>
 <body>
 <div class="container bg1">
@@ -314,7 +396,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     </div>
     <div style="height: 80px;"></div>
-  <jsp:include page="/page/wechat/footer.jsp"></jsp:include>
+	<div id="lightshow" class="div_content">
+		<div id="loading_center">
+			<div id="loading">
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div id="fadeshow" class="div_overlay"></div>
+	<jsp:include page="/page/wechat/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>
