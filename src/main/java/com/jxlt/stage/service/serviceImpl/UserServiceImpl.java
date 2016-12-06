@@ -1,9 +1,13 @@
 package com.jxlt.stage.service.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+
+
 
 
 
@@ -21,8 +25,10 @@ import com.jxlt.stage.common.ReturnResult;
 import com.jxlt.stage.common.utils.MD5Util;
 import com.jxlt.stage.common.utils.StringUtil;
 import com.jxlt.stage.controller.BaseController;
+import com.jxlt.stage.dao.GradeMapper;
 import com.jxlt.stage.dao.GroupItemMapper;
 import com.jxlt.stage.dao.UserMapper;
+import com.jxlt.stage.model.Grade;
 import com.jxlt.stage.model.GroupItem;
 import com.jxlt.stage.model.User;
 import com.jxlt.stage.service.UserService;
@@ -32,6 +38,9 @@ public class UserServiceImpl extends BaseController implements UserService {
 
 	@Resource 
 	private UserMapper userMapper;
+	
+	@Resource 
+	private GradeMapper gradeMapper;
 	
 	@Resource 
 	private GroupItemMapper groupItemMapper;
@@ -129,10 +138,21 @@ public class UserServiceImpl extends BaseController implements UserService {
 			js.setMessage("权限不足！");
 			return js;
 		}
-		//逻辑删除
+		//逻辑删除并清零积分
 		user.setFlag(0);
+		int grades = 0-user.getGrade();
 		user.setGrade(0);
 		userMapper.updateByPrimaryKeySelective(user);
+		if(grades < 0){
+			Grade grade = new Grade();
+			grade.setUserId(user.getId());
+			grade.setOperId(loginUser.getId());
+			grade.setDescription("后台删除用户积分清零");
+			grade.setId(0);
+			grade.setCreateTime(new Date());
+			grade.setGrade(grades);
+			gradeMapper.insert(grade);
+		}		
 		js.setObj(user.getUtypeName()+user.getName());
 		js.setCode(0);
 		js.setMessage("删除成功!");

@@ -154,6 +154,7 @@
     left join t_project t1 on t.project_id=t1.id
     left join t_order t2 on t2.id=t1.order_id
     where t.permission = 2
+    order by t.id desc
   </select>
   <update id="updateProjectImgByProId" parameterType="java.lang.Integer">
   	update t_project_image

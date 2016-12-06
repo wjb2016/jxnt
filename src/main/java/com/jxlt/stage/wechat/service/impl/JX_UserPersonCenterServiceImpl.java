@@ -116,8 +116,8 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 					String code = (String) request.getSession().getAttribute("sendCode");
 					if(user.getSendCode().equals(code) ){
 						user.setUtype(1);                // uType=1是普通用户
-						user.setName(user.getName());    // 用户名
-						user.setSex(user.getSex());      // 性别 0保密 1男 2女
+						user.setName(user.getMobile());    // 注册时用户名默认是手机号
+						//user.setSex(user.getSex());      // 性别 0保密 1男 2女
 						user.setMobile(user.getMobile());// 手机号
 						user.setFlag(1);
 						// 注册密码加密
@@ -199,7 +199,13 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 			}else{
 				user1.setName(user.getName());
 			}
-						
+			
+			// 检查用户性别是否修改
+			if(user.getSex() == null || user.getSex().equals(user1.getSex())){
+				
+			}else{
+				user1.setSex(user.getSex());
+			}
 			// 检查地址是否修改
 			if(user.getAddress() == null || user.getAddress().equals(user1.getAddress())){
 				

@@ -527,7 +527,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                </td>
 		            </tr>
 		            <tr>
-		                <td style="text-align: right;width:100px;">负责人电话</td>
+		                <td style="text-align: right;width:100px;">项目经理电话</td>
 		                <td id="tr_leader" style="color: #1e1107;">
 		                </td>
 		            </tr>

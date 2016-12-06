@@ -120,15 +120,15 @@ body {
     // 注册
     function register(){
         // 用户信息验证
-        var username = $('#username').val();             // 用户名
+       // var username = $('#username').val();             // 用户名
         var mobile = $('#phoneNo').val();                  // 手机号
         var sendCode = $('#sendCode').val();             // 验证码
         var firstPsd = $('#exampleInputPassword1').val();// 第一次密码
 	    var psd = $('#exampleInputPassword2').val();     // 确认密码
-	    if(username == ""){
+	   /*  if(username == ""){
 	          $('#usernameErrInfo').text("*用户名不能为空，请输入用户名！");
 	          return false;
-	    }
+	    } */
 	    if(mobile == ""){
 	          $('#phoneErrInfo').text("*手机号不能为空，请输入手机号！");
 	          return false;
@@ -268,7 +268,7 @@ body {
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-box">
                         <h2 class="bigintro" style="color:#db891e;">登录</h2>
-                        <div class="divide-40"></div>
+                       <!--  <div class="divide-40"></div> -->
                         <form id="userInfo" role="form" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">手机号</label>
@@ -311,30 +311,15 @@ body {
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-box">
                         <h2 class="bigintro">注册</h2>
-                        <div class="divide-40"></div>
+                       <!--  <div class="divide-40"></div> -->
                         <form id="rigisterForm" role="form">
-                            <div class="form-group">
-                                <label for="exampleInputUsername">用户名</label>
+                          <!--   <div class="form-group">
+                                <label for="exampleInputUsername">姓名</label>
                                 <i class="fa fa-user"></i>
                                 <input type="text" class="form-control" id="username" name="name"/>
                                 <span id="usernameErrInfo" class="errFont"></span>
-                            </div>
-                            <div class="form-group">
-                                <label>性别</label>
-                                <div>
-                                    <!-- <span style="margin-left:10px;"></span> --> 
-                                    <label class="radio-inline">
-									<input type="radio" name="sex" id="inlineRadio1" value="1"> 男
-									</label>
-									<label class="radio-inline">
-									  <input type="radio" name="sex" id="inlineRadio2" value="2"> 女
-									</label>
-									<label class="radio-inline">
-									  <input type="radio" name="sex" id="inlineRadio3" value="0" style="width:20px;"> 保密
-									</label>
-                                </div>                           
-                                <span id="sexErrInfo" class="errFont"></span>
-                            </div>
+                            </div> -->
+                           
                             <div class="form-group">
                                 <label>手机号</label>
                                 <i class="fa fa-phone"></i>
@@ -391,7 +376,7 @@ body {
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-box">
                         <h2 class="bigintro">忘记密码</h2>
-                        <div class="divide-40"></div>
+                        <!-- <div class="divide-40"></div> -->
                         <form id="forgetPassword" class="form-inline" role="form">
                             <div class="form-group">
                                 <label for="">手机号</label>

@@ -54,6 +54,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      $('#exampleInputBirth').removeAttr('style','display');
 	      $('#txtEndDate').css('display','none');
 	   } 
+	   var sex = "${user.sex}";
+	   if(sex == "0"){
+	      $('#inlineRadio3').attr('checked','checked');
+	   }else if (sex == "1"){
+	      $('#inlineRadio1').attr('checked','checked');
+	   }else {
+	      $('#inlineRadio2').attr('checked','checked');
+	   }
     });
     function saveUserInfo(){
        var name = $('#exampleInputName2').val();
@@ -181,6 +189,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="text" class="form-control" placeholder="请输入您的姓名" id="exampleInputName2" name="name" value="${user.name}">
             <input type="hidden" name="id" id="userid" value="${user.id}"/>
       </div>
+       <div class="form-group">
+          <label class="jx_font jx_ntFount">性别</label>     
+		  <input type="radio" name="sex" id="inlineRadio1" value="1"> 男	
+		  <span style="margin-left: 10px;"></span>
+		  <input type="radio" name="sex" id="inlineRadio2" value="2"> 女	
+		  <span style="margin-left: 10px;"></span>	
+		  <input type="radio" name="sex" id="inlineRadio3" value="0" style="width:20px;"> 保密	
+          <div>                         
+               <span id="sexErrInfo" class="errFont"></span>
+          </div>
+      </div>  
       <div class="form-group  " >          
             <label class="jx_font jx_ntFount">生日</label>
         <input type="text" class="form-control" id="txtEndDate" name="birthday" placeholder="请输入您的出生年月日"/>
