@@ -295,7 +295,7 @@ function savePro(orderId){
 		<div id="proWindow" class="easyui-window" title="中断原因" style="width:360px;height:200px;overflow:hidden;padding:10px;text-align:center;" iconCls="icon-info" closed="true" modal="true" resizable="false" collapsible="false" minimizable="false" maximizable="false" closable="false" center="true">
 				<span>中断原因：</span>
 				<input type="hidden" id="proId"/> 
-				<textarea id="reason" rows="5" style="width:250px;vertical-align: middle;"></textarea>
+				<textarea id="reason" rows="5" style="width:250px;vertical-align: middle;resize:none;"></textarea>
 		        <div class="yw-window-footer txt-right">
 		        	<span id="btnCancel" class="yw-window-btn bg-lightgray mt12"  onclick="$('#reason').val('');$('#proWindow').window('close')">取消</span>
 		        	<span class="yw-window-btn bg-blue mt12" onclick="savePro(${order.id});">确定</span>

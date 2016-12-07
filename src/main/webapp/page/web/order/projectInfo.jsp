@@ -335,7 +335,7 @@ function deleteById(id,proId,orderTypeId,orderId){
 										<span>评价内容：</span>
 									</td>
 									<td align="left">
-										<textarea rows="5" style="vertical-align: middle;width: 248px;">${project.assessMessage }</textarea>
+										<textarea rows="5" style="vertical-align: middle;width: 248px;resize:none;">${project.assessMessage }</textarea>
 									</td>
 							</c:if>
 						</c:if>
@@ -344,7 +344,7 @@ function deleteById(id,proId,orderTypeId,orderId){
 									<span>工程描述：</span>
 								</td>
 								<td align="left">
-									<textarea rows="5" style="vertical-align: middle;width: 248px;" id="description" name="description">${project.description }</textarea>
+									<textarea rows="5" style="vertical-align: middle;width: 248px;resize:none;" id="description" name="description">${project.description }</textarea>
 								</td>
 							</tr>
 						</c:if>
@@ -354,7 +354,7 @@ function deleteById(id,proId,orderTypeId,orderId){
 									<span>工程描述：</span>
 								</td>
 								<td colspan="3">
-									<textarea rows="5" style="vertical-align: middle;width: 248px;" id="description" name="description">${project.description }</textarea>
+									<textarea rows="5" style="vertical-align: middle;width: 248px;resize:none;" id="description" name="description">${project.description }</textarea>
 								</td>
 							</tr>
 						</c:if>
