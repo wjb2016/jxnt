@@ -232,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			success:function(data){
 				$("#proInfo").hide();
 				$("#erropMsg").text(data.message).show();
-				setTimeout("refreshPage();",3000);
+				setTimeout("selectPro();",3000);
 			}
 		})
 	}

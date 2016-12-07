@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </ul>
     </div>
     <div class="jx_margin" style="padding: 0 20px;">
-        <label style="color:#db891e;">使用方法及售后事项：</label>
+        <label style="color:#db891e;">使用说明：</label>
         <a href="PerCentral/jxFloor_heating.do"><span>1.地暖</span></a><br>       
         <div class="jx_person_top"></div>
         <a href="PerCentral/jxAirConditioning.do"><span>2.中央空调</span></a><br>

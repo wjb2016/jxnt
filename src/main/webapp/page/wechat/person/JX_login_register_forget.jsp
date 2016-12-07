@@ -348,7 +348,7 @@ body {
                                 <span id="psdErrInfo" class="errFont"></span>
                             </div>
                             <div>
-                                <label class="checkbox"><input type="checkbox" checked="checked" id="choice" class="uniform">我看过并同意 
+                                <label class="checkbox"><input type="checkbox" checked="checked" id="choice" class="uniform">我同意并已阅读
                                      <div style="margin-left: 5px;"><a href="PerCentral/jxUserRegisterAgreement.do" >精欣暖通用户注册协议</a></div>
                                 </label>
                                 <span id="checkboxErrInfo" class="errFont"></span>
