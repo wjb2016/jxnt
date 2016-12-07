@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 .rule{
    font-size: 16px;
+   margin-left: 10px;
 }
 </style>
 <body style="font-weight: bold;">
@@ -39,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div>
 	 <div style="margin-top: 10px;">
 	 	<span class="rule">一、积分规则</span><br>
-	 	    <span style="margin-top: 10px;"></span>
+	 	 <div style="margin-top: 10px;margin-left: 20px;">
 			1、积分不可以转赠他人；<br>
 			2、积分不清零、不作废、不逾期；<br>
 			3、消费10元积1分；<br>
@@ -47,18 +48,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			5、客户生日当天赠送888分（生日日期只能修改一次）；<br>
 			6、客户生日当月（整月不限次数）消费可享受双倍积分（以系统登记生日日期为准）；<br>
 			7、每介绍一位真实有效新客户信息积500分；每介绍一位新客户成交积10000分。<br>
+		 </div>
 	 </div>	
 	 <div style="margin-top: 10px;">
-	 
-	 
+	
 		<span class="rule">二、积分兑换规则</span><br>
-		 <span style="margin-top: 10px;"></span>
+		 <div style="margin-top: 10px;margin-left: 20px;">
 			1、1000分可兑换50元物品（可兑换等额现金）；<br>
 			2、积分达到1000分后才可以进行兑换；<br>
 			3、积分每次兑换最少100积分；<br>
 			4、积分可参与我公司促销产品及积分活动；<br>
 			5、积分兑换热线：4006-456-198、028-85554433；<br>
 			6、我公司办公室设立积分兑换专区。<br>
+		 </div>
 	 </div>
     </div>
    
