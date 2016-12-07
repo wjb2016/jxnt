@@ -88,7 +88,6 @@ $(function(){
 
 // 兑换积分
 function cashing(){
-   //$('#win').removeAttr('style','display');
    document.getElementById("win").style.display="";
    document.getElementById("JS_mask").style.display="";
 }
@@ -103,6 +102,10 @@ function cancelAssess(){
 function submitCashing(id){
      var point = $('#cash').val();
      var allPoint = $("#allPoint").val();
+     if(isNaN(point)){
+        $('#pointErrorInfo').text('*对不起，输入积分数必须是数字！');
+        return false;
+     }
      if(point == ""){
         $('#pointErrorInfo').text('*兑换的积分不能为空');
         return false;
@@ -181,7 +184,7 @@ function getNowTime(){
 
     </c:forEach>
     
-    <div id="win" style="width: 100%; position: fixed; left: 50%; top: 50%; z-index: 500; display:none;margin: -50%;">
+    <div id="win" style="width: 100%; position: fixed; left: 50%; top: 70%; z-index: 500; display:none;margin: -50%;">
         <div class="mob-layer-content" style="background-color: #f5eaea;margin-left:auto;margin-right:auto;width:80%">
         <div id="JS_message_box" class="message-box">
         <div class="message">

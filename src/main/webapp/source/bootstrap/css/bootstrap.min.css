@@ -1098,7 +1098,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus,
 }
 
 input[type="radio"], input[type="checkbox"] {
-	margin: 4px 0 0;
+	/* margin: 4px 0 0; */
 	margin-top: 1px \9;
 	*margin-top: 0;
 	line-height: normal
@@ -1313,7 +1313,7 @@ input.span1, textarea.span1, .uneditable-input.span1 {
 input[disabled], select[disabled], textarea[disabled], input[readonly],
 	select[readonly], textarea[readonly] {
 	cursor: not-allowed;
-	background-color: #eee
+	/* background-color: #eee */
 }
 
 input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="radio"][readonly],

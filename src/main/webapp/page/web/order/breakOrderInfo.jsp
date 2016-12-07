@@ -281,7 +281,7 @@ function savePro(orderId){
 				<div>
 					<span>作废原因：</span>
 					<input type="hidden" id="proId"/> 
-					<textarea id="reason" rows="5" style="width:250px;vertical-align: middle;border-radius:5px;"></textarea>
+					<textarea id="reason" rows="5" style="width:250px;vertical-align: middle;border-radius:5px;resize:none;"></textarea>
 				</div>
 				<div style="margin-top: 10px;">
 					<span>退款金额：</span>

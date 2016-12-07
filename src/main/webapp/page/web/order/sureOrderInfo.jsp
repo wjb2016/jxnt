@@ -434,7 +434,7 @@ function surePro(obj,id){
 								<span>工程描述：</span>
 							</td>
 							<td align="left">
-								<textarea id="description" name="description" rows="5" style="width:248px;vertical-align: middle;"></textarea>
+								<textarea id="description" name="description" rows="5" style="width:248px;vertical-align: middle;resize:none;"></textarea>
 							</td>
 						</tr>
 					</table>

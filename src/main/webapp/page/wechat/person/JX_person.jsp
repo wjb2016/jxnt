@@ -72,6 +72,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     .jx_person_top{
         margin-top: 10px;
     }
+    .jx_margin a{
+        padding: 0 10px;
+    }
 </style>
 <script type="text/javascript">
     $(function(){      
