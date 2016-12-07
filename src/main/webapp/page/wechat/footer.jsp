@@ -14,7 +14,7 @@
                         <a href="PerCentral/jxCustomService.do" onclick="">联系我们</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" id="point">积分规则</a>
+                        <a href="PerCentral/jxPointRule.do">积分规则</a>
                     </li>
                     <li>
                         <a href="javascript:void(0);" onclick="gotoTop();return false;">返回顶部</a>
