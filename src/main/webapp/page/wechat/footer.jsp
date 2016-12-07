@@ -22,15 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div class="jx-footer-icp">ICP备案证书号：蜀ICP备xxxx号</div>
+        <div class="jx-footer-icp">ICP备案证书号：蜀ICP备14016313号-1</div>
  </footer>
 <script>
-/* 	function MyPoint(userId){
-	     var userName = $('#username').text();
-	     if(userName !="未登录"){
-	         window.location.href = "PerCentral/jxUserPoints.do?userId="+userId;
-	     }else{
-	     	 $('#point').attr("href","PerCentral/jxLogin.do");
-	     }
-	} */
 </script>

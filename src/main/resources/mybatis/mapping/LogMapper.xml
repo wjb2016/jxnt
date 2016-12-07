@@ -105,7 +105,8 @@
   	 left join t_user tu on tu.id = tl.user_id
   	 where 1=1
     <if test="searchName != null and searchName != ''">
-		and tu.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')	
+		and(tu.name like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')	
+		    or tl.oper like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')	) 
 	</if>
 	 <if test=" userId == 0">
 		and tl.user_id = 0 

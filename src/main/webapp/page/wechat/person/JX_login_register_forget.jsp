@@ -348,7 +348,9 @@ body {
                                 <span id="psdErrInfo" class="errFont"></span>
                             </div>
                             <div>
-                                <label class="checkbox"><input type="checkbox" checked="checked" id="choice" class="uniform">我同意 <a href="PerCentral/jxUserRegisterAgreement.do" >xxxx用户协议</a></label>
+                                <label class="checkbox"><input type="checkbox" checked="checked" id="choice" class="uniform">我看过并同意 
+                                     <div style="margin-left: 5px;"><a href="PerCentral/jxUserRegisterAgreement.do" >精欣暖通用户注册协议</a></div>
+                                </label>
                                 <span id="checkboxErrInfo" class="errFont"></span>
                                 <button type="button" class="btn btn-success" onclick="register()">注册</button>
                             </div>
@@ -436,7 +438,7 @@ body {
     jQuery(document).ready(function() {
         App.setPage("login_bg");  //Set current page
         App.init(); //Initialise plugins and elements
-    });
+    }); 
 </script>
 <script type="text/javascript">
      // 发送验证码计时器	
