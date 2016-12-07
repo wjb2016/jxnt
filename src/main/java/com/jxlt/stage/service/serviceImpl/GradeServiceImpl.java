@@ -70,7 +70,7 @@ public class GradeServiceImpl implements GradeService {
 			gradeMapper.deleteByPrimaryKey(id);
 			user.setGrade(user.getGrade()+num);
 			userMapper.updateByPrimaryKeySelective(user);
-			js.setObj(user.getName()+"取消兑换积分"+num+"分");
+			js.setObj("取消"+user.getName()+"的积分兑换"+num+"分");
 			js.setCode(0);
 			js.setMessage(user.getName()+"取消兑换积分成功!");
 		}catch(Exception e){
