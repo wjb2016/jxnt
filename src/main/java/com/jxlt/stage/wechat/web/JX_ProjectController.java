@@ -179,6 +179,7 @@ public class JX_ProjectController {
 			){
 		JsonResult<Project> js = new JsonResult<Project>();
 		Project project = new Project();
+		int preStatus = 0;
 		if(status == 0){
 			js.setMessage("开始施工出错，稍后再试！");
 			project.setStatus(1);
@@ -187,8 +188,15 @@ public class JX_ProjectController {
 			js.setMessage("完成施工出错，稍后再试！");
 			project.setFinishTime(new Date());
 			project.setStatus(2);
+			preStatus = 1;
 		}
 		try {
+			Project prePro = jxProjectService.getProjectById(proId);
+			if(prePro.getStatus() != preStatus){
+				js.setMessage("工程状态已被他人更新！");
+				return js;
+			}
+			
 			//保存工程
 			project.setId(proId);
 			jxProjectService.savePro(project);
