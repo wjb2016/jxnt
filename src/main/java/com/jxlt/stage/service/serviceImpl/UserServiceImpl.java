@@ -147,7 +147,7 @@ public class UserServiceImpl extends BaseController implements UserService {
 			Grade grade = new Grade();
 			grade.setUserId(user.getId());
 			grade.setOperId(loginUser.getId());
-			grade.setDescription("后台删除用户积分清零");
+			grade.setDescription("删除用户积分清零");
 			grade.setId(0);
 			grade.setCreateTime(new Date());
 			grade.setGrade(grades);
