@@ -256,4 +256,12 @@ public class JX_PersonCenterController {
 		return "wechat/person/JX_Water";
 		
 	}
+	
+	// 积分规则
+	@RequestMapping(value="jxPointRule.do")
+	public String JX_PointRule(){
+		
+		return "wechat/person/JX_PointRule";
+		
+	}
 }
