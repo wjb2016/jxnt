@@ -904,6 +904,12 @@ public class OrderController extends BaseController {
 		js.setCode(1);
 		js.setMessage("中断工程失败！");
 		try {
+			Project project = orderService.getProjectById(proId);
+			if(project != null && project.getStatus() == 2){
+				js.setMessage("工程已完成，不可中断！");
+				return js;
+			}
+			
 			//中断工程
 			Project pro = new Project();
 			pro.setStatus(3);
