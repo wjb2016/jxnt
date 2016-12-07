@@ -904,6 +904,12 @@ public class OrderController extends BaseController {
 		js.setCode(1);
 		js.setMessage("中断工程失败！");
 		try {
+			Project project = orderService.getProjectById(proId);
+			if(project != null && project.getStatus() == 2){
+				js.setMessage("工程已完成，不可中断！");
+				return js;
+			}
+			
 			//中断工程
 			Project pro = new Project();
 			pro.setStatus(3);
@@ -1544,6 +1550,7 @@ public class OrderController extends BaseController {
 				//生日当月享双倍积分
 				if(DateUtil.isBirthMonth(user.getBirth())){
 					grades *= 2;
+					description = "订单合同签订(生日双倍积分)";
 				}
 				//消费积分添加
 				user.setGrade(user.getGrade()+grades);

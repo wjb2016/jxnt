@@ -196,7 +196,7 @@ body {
             <span style="display: block; margin-left: 63px;">218号优博广场2栋4层2-403</span>
             
             <div id="car" style="display:none;">
-                 <span style="display: block; margin-right: 183px;">乘车路线：</span>	                   
+                 <span style="display: block; margin-right: 183px;">参考路线：</span>	                   
                  <table>                       
                        <tr>
                           <td align="left"><span style="margin-left: 60px;">57路到川藏路武侯大道口下车步行760米</span></td>         

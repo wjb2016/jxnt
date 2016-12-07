@@ -145,7 +145,7 @@ body {
 <body>
   <div id="container"> 
     <header id="JS_mll_header" class="mll-header borderOnePx" style="background: #e1891e;">
-        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
+        <a class="layout-back" onclick="javascript:history.go(-1);" style="color: white;">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text"style="color: white;">客服小妹</div>
         </div>
@@ -159,7 +159,7 @@ body {
             <td><div style="margin-top:10px;"></div></td>
          </tr>  -->
          <tr>           
-            <td>客服小妹：亲，如果我没能帮上您的忙，请拨打公司电话888-8888</td>
+            <td>客服小妹：亲，如果我没能帮上您的忙，请拨打公司电话(028)85554462</td>
          </tr>             
     </table>
 	<div style="height: 70px;"> 
