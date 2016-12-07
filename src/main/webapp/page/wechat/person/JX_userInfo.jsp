@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 <body class="userInfo_font">
 <header id="JS_mll_header" class="mll-header borderOnePx">
-        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
+        <a class="layout-back" href="<%=basePath%>PerCentral/jxPerson.do">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text">个人资料</div>
         </div>

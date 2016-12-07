@@ -134,7 +134,7 @@ function saveType(obj){
 						     	<textarea name="description" onblur="valueTrim(this);" type="text" style="width:250px;height:100px;margin-top:15px;margin-bottom:15px;vertical-align: middle;resize:none" class="textarea easyui-validatebox">${orderType.description}</textarea>
 							 </td>
 						</tr>										  
-						<tr>
+						<%-- <tr>
 							<td align="right">品牌照片：</td>	
 							<td>
 								<div id="imagetd">
@@ -153,7 +153,7 @@ function saveType(obj){
 									<input type="file" name="file" id="file" onchange="showName(this)"/>
 								</div>	
 							</td>
-						</tr>
+						</tr> --%>
 					</table> 						
 				</div>  
 			</form>
