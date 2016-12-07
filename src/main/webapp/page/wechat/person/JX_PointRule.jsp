@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 .rule{
    font-size: 16px;
+   margin-left: 10px;
 }
 </style>
 <body style="font-weight: bold;">
