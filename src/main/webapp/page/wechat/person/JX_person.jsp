@@ -17,13 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="apple-mobile-web-app-capable" content="yes">
 	
 	<script src="${pageContext.request.contextPath}/source/bootstrap/js/jquery-1.9.1.js"></script>
-    <%-- <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.js"></script> --%>
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap-tab.js"></script>
-
     <script src="${pageContext.request.contextPath}/source/bootstrap/js/common.js"></script>
 
-   <%--  <link href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/> --%>
     <link href="${pageContext.request.contextPath}/source/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/source/bootstrap/css/common.css" type="text/css">
 
@@ -133,9 +130,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="jx_margin" style="padding: 0 20px;">
         <label style="color:#db891e;">使用方法及售后事项：</label>
-        <a href="PerCentral/jxAirConditioning.do"><span>1.中央空调</span></a><br>
+        <a href="PerCentral/jxFloor_heating.do"><span>1.地暖</span></a><br>       
         <div class="jx_person_top"></div>
-        <a href="PerCentral/jxFloor_heating.do"><span>2.地暖</span></a><br>
+        <a href="PerCentral/jxAirConditioning.do"><span>2.中央空调</span></a><br>
         <div class="jx_person_top"></div>
         <a href="PerCentral/jxWater.do"><span>3.净水系统</span></a>
     </div>

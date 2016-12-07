@@ -40,17 +40,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div>
       <div style="margin-top: 10px;">       
        <span class="rule">1、服务条款确认</span><br>      
-       <p style="margin-left: 30px;">
+       <div style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	              精欣暖通微信公众号的各项网络电子服务的所有权和运营权归成都市精欣暖通工程有限公司，
 	              任何单位和个人非经本公司授权不得以本公司及其所有的网站名义进行商业或非商业活动。
 	              精欣暖通微信公众号提供的服务将严格按照本公司及本网发布的服务条款和操作规则执行。
 	              用户必须确认所有服务条款并完成注册程序，才能成为精欣暖通微信公众号的正式用户。
-	   </p>
+	   </div>
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">2、精欣暖通微信公众号版权声明</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	              精欣暖通微信公众号旗下网站(www.cdjxssj.com ,www.cdjxnt.cn及精欣暖通微信公众号的其他网站)
 	              上刊载的所有内容，包括但不限于文字报导、图片、声音、录像、图表、标志、标识、广告、商标、商号、域名、软件、程序、版面设计、专栏目录与名称、内容分类标准
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
        <div style="margin-top: 10px;">       
        <span class="rule">3、服务约定</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            精欣暖通微信公众号运用自己的电脑操作系统通过国际互联网络为用户提供网络服务。
 	            由于服务栏目和内容的不同，要求用户必须：
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">4、服务修订</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	              精欣暖通微信公众号根据自身的服务内容，以及与用户达成的协议提供服务。
 	              用户在享用本网提供的专项服务的同时，同意接受网站提供的各类信息服务。
@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">5、注册用户隐私保护</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	              用户一旦注册成功，成为精欣暖通微信公众号的合法用户，将得到一个密码和用户名。 
 	              由用户对用户名和密码安全负全部责任。
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">6、风险承担</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	             用户个人对网络服务的使用自行承担风险。精欣暖通微信公众号所提供的所有资料权限于对用户参考，
 	             不对用户的商业运作做任何具体性指导，用户应自行承担使用或提供本网信息的商业活动及其风险。
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">7、免责事由</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	       
 	           （1）精欣暖通微信公众号对用户在接受服务过程中所受的任何直接、间接的损害不负责任，这些损害可能来自：不正当使用网络服务，在网上购买商品或进行同类型服务，在网上进行交易，非法使用网络服务或用户传送的信息有所变动等。<br>
 	           （2）精欣暖通微信公众号不对用户所发布信息的删除或储存失败负责。精欣暖通微信公众号有判定用户的行为是否符合本网服务条款的要求和精神的保留权利，如果用户违背了服务条款的规定，精欣暖通微信公众号有中断对其提供网络服务的权利。<br>
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">8、用户承诺</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            用户自行承担发布内容的责任。用户对服务的使用是根据所有适用于精欣暖通微信公众号的国家法律、地方法律和国际法律准则的规定的。 <br>
 	            用户必须遵循：<br>
@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">9、服务终止或中止</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            精欣暖通微信公众号和用户可根据合同约定或实际情况终止、中止一项或多项网络服务。
 	            精欣暖通微信公众号不需对任何个人或第三方负责而随时中止服务。
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">10、通告形式</span><br>      
-       <p style="margin-left: 30px;">
+       <p style="padding: 0 0 10px 10px;">
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            精欣暖通微信公众号服务条款的修改、服务变更、或其它重要事件发生变动而需要通告时，
 	            可根据实际情况选择通过重要页面公告、电子邮件、常规信件等形式进行。
@@ -171,16 +171,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <div style="margin-top: 10px;">       
        <span class="rule">11、法律适用</span><br>      
-       <p style="margin-left: 30px;">
+       <div style="padding: 0 0 10px 10px;">
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	           本网网络服务条款与中华人民共和国的法律解释相一致，
 	           用户和精欣暖通微信公众号一致同意服从中华人民共和国法律的管辖。
 	           如发生精欣暖通微信公众号服务条款与中华人民共和国法律相抵触时，
 	           则这些条款将完全按法律规定重新解释，
 	           而其它条款则依旧保持对用户产生法律效力和影响。
-	   </p>
+	   </div>
       </div>
    </div> 
+   <jsp:include page="/page/wechat/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>
