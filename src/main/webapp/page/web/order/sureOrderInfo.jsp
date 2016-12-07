@@ -42,7 +42,11 @@ function savePro(obj){
         			});
 	  			}else{
 					$.messager.alert('错误信息',data.message,'error',function(){
-						$(obj).attr("onclick", "savePro(this);"); 
+						if(data.code==2){
+							window.location.href="<%=basePath %>Order/orderInfo.do?id="+data.obj.orderId;
+						}else{
+							$(obj).attr("onclick", "savePro(this);"); 
+						}
         			});
 	  			}
 	  		}

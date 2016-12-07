@@ -156,6 +156,7 @@ function savePsd(obj){
 				             <c:if test="${User.sex == 0 || User.sex == null}">
 							     <label><input type="radio" name="sex" value="1"/>男</label> 
  								<label><input type="radio" name="sex" value="2" />女</label> 
+ 								<label><input type="radio" name="sex" value="0" checked="checked"/>保密</label> 
 							     </c:if>
 							     <c:if test="${User.sex== 1 }">
 							     <label><input type="radio" name="sex" value="1" checked="checked" />男</label> 

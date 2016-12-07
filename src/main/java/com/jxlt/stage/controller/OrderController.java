@@ -692,6 +692,13 @@ public class OrderController extends BaseController {
 			js.setMessage("修改工程失败！");
 		}
 		try {
+			Order order = orderService.getOrderById(pro.getOrderId());
+			if(order.getStatus() > 2){
+				js.setMessage("工程划分已确认完毕！");
+				js.setObj(pro);
+				js.setCode(2);
+				return js;
+			}
 			if(pro.getStartTimes() != null && !pro.getStartTimes().trim().equals("")){
 				Date date = new Date();
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

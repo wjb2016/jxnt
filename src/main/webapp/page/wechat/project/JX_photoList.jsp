@@ -55,8 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div id="thumbs">
 		     <a id="photos" href='${projectImage.imagePath }' style="background-image:url('${projectImage.imagePath }');margin:auto;" title="照片${status.count}"></a>
 	         <div style="margin-top: 10px;">
-	             
-	             <p style="width: 340px;" >${projectImage.userMobile}<span>:</span>${projectImage.message}</p>
+	             <c:if test="${projectImage.message != null && projectImage.message != ''}">
+		             <p style="width: 340px;" >${projectImage.userMobile}<span>:</span>${projectImage.message}</p>
+	             </c:if>
 	         </div>
 	    </div>
     </c:forEach>

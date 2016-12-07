@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -195,6 +196,14 @@ public class UserController extends BaseController {
 			}
 			//保存
 			js = userService.saveOrUpdateUser(user);
+			User loginUser = this.getLoginUser();
+			if(user.getId() == loginUser.getId()){
+				loginUser.setName(user.getName());
+				loginUser.setSex(user.getSex());
+				loginUser.setAddress(user.getAddress());
+				loginUser.setMobile(user.getMobile());
+				SecurityUtils.getSubject().getSession().setAttribute(Constants.USER_SESSION_NAME, loginUser);
+			}
 			//日志
 			if(js.getCode() == 0){
 				if(user.getUtype() == 100){
