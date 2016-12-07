@@ -154,7 +154,9 @@ function saveLeader(obj){
 			   <span class="yw-bi-now">团队详情</span>
 			</div>
 		   <div class="fr">
+		   <c:if test="${Group.id != null}">
 		        <span class="yw-btn bg-green mr10" onclick="addMember()" >添加成员</span>
+		   </c:if>
 				<span class="yw-btn bg-green mr10" id="saveBtn" onclick="saveGroup(this);">保存</span> 
 				<span class="yw-btn bg-red mr10"  onclick="$('#i_back').click();">返回</span>
 				<input id="count2" name="count2" type="hidden" value="${Group.count2 }"/>  
@@ -184,6 +186,7 @@ function saveLeader(obj){
 					</tr>																		 	
 				</table>
 			   </form>
+			   <c:if test="${Group.count != 0}">
 				<table  class="yw-cm-table yw-center yw-bg-hover" id="groupItemList">
 					<tr style="background-color:#D6D3D3;font-weight: bold;">
 						<th style="display:none">&nbsp;</th>				
@@ -208,7 +211,8 @@ function saveLeader(obj){
 						</td>	
 					</tr>				
 					</c:forEach>													
-			    </table> 						
+			    </table> 	
+			   </c:if>					
 		</div>							
 	  </div> 
 	 </div>	

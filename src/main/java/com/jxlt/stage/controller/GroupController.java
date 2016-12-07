@@ -96,7 +96,8 @@ public class GroupController extends BaseController {
 	    	List<User> leaderlist = new ArrayList<User>();
 	    	List<User> chooselist = new ArrayList<User>();
 	    	int count0 = 0,count1 = 0,count2 = 0;
-	    	try{	    		
+	    	try{	  
+	    		group.setCount(0);
 	    		if(id > 0){
 	    			group = groupService.getGroupById(id);
 	    			groupItem.setId(0);

@@ -119,7 +119,7 @@ public class StatisticController extends BaseController {
 			loglist = logService.getLogList(log);
 			totalCount = logService.getTotalCount(log);
 			for(Log s:loglist)
-				s.setOperTimes(DateUtil.sortFormat(s.getOperTime()));
+				s.setOperTimes(DateUtil.longFormat(s.getOperTime()));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -153,7 +153,7 @@ public class StatisticController extends BaseController {
 			gradelist = gradeService.getGradeList(grade);
 			totalCount = gradeService.getTotalCount(grade);
 			for(Grade s:gradelist){
-				s.setCreateTimes(DateUtil.sortFormat(s.getCreateTime()));
+				s.setCreateTimes(DateUtil.longFormat(s.getCreateTime()));
 				if(s.getOperId() == 0 && s.getGrade() < 0)
 					convertCount++;
 			}
@@ -185,7 +185,7 @@ public class StatisticController extends BaseController {
 			paylist = payService.getPayList(pay);
 			totalCount = payService.getTotalCount(pay);
 			for(Pay s:paylist){
-				s.setPayTimes(DateUtil.sortFormat(s.getPayTime()));
+				s.setPayTimes(DateUtil.longFormat(s.getPayTime()));
 				if(s.getPayBackTime() != null)
 			    	s.setPayBackTimes(DateUtil.sortFormat(s.getPayBackTime()));
 			}

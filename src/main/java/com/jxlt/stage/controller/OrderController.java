@@ -1333,7 +1333,7 @@ public class OrderController extends BaseController {
 			File targetFile = new File(path);
 			String filePath = "";
 			String fileName = "";
-			if(file.getSize()>0){ 
+			if(file != null && file.getSize()>0){ 
 				String tempName = file.getOriginalFilename();  
 				String fileType = tempName.split("\\.")[1];
 				fileName = OrderType.getId()+"."+fileType;
