@@ -75,7 +75,7 @@ var baseurl = '<%=url%>';
 	        	<span>用户名：</span><input type="text" name="name" style="width:300px;height:28px;"/>
 	        </div>
 	        <div class="Password">
-	        	<span>密&nbsp;&nbsp;&nbsp;码：</span><input type="password" id="psd" name="psd" style="width:300px;height:28px;"/>
+	        	<span>密&nbsp;&nbsp;&nbsp;码：</span><input type="password" id="psd" name="psd" style="width:300px;height:28px;" onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false"/>
 	        </div>
 	        <div id="login-alert" class="login-rows" style="display:none;"></div>
 	        <a href="#"><div class="login-Btn"  onclick="javascript:login()">登录</div></a>

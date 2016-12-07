@@ -53,6 +53,7 @@ table tr td{
     display: -ms-box;
     width: -moz-available;
     margin-top: 10px;
+    margin-left: -0px;
 }
 .button li {
     height: 42px;
@@ -118,7 +119,10 @@ function submitCashing(id){
         $('#pointErrorInfo').text('*兑换的积分不能低于100积分，请重新输入！');
         return false;
      }
-   
+   	 if(allPoint < 1000){
+   	 	$('#pointErrorInfo').text('*积分达到1000分后才可以进行兑换！');
+        return false;
+   	 }
      $.ajax({
         url:"PerCentral/cashingPoint.do",
         type:"POST",
@@ -126,16 +130,16 @@ function submitCashing(id){
         data:{grade:point,id:id},
         success: function(data){
            if(data.code == 1){
+			   cancelAssess();
                dealWithAlert("兑换积分申请已成功提交！相关人员审核通过即可生效");
                // 返回上一级并刷新
 			   //location.replace(document.referrer);
-			   cancelAssess();
 			   $("#afterGrade").text(allPoint-point);
 			   $("#canUsedGrade").text(allPoint-point);
 			   $("#allPoint").val(allPoint-point);
-			   var html = "<tr><td align='left' style='width: 50%;'>兑换积分</td><td align='center' style='color: red'>"+(-point)+"</td><td align='right'>";
+			   var html = "<tr><td align='left'>兑换积分</td><td align='center' style='color: red' width='40px;'>"+(-point)+"</td><td align='right' width='100px;'>";
 			   html += getNowTime() + "</td></tr>";
-			   $("table").prepend(html);
+			   $("#gradeTable").prepend(html);
            }else{               
                dealWithAlert("兑换失败！请重新操作");
            }
@@ -159,7 +163,7 @@ function getNowTime(){
 <body>
 <div class="container bg1">
     <header id="JS_mll_header" class="mll-header borderOnePx">
-        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
+        <a class="layout-back" href="<%=basePath%>PerCentral/jxPerson.do">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text">积分详情</div>
         </div>
@@ -173,16 +177,15 @@ function getNowTime(){
     <div class="jx_margin userPoint_font">
         <p>积分明细</p><input type="hidden" value="${user.grade}" id="allPoint"/>
     </div>
-    <c:forEach var="grade" items="${gradeObj}">
-    <table style="width: 99%;font-size:16px;height:auto;">
-        <tr>
-            <td align="left" style="width: 50%;">${grade.description}</td>
-             <td align="center" style="color: red">${grade.grade}</td>
-            <td align="right">${grade.createTimes}</td>
-        </tr>        
+    <table style="width: 99%;font-size:16px;height:auto;" id="gradeTable">
+	    <c:forEach var="grade" items="${gradeObj}">
+		        <tr>
+		            <td align="left">${grade.description}</td>
+		            <td align="center" style="color: red;" width="40px">${grade.grade}</td>
+		            <td align="right" width="100px;">${grade.createTimes}</td>
+		        </tr>        
+	    </c:forEach>
     </table> 
-
-    </c:forEach>
     
     <div id="win" style="width: 100%; position: fixed; left: 50%; top: 70%; z-index: 500; display:none;margin: -50%;">
         <div class="mob-layer-content" style="background-color: #f5eaea;margin-left:auto;margin-right:auto;width:80%">
@@ -197,7 +200,7 @@ function getNowTime(){
 				    </div> 
 			    </div>
 	        </div>
-	     <ul class="button">
+	     <ul class="button" style="padding-left: -20px;">
 	          <li id="JS_msgbox_btn_0" style="font-weight:normal" onclick="cancelAssess()">取消</li>
 	          <li id="JS_msgbox_btn_1" style="border-left:1px solid #d8d8d8;" onclick="submitCashing(${sessionScope.ID})">确定</li>
 	     </ul>

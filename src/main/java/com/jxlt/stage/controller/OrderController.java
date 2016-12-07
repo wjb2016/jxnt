@@ -1544,6 +1544,7 @@ public class OrderController extends BaseController {
 				//生日当月享双倍积分
 				if(DateUtil.isBirthMonth(user.getBirth())){
 					grades *= 2;
+					description = "订单合同签订(生日双倍积分)";
 				}
 				//消费积分添加
 				user.setGrade(user.getGrade()+grades);

@@ -198,7 +198,7 @@ function deleteItem(id,count,flag){
 				<table class="yw-cm-table yw-center yw-bg-hover" id="typeInfoList">
 					<thead>
 					<tr style="background-color:#D6D3D3;font-weight: bold;">
-						<th>照片</th>						
+						<!-- <th>照片</th>	 -->					
 						<th>品牌名称</th>						
 						<th>品牌类型</th> 
 						<th  style="text-align: left!important;">品牌描述</th>
@@ -208,9 +208,9 @@ function deleteItem(id,count,flag){
 					<tbody id="typeList">
 					<c:forEach var="item" items="${ItemList}">
 						<tr>
-							<td	align="left">
+							<%-- <td	align="left">
 								<img alt="品牌照片" src="<%=basePath%>${item.imagePath}" style="width:40px;height:50px;vertical-align: middle;">
-							</td>							
+							</td> --%>							
 							<td>${item.name}</td>							
 							<td>${item.parentName}</td>
 							<td  style="text-align: left!important;">${item.description}</td>
