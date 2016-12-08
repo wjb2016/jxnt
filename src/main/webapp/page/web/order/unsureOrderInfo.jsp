@@ -145,26 +145,26 @@ function falseOrder(){
 				<div id="tab1" class="yw-tab ">
 					<table class="yw-cm-table font16">
 						<tr>
-							<td width="8%" align="right">
+							<td width="120px;" align="right">
 								<span>客户名称：</span>
 							</td>
 							<td>
 								<input id="name" name="name" type="text" value="${order.name}" class="easyui-validatebox" onblur="valueTrim(this);" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
 							</td>
-							<td width="8%" align="right">客户电话：</td>
+							<td width="120px;" align="right">客户电话：</td>
 							 <td>
 							 	<input id="mobile" name="mobile" type="text" value="${order.mobile}" class="easyui-validatebox" onblur="valueTrim(this);" required="true" validType="mobile" style="width:254px;height:28px;" />
 							 </td>
 						</tr>
 						<tr>						 
-							<td width="8%" align="right">
+							<td width="120px;" align="right">
 							 	<span>订单状态：</span>
 							</td>
 							<td>
 								<input value="待确认" type="text" class="easyui-validatebox" readonly="readonly" style="width:254px;height:28px;"/>
 								<input type="hidden" name="status" value="0"/>
 							</td>
-							<td width="8%" align="right">
+							<td width="120px;" align="right">
 								<span>下单时间：</span>
 							</td>
 							<td>
@@ -178,7 +178,7 @@ function falseOrder(){
 							</td>
 						</tr>	
 						<tr>
-							<td width="8%" align="right">
+							<td width="120px;" align="right">
 								<span>施工类型：</span>
 							</td>
 							<td>
@@ -190,18 +190,18 @@ function falseOrder(){
 								</select>
 								<input id="orderTypeId" name="orderTypeId" type="hidden" value="${order.orderTypeId}"/>
 							</td>
-							<td width="8%" align="right">交付时间：</td>
+							<td width="120px;" align="right">交付时间：</td>
 							 <td>
 							 	<input id="appointTime" name="appointTime" onblur="valueTrim(this);" type="text" value="${order.appointTime}" class="easyui-datetimebox" data-options="showSeconds:false,editable:false" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 	<input id="appoint" type="hidden" value="${order.appointTime}"/>
 							 </td>
 						</tr>
 						<tr>						 
-							 <td width="8%" align="right">房屋地址：</td>
+							 <td width="120px;" align="right">房屋地址：</td>
 							 <td>
 							 	<input id="homeAddress" name="homeAddress" placeholder="请输入房屋地址" type="text" value="${order.homeAddress}" class="easyui-validatebox" onblur="valueTrim(this);" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 </td>
-							 <td width="8%" align="right">
+							 <td width="120px;" align="right">
 								<span>房屋户型：</span>
 							 </td>
 							 <td>
@@ -217,7 +217,7 @@ function falseOrder(){
 							 </td>
 						</tr>	
 						<tr>
-							 <td width="8%" align="right">订单金额：</td>
+							 <td width="120px;" align="right">订单金额：</td>
 							 <td>
 							 	<c:if test="${order.amount == 0 }">
 								 	<input id="amount" name="amount" placeholder="请输入订单金额" onblur="valueTrim(this);" type="text" class="easyui-numberbox" data-options="min:0,precision:2" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
@@ -226,31 +226,31 @@ function falseOrder(){
 								 	<input id="amount" name="amount" placeholder="请输入订单金额" onblur="valueTrim(this);" type="text" value="${order.amount}" class="easyui-numberbox" data-options="min:0,precision:2" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 	</c:if>
 							 </td>
-							 <td width="8%" align="right">合同编号：</td>
+							 <td width="120px;" align="right">合同编号：</td>
 							 <td>
 							 	<input id="contractNumber" name="contractNumber" placeholder="请输入合同编号" onblur="valueTrim(this);" type="text" value="${order.contractNumber}" class="easyui-validatebox" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 </td>					 
 						</tr>
 						<tr>
-							<td width="8%" align="right">
+							<td width="120px;" align="right">
 								<span>保修起始：</span>
 							</td>
 							<td>
 							 	<input id="serviceStarts" name="serviceStarts" onblur="valueTrim(this);" type="text" value="${order.serviceStarts}" class="easyui-datebox" data-options="showSeconds:false,editable:false" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 	<input id="starts" type="hidden" value="${order.serviceStarts}"/>
 							 </td>
-							<td width="8%" align="right">保修截止：</td>
+							<td width="120px;" align="right">保修截止：</td>
 							 <td>
 							 	<input id="serviceEnds" name="serviceEnds" onblur="valueTrim(this);" type="text" value="${order.serviceEnds}" class="easyui-datebox" data-options="showSeconds:false,editable:false" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 	<input id="ends" type="hidden" value="${order.serviceEnds}"/>
 							 </td>
 						</tr>
 						<tr>						 
-							 <td width="8%" align="right">留言备注：</td>
+							 <td width="120px;" align="right">留言备注：</td>
 							 <td>
 							 	<input id="message" name="message" placeholder="请输入留言备注" onblur="valueTrim(this);" type="text" value="${order.message}" class="easyui-validatebox" style="width:254px;height:28px;" />
 							 </td>
-							 <td width="8%" align="right"><span>上门测量：</span></td>
+							 <td width="120px;" align="right"><span>上门测量：</span></td>
 							 <td>
 							 	<c:if test="${order.measureFlag == 0}">
 									<input type="radio" name="measure" value="0" checked="checked">否
@@ -267,7 +267,7 @@ function falseOrder(){
 							 </td>
 						</tr>	
 						<tr>
-							<td width="8%" align="right">是否交房：</td>
+							<td width="120px;" align="right">是否交房：</td>
 						    <td>
 						 		<c:if test="${order.depostFlag == 0}">
 									<input type="radio" name="depost" value="0" checked="checked">否
@@ -282,7 +282,7 @@ function falseOrder(){
 									<input type="radio" name="depost" value="1">是
 								</c:if>
 						    </td>
-							<td width="8%" align="right">是否新房：</td>
+							<td width="120px;" align="right">是否新房：</td>
 						    <td>
 						 		<c:if test="${order.newFlag == 0}">
 									<input type="radio" name="new" value="0" checked="checked">否
