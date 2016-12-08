@@ -216,7 +216,7 @@ function deleteById(id,proId,orderTypeId,orderId){
 					<span class="yw-bi-now">${project.name }</span>
 				</div>			
 				<div class="fr">
-					<c:if test="${project.status == 1 }">
+					<c:if test="${project.status == 1 || project.status == 2}">
 						<span class="yw-btn bg-blue mr10" id="addBtn" onclick="$('#uploadPhotoWindow').window('open');">上传工程图片</span> 
 					</c:if>
 					<c:if test="${project.status == 0 }">
@@ -387,6 +387,7 @@ function deleteById(id,proId,orderTypeId,orderId){
 							<div style="display:none;">
 								<input type="file" name="file1" id="file1" onchange="showName1(this)" />
 							</div>
+							<input type="hidden" id="orderImageId" name="orderImageId" value="${order.id }"/>
 						</tr>
 						<tr>
 							<td align="center">

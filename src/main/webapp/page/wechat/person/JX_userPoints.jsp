@@ -137,7 +137,7 @@ function submitCashing(id){
 			   $("#afterGrade").text(allPoint-point);
 			   $("#canUsedGrade").text(allPoint-point);
 			   $("#allPoint").val(allPoint-point);
-			   var html = "<tr><td align='left'>兑换积分</td><td align='center' style='color: red' width='40px;'>"+(-point)+"</td><td align='right' width='100px;'>";
+			   var html = "<tr><td align='left'>申请兑换积分</td><td align='center' style='color: red' width='40px;'>"+(-point)+"</td><td align='right' width='100px;'>";
 			   html += getNowTime() + "</td></tr>";
 			   $("#gradeTable").prepend(html);
            }else{               

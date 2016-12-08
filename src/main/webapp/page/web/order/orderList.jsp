@@ -99,8 +99,8 @@ function exportOrder(){
      });
 }
 function refresh(){
-    $("#startTime").datebox('setValue', '');
-    $("#endTime").datebox('setValue', ''); 
+    $("#startTimes").val("");
+    $("#endTimes").val("");
     $("#searchName").val("");
     $("#orderTypeId").val("0");
     $("#orderStatus").val("-1");
