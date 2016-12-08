@@ -62,12 +62,12 @@ var baseurl = '<%=url%>';
 </head>
 
 <style>
-	body{ background:url(source/images/logn-bg.jpg) no-repeat;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif; font-size:14px; color:#222;margin-top:150px;}
+	body{ /* background:url(source/images/logn-bg.jpg) no-repeat; */font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif; font-size:14px; color:#222;margin-top:150px;}
 </style>
 <body>
 
 	<div class="logn-logo" id="login-head">
-		<img style="max-width: 100%;height: auto;" src="source/images/logo.jpg" alt="">
+		<img style="max-width: 100%;height: auto;border:10% solid #F2F2F2;border-radius:10px;" src="source/images/jxltlogin.jpg" alt="">
 	</div>
 	<form id="loginForm" method="post"  >
 	    <div class="login-panel">
