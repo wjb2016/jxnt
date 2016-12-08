@@ -98,6 +98,14 @@ function exportOrder(){
          }
      });
 }
+function refresh(){
+    $("#startTime").datebox('setValue', '');
+    $("#endTime").datebox('setValue', ''); 
+    $("#searchName").val("");
+    $("#orderTypeId").val("0");
+    $("#orderStatus").val("-1");
+    search();
+}
 </script>
 </head>
 <body>
@@ -110,7 +118,7 @@ function exportOrder(){
 				</span>
 				<div class="fr" style="margin-right: 15px;"> 
 					<span class="yw-btn bg-green cur" style="margin-right: 10px;" onclick="window.location.href='<%=basePath%>Order/orderInfo.do?id=0'">新增订单</span> 
-					<span class="yw-btn bg-red cur" onclick="exportOrder();">导出订单</span> 
+					<span class="yw-btn bg-red cur" onclick="exportOrder();">导出</span> 
 				</div>
 			</div>
 		</div>
@@ -123,7 +131,7 @@ function exportOrder(){
 								<span>订单查询：</span>
 							</td>
 							<td width="200px" height="32px">
-								<input type="text" name="searchName" class="easyui-validatebox"	placeholder="用户名/手机号/合同号搜索" value="${Order.searchName}" style="width: 178px;height:28px;"/>
+								<input id="searchName" type="text" name="searchName" class="easyui-validatebox"	placeholder="用户名/手机号/合同号搜索" value="${Order.searchName}" style="width: 178px;height:28px;"/>
 							</td>
 							<td width="200px" height="32px">
 								<select id="ordertype" class="easyui-combobox" data-options="editable:false,onSelect:function(record){ $('#orderTypeId').val(record.value) }" style="width:177px;height: 32px;">
@@ -150,12 +158,13 @@ function exportOrder(){
 								<span>日期查询：</span>
 							</td>
 							<td colspan="2">
-								<input value="${Order.startTimes}" style="width:180px;height:32px;" type="text" class="easyui-datebox" data-options="editable:false,onSelect:function(date){ $('#startTimes').val(date.getFullYear()+ '-' +(date.getMonth()+1)+ '-' + date.getDate()) }"/>
+								<input id="startTime" value="${Order.startTimes}" style="width:180px;height:32px;" type="text" class="easyui-datebox" data-options="editable:false,onSelect:function(date){ $('#startTimes').val(date.getFullYear()+ '-' +(date.getMonth()+1)+ '-' + date.getDate()) }"/>
 								<span style="padding:0 2px;">~</span>
-								<input value="${Order.endTimes}" style="width:180px;height:32px;" type="text" class="easyui-datebox" data-options="editable:false,onSelect:function(date){ $('#endTimes').val(date.getFullYear()+ '-' +(date.getMonth()+1)+ '-' + date.getDate()) }"/>
+								<input id="endTime" value="${Order.endTimes}" style="width:180px;height:32px;" type="text" class="easyui-datebox" data-options="editable:false,onSelect:function(date){ $('#endTimes').val(date.getFullYear()+ '-' +(date.getMonth()+1)+ '-' + date.getDate()) }"/>
 							</td>
-							<td width="150px" height="32px" align="right">
-								<span class="yw-btn bg-blue cur" onclick="search();" style="display:inline-block;width: 125px;text-align: center;">搜索</span>
+							<td width="150px" height="32px" >
+							<span class="yw-btn bg-green cur" onclick="refresh();">刷新</span>							 						 
+							<span class="yw-btn bg-blue  cur" onclick="search();" style="margin-left:8px;">搜索</span>
 							</td>
 						</tr>
 					</table>
