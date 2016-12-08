@@ -2,9 +2,7 @@ package com.jxlt.stage.model;
 
 import java.util.Date;
 
-import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.Page;
-import com.jxlt.stage.common.utils.StringUtil;
 
 public class Order  extends Page{
     private Integer id;

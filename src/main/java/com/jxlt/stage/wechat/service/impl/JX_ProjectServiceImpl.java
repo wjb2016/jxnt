@@ -17,7 +17,6 @@ import com.jxlt.stage.dao.ProjectMapper;
 import com.jxlt.stage.dao.UserMapper;
 import com.jxlt.stage.model.Grade;
 import com.jxlt.stage.model.Order;
-import com.jxlt.stage.model.OrderImage;
 import com.jxlt.stage.model.OrderType;
 import com.jxlt.stage.model.Project;
 import com.jxlt.stage.model.ProjectImage;

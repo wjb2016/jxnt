@@ -1,6 +1,5 @@
 package com.jxlt.stage.common.utils;
 
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
 
 import com.google.common.base.Preconditions;

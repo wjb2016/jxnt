@@ -19,7 +19,6 @@ import com.jxlt.stage.common.JsonResult;
 import com.jxlt.stage.common.utils.Constants;
 import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.StringUtil;
-import com.jxlt.stage.model.Auto;
 import com.jxlt.stage.model.Group;
 import com.jxlt.stage.model.GroupItem;
 import com.jxlt.stage.model.User;

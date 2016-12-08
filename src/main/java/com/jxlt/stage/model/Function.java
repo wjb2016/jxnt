@@ -2,7 +2,6 @@ package com.jxlt.stage.model;
 
 import java.util.List;
 
-import com.jxlt.stage.common.utils.Page;
 
 
 public class Function{

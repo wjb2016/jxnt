@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.junit.Test;
 
 import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.MessageUtil;

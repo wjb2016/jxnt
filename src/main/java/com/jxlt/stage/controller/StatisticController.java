@@ -570,7 +570,7 @@ public class StatisticController extends BaseController {
 		js.setMessage("积分兑换确认失败!");
 		if(flag == 1)
 			js.setMessage("积分兑换取消失败!");
-		int temp = -1;
+		//int temp = -1;
 		try{
 			User user = this.getLoginUser();
 			if(id > 0){
