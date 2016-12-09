@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body style="font-weight: bold;">
 <div class="container bg1">
     <header id="JS_mll_header" class="mll-header borderOnePx">
-        <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
+        <a class="layout-back" href="<%=basePath%>PerCentral/jxPerson.do">返回</a>
         <div class="layout-middle">
             <div id="JS_header_page_title" class="text">积分规则</div>
         </div>

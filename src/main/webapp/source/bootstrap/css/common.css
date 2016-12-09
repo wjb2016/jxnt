@@ -184,7 +184,8 @@ a:hover {
             center center no-repeat; */
     /* background-size: cover; */
     top: 12px;
-    left: 15px
+    left: 15px;
+    font-weight: normal
 }
 
 .mll-header .layout-middle {
