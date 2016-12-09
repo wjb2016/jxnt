@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
     $(function(){      
         isLogin();
-        var sex = '${User.sex}'
+       /*  var sex = '${User.sex}'
         if(sex == 1){
           $('#baomi').css('display','none');
           $('#man').removeAttr('style');
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           $('#baomi').css('display','none');
           $('#meinv').removeAttr('style');
         }else{
-        }
+        } */
     });
     // 个人资料
     function userInfo(userId){
@@ -117,8 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="banner heardImg">
         <a href="javascript:void(0);" onclick="userInfo(${sessionScope.ID})">
         <img src="source/images/touxiang1.jpg" alt="我要预约" class="img-rounded" id="baomi">
-        <img src="source/images/man.jpg" alt="我要预约" class="img-rounded" id="man" style="display: none;">
-        <img src="source/images/meinv.jpg" alt="我要预约" class="img-rounded" id="meinv" style="display: none;">
+     <!--    <img src="source/images/man.jpg" alt="我要预约" class="img-rounded" id="man" style="display: none;">
+        <img src="source/images/meinv.jpg" alt="我要预约" class="img-rounded" id="meinv" style="display: none;"> -->
         <p style="color: #db891e; font-size: 16px; font-weight: bold;margin-top: 10px;">${sessionScope.userName}</p>
         </a>
     </div>

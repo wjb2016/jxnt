@@ -187,13 +187,16 @@ public class JX_PersonCenterController {
 		List<Grade> grade = userPersonCenterService.getGradeByUserId(id);
 		// 转换日期
 		String time = null;
+		Grade gradeObj = null;
 		for (Grade grade2 : grade) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			time = sdf.format(grade2.getCreateTime());
-			grade2.setCreateTimes(time);			
+			grade2.setCreateTimes(time);
+			gradeObj = grade2;
 		}
 		
 		request.setAttribute("user", user);
+		request.setAttribute("userGrade", gradeObj);
 		request.setAttribute("gradeObj", grade);
 		return "wechat/person/JX_userPoints";
 		

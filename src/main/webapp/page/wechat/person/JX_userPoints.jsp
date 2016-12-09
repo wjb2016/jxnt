@@ -84,6 +84,10 @@ i, ol, ul {
 <script type="text/javascript">
 $(function(){      
    isLogin();
+   var grade = "${userGrade}";
+   if(grade == ""){
+      $('#noLogging').removeAttr('style','display');
+   }
 });
    
 
@@ -209,7 +213,11 @@ function getNowTime(){
        
 </div>
 <div id="JS_mask" style="height: 820px; width: 100%; position: absolute; top: 0px; left: 0px; z-index: 499; background: rgba(0, 0, 0, 0.498039);display:none;"></div>
-
+<div id="noLogging" style="display:none;">
+	<div class="isNone" style="background:none;padding:5% 0;transform-origin: 0px 0px 0px;opacity: 1;transform: scale(1, 1);background:#fffef9;">
+		<div style="color:#aaa;text-align:center;background:url(${pageContext.request.contextPath}/source/images/keai.jpg) no-repeat center 0;background-size:150px;padding-top:200px;"><span style="margin-left: 20px;">暂无积分记录 </span></div>
+	</div> 
+</div>	
    <jsp:include page="/page/wechat/footer.jsp"></jsp:include>
 </div>
 </body>
