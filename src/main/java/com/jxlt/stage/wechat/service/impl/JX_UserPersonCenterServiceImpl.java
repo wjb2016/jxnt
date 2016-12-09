@@ -440,7 +440,7 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 				grades.setUserId(userId);        // 用户id
 				grades.setGrade(-grade);          // 兑换的积分
 				grades.setCreateTime(new Date());// 创建时间
-				grades.setDescription("兑换积分"); // 描述
+				grades.setDescription("申请兑换积分"); // 描述
 				gradeMapper.insertSelective(grades);
 				// 用户当前积分减去兑换积分
 				User user = userMapper.selectByPrimaryKey(userId);

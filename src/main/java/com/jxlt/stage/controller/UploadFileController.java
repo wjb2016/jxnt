@@ -1,37 +1,9 @@
 package com.jxlt.stage.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 @Scope("prototype")
 @Controller
 @RequestMapping("/fileUpload")
@@ -57,14 +29,14 @@ public class UploadFileController extends BaseController {
 //					+ fileName + ".xls");*/
 //			response.reset();
 //			final String userAgent = request.getHeader("USER-AGENT");
-//			if(StringUtils.contains(userAgent, "MSIE")){//IE浏览�? 
+//			if(StringUtils.contains(userAgent, "MSIE")){//IE浏览�? 
 //				fileName = URLEncoder.encode(fileName,"UTF8");  
-//			}else if(StringUtils.contains(userAgent, "Mozilla")){//google,火狐浏览�? 
+//			}else if(StringUtils.contains(userAgent, "Mozilla")){//google,火狐浏览�? 
 //				fileName = new String(fileName.getBytes(), "ISO8859-1");  
 //			}else{  
-//				fileName = URLEncoder.encode(fileName,"UTF8");//其他浏览�? 
+//				fileName = URLEncoder.encode(fileName,"UTF8");//其他浏览�? 
 //			}  
-//			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");//这里设置�?��让浏览器弹出下载提示框，而不是直接在浏览器中打开  
+//			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");//这里设置�?��让浏览器弹出下载提示框，而不是直接在浏览器中打开  
 //			response.setContentType("application/vnd.ms-excel"); 
 //			filePath = new String(filePath.getBytes("ISO-8859-1"), "utf-8");
 //			FileInputStream inStream = new FileInputStream(filePath);
@@ -94,7 +66,7 @@ public class UploadFileController extends BaseController {
 //			@RequestParam(value = "file", required = false) MultipartFile file) {
 //		JsonResult<Associate> js = new JsonResult<Associate>();
 //		js.setCode(1);
-//		js.setMessage("导入数据失败�?);		
+//		js.setMessage("导入数据失败�?);		
 //		List<Associate> associatelist = new ArrayList<Associate>();
 //		List<Associate> list = new ArrayList<Associate>();
 //		List<Associate> nulllist = new ArrayList<Associate>();
@@ -105,7 +77,7 @@ public class UploadFileController extends BaseController {
 //			// 项目在容器中的实际发布运行的upload路径
 //			String path = request.getSession().getServletContext()
 //					.getRealPath("upload");
-//			// 获取文件�?
+//			// 获取文件�?
 //			String fileName = file.getOriginalFilename();
 //			File targetFile = new File(path, fileName);
 //			if (!targetFile.exists()) {
@@ -121,8 +93,8 @@ public class UploadFileController extends BaseController {
 //				file.transferTo(targetFile);
 //				InputStream stream = new FileInputStream(targetFile.getPath());
 //				Workbook wb = WorkbookFactory.create(stream);
-//				// HSSFWorkbook是解析出来excel 2007 以前版本的，后缀名为xls�?
-//				// XSSFWorkbook是解析excel 2007 版的，后�?��为xlsx�?
+//				// HSSFWorkbook是解析出来excel 2007 以前版本的，后缀名为xls�?
+//				// XSSFWorkbook是解析excel 2007 版的，后�?��为xlsx�?
 //				try {
 //					stream = new FileInputStream(targetFile.getPath());
 //					wb = new XSSFWorkbook(stream);
@@ -133,7 +105,7 @@ public class UploadFileController extends BaseController {
 //					associatelist = getAssociateHSSFResult(wb);
 //				}
 //				for (Associate associate : associatelist) {
-//					// 把刚获取的列存入list,判断获取的对象是否按照规�?
+//					// 把刚获取的列存入list,判断获取的对象是否按照规�?
 //					if (associate.getName() == null
 //						|| "".equals(associate.getName())
 //						|| associate.getTypeid() == null
@@ -153,7 +125,7 @@ public class UploadFileController extends BaseController {
 //				totalCount = associatelist.size();
 //				rightCount = list.size();
 //				faultCount = nulllist.size();
-//				String message = "导入成功，共�?+totalCount+"�?其中成功"+rightCount+"�?失败"+faultCount+"条�?";
+//				String message = "导入成功，共�?+totalCount+"�?其中成功"+rightCount+"�?失败"+faultCount+"条�?";
 //				if (rightCount > 0) {
 //					associateService.importAssociateList(list);
 //					js.setCode(0);
@@ -177,7 +149,7 @@ public class UploadFileController extends BaseController {
 //			List<Area> areaList = areaService.getAreaAlList();
 //			for (int sheetIndex = 0; sheetIndex < wb.getNumberOfSheets(); sheetIndex++) {
 //				XSSFSheet st = (XSSFSheet) wb.getSheetAt(sheetIndex);
-//				// 第一行为标题，不�?
+//				// 第一行为标题，不�?
 //				for (int rowIndex = 1; rowIndex <= st.getLastRowNum(); rowIndex++) {
 //					XSSFRow row = st.getRow(rowIndex);
 //					if (row == null) {
@@ -265,7 +237,7 @@ public class UploadFileController extends BaseController {
 //			List<Area> areaList = areaService.getAreaAlList();
 //			for (int sheetIndex = 0; sheetIndex < wb.getNumberOfSheets(); sheetIndex++) {
 //				HSSFSheet st = (HSSFSheet) wb.getSheetAt(sheetIndex);
-//				// 第一行为标题，不�?
+//				// 第一行为标题，不�?
 //				for (int rowIndex = 1; rowIndex <= st.getLastRowNum(); rowIndex++) {
 //					HSSFRow row = st.getRow(rowIndex);
 //					if (row == null) {
@@ -400,7 +372,7 @@ public class UploadFileController extends BaseController {
 //			@RequestParam(value = "file", required = false) MultipartFile file) {
 //		JsonResult<AssociatePerson> js = new JsonResult<AssociatePerson>();
 //		js.setCode(1);
-//		js.setMessage("导入数据失败�?);		  
+//		js.setMessage("导入数据失败�?);		  
 //		if(associateid == null || associateid == 0)
 //		{
 //			js.setMessage("未指定社会机构！");
@@ -417,7 +389,7 @@ public class UploadFileController extends BaseController {
 //			// 项目在容器中的实际发布运行的upload路径
 //			String path = request.getSession().getServletContext()
 //					.getRealPath("upload");
-//			// 获取文件�?
+//			// 获取文件�?
 //			String fileName = file.getOriginalFilename();
 //			File targetFile = new File(path, fileName);
 //			if (!targetFile.exists()) {
@@ -433,8 +405,8 @@ public class UploadFileController extends BaseController {
 //				file.transferTo(targetFile);
 //				InputStream stream = new FileInputStream(targetFile.getPath());
 //				Workbook wb = WorkbookFactory.create(stream);
-//				// HSSFWorkbook是解析出来excel 2007 以前版本的，后缀名为xls�?
-//				// XSSFWorkbook是解析excel 2007 版的，后�?��为xlsx�?
+//				// HSSFWorkbook是解析出来excel 2007 以前版本的，后缀名为xls�?
+//				// XSSFWorkbook是解析excel 2007 版的，后�?��为xlsx�?
 //				try {
 //					stream = new FileInputStream(targetFile.getPath());
 //					wb = new XSSFWorkbook(stream);
@@ -448,7 +420,7 @@ public class UploadFileController extends BaseController {
 //				for (AssociatePerson p : associatePersonlist) {
 //					//格式转换
 //					
-//					// 把刚获取的列存入list,判断获取的对象是否按照规�?
+//					// 把刚获取的列存入list,判断获取的对象是否按照规�?
 //					if (p.getName() != null
 //							&& !"".equals(p.getName())
 //							&& p.getAddress() != null
@@ -477,7 +449,7 @@ public class UploadFileController extends BaseController {
 //				totalCount = associatePersonlist.size();
 //				rightCount = associatePersonSuccesslist.size();
 //				faultCount = associatePersonFaultlist.size();
-//				String message = "导入成功，共�?+totalCount+"�?其中成功"+rightCount+"�?失败"+faultCount+"条�?";
+//				String message = "导入成功，共�?+totalCount+"�?其中成功"+rightCount+"�?失败"+faultCount+"条�?";
 //				if (totalCount > 0) {
 //					associateService.importAssociatePersonList(associatePersonSuccesslist);
 //					js.setCode(0);
@@ -502,7 +474,7 @@ public class UploadFileController extends BaseController {
 //			List<AssociatePerson> result = new ArrayList<AssociatePerson>();
 //			for (int sheetIndex = 0; sheetIndex < wb.getNumberOfSheets(); sheetIndex++) {
 //				HSSFSheet st = (HSSFSheet) wb.getSheetAt(sheetIndex);
-//				// 第一行为标题，不�?
+//				// 第一行为标题，不�?
 //				for (int rowIndex = 1; rowIndex <= st.getLastRowNum(); rowIndex++) {
 //					HSSFRow row = st.getRow(rowIndex);
 //					if (row == null) {
@@ -524,9 +496,9 @@ public class UploadFileController extends BaseController {
 //					if (cell1 != null || "".equals(cell1)) {
 //						cell1.setCellType(Cell.CELL_TYPE_STRING);
 //						String sex = cell1.getStringCellValue();
-//						if(sex.equals("�?) || sex.equals("1"))
+//						if(sex.equals("�?) || sex.equals("1"))
 //						    p.setSex(1);
-//						if(sex.equals("�?) || sex.equals("0"))
+//						if(sex.equals("�?) || sex.equals("0"))
 //							p.setSex(0);
 //					}					
 //					HSSFCell cell2 = row.getCell(2);
@@ -560,7 +532,7 @@ public class UploadFileController extends BaseController {
 //						p.setIsleader(0);
 //						try {	
 //							String isleader = cell7.getStringCellValue();
-//							if(isleader.equals("�?) || isleader.equals("1"))
+//							if(isleader.equals("�?) || isleader.equals("1"))
 //								p.setIsleader(1);
 //						} catch (Exception ex) {
 //							ex.printStackTrace();
@@ -589,7 +561,7 @@ public class UploadFileController extends BaseController {
 //		p.setCreatorname(u.getName());
 //		for (int sheetIndex = 0; sheetIndex < wb.getNumberOfSheets(); sheetIndex++) {
 //			XSSFSheet st = (XSSFSheet) wb.getSheetAt(sheetIndex);
-//			// 第一行为标题，不�?
+//			// 第一行为标题，不�?
 //			for (int rowIndex = 1; rowIndex <= st.getLastRowNum(); rowIndex++) {
 //				XSSFRow row = st.getRow(rowIndex);
 //				if (row == null) {
@@ -605,9 +577,9 @@ public class UploadFileController extends BaseController {
 //				if (cell1 != null || "".equals(cell1)) {
 //					cell1.setCellType(Cell.CELL_TYPE_STRING);
 //					String sex = cell1.getStringCellValue();
-//					if(sex.equals("�?) || sex.equals("1"))
+//					if(sex.equals("�?) || sex.equals("1"))
 //					    p.setSex(1);
-//					if(sex.equals("�?) || sex.equals("0"))
+//					if(sex.equals("�?) || sex.equals("0"))
 //						p.setSex(0);
 //				}
 //				XSSFCell cell2 = row.getCell(2);
@@ -641,7 +613,7 @@ public class UploadFileController extends BaseController {
 //					p.setIsleader(0);
 //					try {	
 //						String isleader = cell7.getStringCellValue();
-//						if(isleader.equals("�?) || isleader.equals("1"))
+//						if(isleader.equals("�?) || isleader.equals("1"))
 //							p.setIsleader(1);
 //					} catch (Exception ex) {
 //						ex.printStackTrace();

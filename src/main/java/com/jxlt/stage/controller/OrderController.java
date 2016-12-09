@@ -1024,6 +1024,13 @@ public class OrderController extends BaseController {
 		JsonResult<ProjectImage> js = new JsonResult<ProjectImage>();
 		js.setMessage("保存照片失败！");
 		js.setCode(1);
+		if(projectImage.getOrderImageId() != null){
+			Order order = orderService.getOrderById(projectImage.getOrderImageId());
+			if(order.getStatus() == 6){
+				js.setMessage("项目已完工，不能再上传照片！");
+				return js;
+			}
+		}
 		if(file1.getSize() == 0 && file2.getSize() == 0 && file3.getSize() == 0 && file4.getSize() == 0){
 			js.setMessage("请选择照片!");
 			return js;
@@ -1557,7 +1564,7 @@ public class OrderController extends BaseController {
 				//生日当月享双倍积分
 				if(DateUtil.isBirthMonth(user.getBirth())){
 					grades *= 2;
-					description = "订单合同签订(生日双倍积分)";
+					description = "订单合同签订(生日当月双倍积分)";
 				}
 				//消费积分添加
 				user.setGrade(user.getGrade()+grades);

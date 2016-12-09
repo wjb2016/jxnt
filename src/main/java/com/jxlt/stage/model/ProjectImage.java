@@ -18,6 +18,8 @@ public class ProjectImage  extends Page{
     private Integer permission;
     //用户手机号
     private String userMobile;
+    
+    private Integer orderImageId;
 
     public Integer getId() {
         return id;
@@ -81,5 +83,13 @@ public class ProjectImage  extends Page{
 
 	public void setUserMobile(String userMobile) {
 		this.userMobile = userMobile;
+	}
+
+	public Integer getOrderImageId() {
+		return orderImageId;
+	}
+
+	public void setOrderImageId(Integer orderImageId) {
+		this.orderImageId = orderImageId;
 	}
 }

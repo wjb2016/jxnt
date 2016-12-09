@@ -77,19 +77,19 @@ function savePro(orderId){
 			<div id="tab1" class="yw-tab ">
 				<table class="yw-cm-table font16">
 					<tr>
-						<td width="8%" align="right">
+						<td width="120px;" align="right">
 							<span>客户名称：</span>
 						</td>
 						<td>
 							<input readonly="readonly" type="text" value="${order.name}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						</td>
-						<td width="8%" align="right">客户电话：</td>
+						<td width="120px;" align="right">客户电话：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.mobile}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
 					</tr>
 					<tr>						 
-						<td width="8%" align="right">
+						<td width="120px;" align="right">
 						 	<span>订单状态：</span>
 						</td>
 						<td>
@@ -100,7 +100,7 @@ function savePro(orderId){
 								<input value="已作废" type="text" class="easyui-validatebox" readonly="readonly" style="width:254px;height:28px;"/>
 							</c:if>
 						</td>
-						<td width="8%" align="right">
+						<td width="120px;" align="right">
 							<span>施工类型：</span>
 						</td>
 						<td>
@@ -119,23 +119,23 @@ function savePro(orderId){
 						</td>
 					</tr>	
 					<tr>
-						<td width="8%" align="right">
+						<td width="120px;" align="right">
 							<span>下单时间：</span>
 						</td>
 						<td>
 							<input type="text" readonly="readonly" value="${order.createDate}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						</td>
-						<td width="8%" align="right">交付时间：</td>
+						<td width="120px;" align="right">交付时间：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.appointTime}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
 					</tr>
 					<tr>						 
-						 <td width="8%" align="right">房屋地址：</td>
+						 <td width="120px;" align="right">房屋地址：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.homeAddress}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
-						 <td width="8%" align="right">
+						 <td width="120px;" align="right">
 							<span>房屋户型：</span>
 						 </td>
 						 <td>
@@ -160,39 +160,39 @@ function savePro(orderId){
 						 </td>
 					</tr>	
 					<tr>
-						 <td width="8%" align="right">订单金额：</td>
+						 <td width="120px;" align="right">订单金额：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.amount}" class="easyui-numberbox" data-options="min:0,precision:2" style="width:254px;height:28px;" />
 						 </td>
-						 <td width="8%" align="right">合同编号：</td>
+						 <td width="120px;" align="right">合同编号：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.contractNumber}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>					 
 					</tr>
 				<c:if test="${order.serviceStart != null && order.serviceEnd != null}">
 					<tr>						 
-						 <td width="8%" align="right">维修起始：</td>
+						 <td width="120px;" align="right">维修起始：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.serviceStarts}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
-						 <td width="8%" align="right">维修截止：</td>
+						 <td width="120px;" align="right">维修截止：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.serviceEnds}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
 					</tr>
 				</c:if>
 					<tr>						 
-						 <td width="8%" align="right">留言备注：</td>
+						 <td width="120px;" align="right">留言备注：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.message}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
-						 <td width="8%" align="right">接单人员：</td>
+						 <td width="120px;" align="right">接单人员：</td>
 						 <td>
 						 	<input readonly="readonly" type="text" value="${order.operName}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						 </td>
 					</tr>	
 					<tr>
-						<td width="8%" align="right"><span>上门测量：</span></td>
+						<td width="120px;" align="right"><span>上门测量：</span></td>
 						<td>
 						 	<c:if test="${order.measureFlag == 0}">
 								<input type="radio" name="measure" value="0" checked="checked" disabled="disabled">否
@@ -203,7 +203,7 @@ function savePro(orderId){
 								<input type="radio" name="measure" value="1" checked="checked" disabled="disabled">是
 							</c:if>
 						</td>
-						<td width="8%" align="right">是否交房：</td>
+						<td width="120px;" align="right">是否交房：</td>
 					    <td>
 					 		<c:if test="${order.depostFlag == 0}">
 								<input type="radio" name="depost" value="0" checked="checked" disabled="disabled">否
@@ -216,7 +216,7 @@ function savePro(orderId){
 					    </td>
 					</tr>
 					<tr>
-						<td width="8%" align="right">是否新房：</td>
+						<td width="120px;" align="right">是否新房：</td>
 					    <td>
 					 		<c:if test="${order.newFlag == 0}">
 								<input type="radio" name="new" value="0" checked="checked" disabled="disabled">否
@@ -228,10 +228,10 @@ function savePro(orderId){
 							</c:if>
 						</td>
 						<c:if test="${order.status == 8}">
-							<td width="8%" align="right">中断原因：</td>
+							<td width="120px;" align="right">中断原因：</td>
 						</c:if>
 						<c:if test="${order.status == 10}">
-							<td width="8%" align="right">作废原因：</td>
+							<td width="120px;" align="right">作废原因：</td>
 						</c:if>
 					    <td>
 					    	<textarea rows="5" style="width:254px;vertical-align: middle;border:1px solid #ddd;border-radius:5px;margin:8px 0px;" readonly="readonly">${order.operMessage }</textarea>

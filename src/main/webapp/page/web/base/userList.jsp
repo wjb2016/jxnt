@@ -50,7 +50,7 @@ function pagesearch(){
 	}
 }
 function DeleteUser(id){
-    var message = "是否删除该用户?";
+    var message = "是否删除该用户(删除将彻底清空用户积分)?";
    
 	$.messager.confirm("操作确认",message,function(r){  
 		    if (r){   
@@ -178,10 +178,10 @@ function ChangeFlag(id,flag){
 								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;" >详情</a>	
 								</c:if>   
 							<!-- 删除 -->  
-								<c:if test="${!(item.utype == 10 && loginUser.utype == 10) && item.utype != 13}">								 
+								<c:if test="${loginUser.utype == 13 && item.utype != 13}">								 
 								    <a href="javascript:void(0);" style="color:red;margin-right:22px;" onclick="DeleteUser(${item.id})">删除</a>	 												
 							     </c:if>
-							    <c:if test="${(item.utype == 10 && loginUser.utype == 10) || item.utype == 13}">								 
+							    <c:if test="${loginUser.utype == 13 && item.utype == 13}">								 
 								    <a href="javascript:void(0);" style="color:#D3D3D3;margin-right:22px;" >删除</a>	 												
 							     </c:if> 
 							 <!-- 登录权限 -->

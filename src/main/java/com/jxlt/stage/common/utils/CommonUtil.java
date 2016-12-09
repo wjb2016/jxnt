@@ -39,7 +39,7 @@ import org.apache.commons.lang.StringUtils;
 public class CommonUtil {
 
 	/**
-	 * 将class转换为Map，当class为null或�?异常的时候，返回new HashMap
+	 * 将class转换为Map，当class为null或�?异常的时候，返回new HashMap
 	 * 
 	 * @param obj
 	 * @return Map<String, Object>
@@ -60,7 +60,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 返回6位随机密�?	 * 
+	 * 返回6位随机密�?	 * 
 	 * @return
 	 */
 	public static String getRandomPassword() {
@@ -68,7 +68,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 将数组转换成字符�?	 * 
+	 * 将数组转换成字符�?	 * 
 	 * @param array
 	 * @return
 	 */
@@ -128,7 +128,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 生成随机�?	 * 
+	 * 生成随机�?	 * 
 	 * @param int
 	 * @return
 	 */
@@ -284,7 +284,7 @@ public class CommonUtil {
 		Pattern p = null;
 		Matcher m = null;
 		boolean b = false;
-		p = Pattern.compile("^[1][3,5,7,8][0-9]{9}$"); // 验证手机�?		m = p.matcher(str);
+		p = Pattern.compile("^[1][3,5,7,8][0-9]{9}$"); // 验证手机�?		m = p.matcher(str);
 		b = m.matches();
 		return b;
 	}
@@ -325,7 +325,7 @@ public class CommonUtil {
 
 	public static String Guid() {
 		StringBuffer str = new StringBuffer();
-		// 产生 1�?GUID
+		// 产生 1�?GUID
 		for (int i = 0; i < 1; i++) {
 			// 创建 GUID 对象
 			UUID uuid = UUID.randomUUID();
@@ -333,7 +333,7 @@ public class CommonUtil {
 			// 得到对象产生的ID
 			String a = uuid.toString();
 
-			// 转换为大�?			a = a.toUpperCase();
+			// 转换为大�?			a = a.toUpperCase();
 			// 替换 -
 			a = a.replaceAll("-", "");
 			// System.out.println(a);
@@ -346,7 +346,7 @@ public class CommonUtil {
 
 
 	/**
-	 * 判断坐标是否在多边形�?	 * @param point 点坐�?	 * @param polygon 多边�?	 * @return
+	 * 判断坐标是否在多边形�?	 * @param point 点坐�?	 * @param polygon 多边�?	 * @return
 	 */
 	public static boolean checkWithJdkGeneralPath(Point2D.Double point,
 			List<Point2D.Double> polygon) {
@@ -408,7 +408,7 @@ public class CommonUtil {
                 String key = property.getName();  
                 sdfd = key;
                 //System.out.println(key);
-                // 过滤class属�?  
+                // 过滤class属�?  
                 if (!key.equals("class")) {  
                     // 得到property对应的getter方法  
                     Method getter = property.getReadMethod();  
@@ -460,14 +460,14 @@ public class CommonUtil {
     public static Date getEndMonthDay(Date date){
         Calendar todayEnd = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));  
         todayEnd.setTime(date);
-//        System.out.println(todayEnd.get(Calendar.DATE)); //获取�?;
+//        System.out.println(todayEnd.get(Calendar.DATE)); //获取�?;
         todayEnd.set(Calendar.DAY_OF_MONTH, todayEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
-//        System.out.println(todayEnd.get(Calendar.DATE)); //获取�?;
+//        System.out.println(todayEnd.get(Calendar.DATE)); //获取�?;
         todayEnd.set(Calendar.HOUR_OF_DAY, 23);  
         todayEnd.set(Calendar.MINUTE, 59);  
         todayEnd.set(Calendar.SECOND, 59);  
 //        todayEnd.set(Calendar.MILLISECOND, 999);  
-//        System.out.println(todayEnd.getTime()); //获取�?;
+//        System.out.println(todayEnd.getTime()); //获取�?;
         return todayEnd.getTime();  
     } 
     
@@ -487,8 +487,8 @@ public class CommonUtil {
 		map.put("summary", "1");
 		map.put("detail", "11111");
 		map.put("type", "1");
-		map.put("address", "高新区九兴大�?);
-		map.put("additional", "恐�?、暴�?);
+		map.put("address", "高新区九兴大�?);
+		map.put("additional", "恐�?、暴�?);
 		Map<String, File> fileMap = new HashMap<String, File>();
 		File file = new File("d:\\server.xml");
 		// File file1 = new File("d:\\csdn.xml");

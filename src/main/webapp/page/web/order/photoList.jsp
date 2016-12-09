@@ -127,7 +127,9 @@ function openimg(id){
 					</c:if>
 				</div>
 			</c:forEach>
-			<div class="page" id="pager" style="clear: both;"></div>
+			<c:if test="${ProjectImage.totalCount > 0}">
+			    <div class="page" id="pager" style="clear: both;"></div>
+			</c:if>
 		</div>
 		<div style="margin-top: 8px;width:48%;display:inline-table;">
 			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">已公开照片</span>

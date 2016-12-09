@@ -1,6 +1,5 @@
 package com.jxlt.stage.dao;
 
-import java.util.List;
 
 import com.jxlt.stage.model.OrderImage;
 @MyBatisRepository
