@@ -109,7 +109,7 @@ function refresh(){
 					  <tr>
 						  <td>			     
 							<span>内容查询：</span>
-							<input type="text" id="searchName" name="searchName"  style="width:177px;height:32px;"
+							<input type="text" onblur="valueTrim(this);" id="searchName" name="searchName"  style="width:177px;height:32px;"
 							 class="easyui-validatebox" placeholder="操作人搜索" value="${Log.searchName}" type="hidden"/> 						
 							<span class="yw-btn bg-green cur" onclick="refresh();" style="margin-left: 15px;">刷新</span>							 						 
 							<span class="yw-btn bg-blue  cur" onclick="search();" style="margin-left: 15px;">搜索</span>

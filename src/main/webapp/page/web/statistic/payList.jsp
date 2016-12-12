@@ -105,7 +105,7 @@ function refresh(){
 					  </td></tr>
 					  <tr><td>			     
 						<span>内容查询：</span>
-						<input type="text" id="searchName" name="searchName"  style="width:177px;height:32px;"
+						<input type="text" onblur="valueTrim(this);" id="searchName" name="searchName"  style="width:177px;height:32px;"
 						 class="easyui-validatebox" placeholder="合同号搜索" value="${Pay.searchName}" type="hidden"/> 						
 						<span class="yw-btn bg-green cur" onclick="refresh();" style="margin-left: 15px;">刷新</span>							 						 
 						<span class="yw-btn bg-blue  cur" onclick="search();" style="margin-left: 15px;">搜索</span>
@@ -124,10 +124,11 @@ function refresh(){
 						<th >合同号</th> 
 						<th >交易类型</th>		 
 						<th >支付金额</th>  
-						<th >支付时间</th>  
-						<!-- <th >退款金额</th>  
-						<th >退款时间</th>   -->
-								
+						<th >支付时间</th> 
+						<c:if test="${Pay.payBackPrice > 0}">
+						<th >退款金额</th>  
+						<th >退款时间</th>  
+						</c:if> 		
 					</tr>
 					<c:forEach var="item" items="${paylist}">
 						<tr>
@@ -135,18 +136,11 @@ function refresh(){
 							<td ><span >${item.contract}</span></td> 
 							<td ><span>${item.payAccount}</span></td>  
 							<td ><span >${item.payPrice}</span></td> 
-							<td ><span>${item.payTimes}</span></td>  
-							<%-- <td ><span >${item.payBackPrice}</span></td> 
-							<td ><span>${item.payBackTimes}</span></td>   --%>
-							<%-- <td>
-								<a href="javascript:void(0);" style="color:blue;" onclick="window.location.href='<%=basePath %>Pay/autoInfo.do?id=${item.id}'">详情</a>
-								<c:if test="${item.flag == 0}">
-								   <a style="margin-left:15px;color:red"  onclick="ChangeAuto(${item.id},${item.flag})">重新启用</a> 
-								</c:if>
-								<c:if test="${item.flag == 1}">
-								   <a style="margin-left:15px;color:green"  onclick="ChangeAuto(${item.id},${item.flag})">立即停用</a> 
-								</c:if>
-							</td>		 --%>					
+							<td ><span>${item.payTimes}</span></td>
+							<c:if test="${Pay.payBackPrice > 0}">  
+							 <td ><span >${item.payBackPrice}</span></td> 
+							<td ><span>${item.payBackTimes}</span></td>   
+							</c:if>			
 						</tr>
 					</c:forEach>
 				</table>

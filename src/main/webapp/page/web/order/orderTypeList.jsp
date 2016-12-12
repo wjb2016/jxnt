@@ -80,7 +80,7 @@ function fillItemList(lst){
 	var html = "";
 	for(var i = 0; i<lst.length;i++){
 		html += "<tr>";
-		html += "<td align='center'>" + "<img alt='品牌照片' src='<%=basePath%>"+ lst[i].img1Path + "'"+" style='width:40px;height:50px;vertical-align: middle;'></td>";
+		<%-- html += "<td align='center'>" + "<img alt='品牌照片' src='<%=basePath%>"+ lst[i].img1Path + "'"+" style='width:40px;height:50px;vertical-align: middle;'></td>"; --%>
 		html += "<td>"+(lst[i].name == null ? "":lst[i].name)+"</td>";		
 		html += "<td>"+(lst[i].parentName == null ? "":lst[i].parentName)+"</td>";
 		html += "<td style='text-align:left;'>"+(lst[i].description == null ? "":lst[i].description)+"</td>";
@@ -172,7 +172,7 @@ function deleteItem(id,count,flag){
 				<div class="pd10">
 					<div class="fr"> 
 						<span class="ml26">品牌查询：</span>
-						<input type="text" name="searchName" class="easyui-validatebox"	placeholder="品牌名搜索" value="${Type.searchName}" /> 
+						<input type="text" name="searchName" onblur="valueTrim(this);" class="easyui-validatebox"	placeholder="品牌名搜索" value="${Type.searchName}" /> 
 						<span class="yw-btn bg-blue ml30 cur" onclick="search();" style="display:inline-block;width: 65px;text-align: center;">搜索</span>
 					</div>
 					<div class="cl"></div>

@@ -200,15 +200,15 @@ public class OrderController extends BaseController {
                 Cell cell0_1 = row0.createCell(1, Cell.CELL_TYPE_STRING);
                 cell0_1.setCellValue("客户电话");
                 Cell cell0_2 = row0.createCell(2, Cell.CELL_TYPE_STRING);
-                cell0_2.setCellValue("预约时间");
+                cell0_2.setCellValue("房屋类型");
                 Cell cell0_3 = row0.createCell(3, Cell.CELL_TYPE_STRING);
                 cell0_3.setCellValue("下单时间");
                 Cell cell0_4 = row0.createCell(4, Cell.CELL_TYPE_STRING);
-                cell0_4.setCellValue("施工类型");
+                cell0_4.setCellValue("房屋地址");
                 Cell cell0_5 = row0.createCell(5, Cell.CELL_TYPE_STRING);
-                cell0_5.setCellValue("房屋地址");
+                cell0_5.setCellValue("施工类型");
                 Cell cell0_6 = row0.createCell(6, Cell.CELL_TYPE_STRING);
-                cell0_6.setCellValue("房屋户型");
+                cell0_6.setCellValue("预约时间");
                 Cell cell0_7 = row0.createCell(7, Cell.CELL_TYPE_STRING);
                 cell0_7.setCellValue("留言信息");
                 Cell cell0_8 = row0.createCell(8, Cell.CELL_TYPE_STRING);
@@ -216,9 +216,11 @@ public class OrderController extends BaseController {
                 Cell cell0_9 = row0.createCell(9, Cell.CELL_TYPE_STRING);
                 cell0_9.setCellValue("是否新房");
                 Cell cell0_10 = row0.createCell(10, Cell.CELL_TYPE_STRING);
-                cell0_10.setCellValue("上门测量");
+                cell0_10.setCellValue("是否上门测量");
                 Cell cell0_11 = row0.createCell(11, Cell.CELL_TYPE_STRING);
                 cell0_11.setCellValue("合同编号");
+                Cell cell0_12 = row0.createCell(12, Cell.CELL_TYPE_STRING);
+                cell0_12.setCellValue("是否有效");
 
                 try {
                     for (int i = 0; i < list.size(); i++) {
@@ -232,74 +234,74 @@ public class OrderController extends BaseController {
                         sheet.autoSizeColumn(1,true);
                         
                         Cell cell3 = row.createCell(2, Cell.CELL_TYPE_STRING);
-                        cell3.setCellValue(list.get(i).getAppointTime() == null?"":list.get(i).getAppointTime());
+                        String homeType = list.get(i).getHouseType();
+                        if(homeType != null){
+                        	if(homeType.equals("1")){
+                        		cell3.setCellValue("平层一套一");
+                        	}else if(homeType.equals("2")){
+                        		cell3.setCellValue("平层一套二");
+                        	}else if(homeType.equals("3")){
+                        		cell3.setCellValue("平层一套三");
+                        	}else if(homeType.equals("4")){
+                        		cell3.setCellValue("平层一套四");
+                        	}else if(homeType.equals("5")){
+                        		cell3.setCellValue("跃层/别墅");
+                        	}else{
+                        		cell3.setCellValue("");
+                        	}
+                        }else{
+                        	cell3.setCellValue("");
+                        }
                         sheet.autoSizeColumn(1,true);
-                        
+                                                                                            
                         Cell cell4 = row.createCell(3, Cell.CELL_TYPE_STRING);
                         cell4.setCellValue(list.get(i).getCreateDate() == null?"":list.get(i).getCreateDate());
                         sheet.autoSizeColumn(1,true);
                         
                         Cell cell5 = row.createCell(4, Cell.CELL_TYPE_STRING);
-                        Integer type = list.get(i).getOrderTypeId();
-                        if(type != null){
-                        	if(type == 1){
-                        		cell5.setCellValue("地暖");
-                        	}else if(type == 2){
-                        		cell5.setCellValue("中央空调");
-                        	}else if(type == 3){
-                        		cell5.setCellValue("净水系统");
-                        	}else{
-                        		cell5.setCellValue("");
-                        	}
-                        }else{
-                        	cell5.setCellValue("");
-                        }
+                        cell5.setCellValue(list.get(i).getHomeAddress() == null ? "":list.get(i).getHomeAddress());
                         sheet.autoSizeColumn(1,true);
                         
                         Cell cell6 = row.createCell(5, Cell.CELL_TYPE_STRING);
-                        cell6.setCellValue(list.get(i).getHomeAddress() == null ? "":list.get(i).getHomeAddress());
-                        sheet.autoSizeColumn(1,true);
-                        
-                        Cell cell7 = row.createCell(6, Cell.CELL_TYPE_STRING);
-                        String homeType = list.get(i).getHouseType();
-                        if(homeType != null){
-                        	if(homeType.equals("1")){
-                        		cell7.setCellValue("平层一套一");
-                        	}else if(homeType.equals("2")){
-                        		cell7.setCellValue("平层一套二");
-                        	}else if(homeType.equals("3")){
-                        		cell7.setCellValue("平层一套三");
-                        	}else if(homeType.equals("4")){
-                        		cell7.setCellValue("平层一套四");
-                        	}else if(homeType.equals("5")){
-                        		cell7.setCellValue("跃层/别墅");
+                        Integer type = list.get(i).getOrderTypeId();
+                        if(type != null){
+                        	if(type == 1){
+                        		cell6.setCellValue("地暖");
+                        	}else if(type == 2){
+                        		cell6.setCellValue("中央空调");
+                        	}else if(type == 3){
+                        		cell6.setCellValue("净水系统");
                         	}else{
-                        		cell7.setCellValue("");
+                        		cell6.setCellValue("");
                         	}
                         }else{
-                        	cell7.setCellValue("");
+                        	cell6.setCellValue("");
                         }
+                        sheet.autoSizeColumn(1,true);
+                                               
+                        Cell cell7 = row.createCell(6, Cell.CELL_TYPE_STRING);
+                        cell7.setCellValue(list.get(i).getAppointTime() == null?"":list.get(i).getAppointTime());
                         sheet.autoSizeColumn(1,true);
                         
                         Cell cell8 = row.createCell(7, Cell.CELL_TYPE_STRING);
                         cell8.setCellValue(list.get(i).getMessage() == null?"":list.get(i).getMessage());
                         sheet.autoSizeColumn(1,true);
                         
-                        Cell cell9 = row.createCell(8, Cell.CELL_TYPE_STRING);
-                        cell9.setCellValue(list.get(i).getDepostFlag() == null?"":list.get(i).getDepostFlag()==0?"×":"√");
-                        sheet.autoSizeColumn(1,true);
-                        
-                        Cell cell10 = row.createCell(9, Cell.CELL_TYPE_STRING);
-                        cell10.setCellValue(list.get(i).getNewFlag() == null?"":list.get(i).getNewFlag()==0?"×":"√");
-                        sheet.autoSizeColumn(1,true);
-                        
-                        Cell cell11 = row.createCell(10, Cell.CELL_TYPE_STRING);
-                        cell11.setCellValue(list.get(i).getMeasureFlag() == null?"":list.get(i).getMeasureFlag()==0?"×":"√");
-                        sheet.autoSizeColumn(1,true);
-                        
-                        Cell cell12 = row.createCell(11, Cell.CELL_TYPE_STRING);
-                        cell12.setCellValue(list.get(i).getContractNumber() == null?"":list.get(i).getContractNumber());
-                        sheet.autoSizeColumn(1,true);
+//                        Cell cell9 = row.createCell(8, Cell.CELL_TYPE_STRING);
+//                        cell9.setCellValue(list.get(i).getDepostFlag() == null?"":list.get(i).getDepostFlag()==0?"×":"√");
+//                        sheet.autoSizeColumn(1,true);
+//                        
+//                        Cell cell10 = row.createCell(9, Cell.CELL_TYPE_STRING);
+//                        cell10.setCellValue(list.get(i).getNewFlag() == null?"":list.get(i).getNewFlag()==0?"×":"√");
+//                        sheet.autoSizeColumn(1,true);
+//                        
+//                        Cell cell11 = row.createCell(10, Cell.CELL_TYPE_STRING);
+//                        cell11.setCellValue(list.get(i).getMeasureFlag() == null?"":list.get(i).getMeasureFlag()==0?"×":"√");
+//                        sheet.autoSizeColumn(1,true);
+//                        
+//                        Cell cell12 = row.createCell(11, Cell.CELL_TYPE_STRING);
+//                        cell12.setCellValue(list.get(i).getContractNumber() == null?"":list.get(i).getContractNumber());
+//                        sheet.autoSizeColumn(1,true);
                         
                     }
                 }catch (Exception ex){
