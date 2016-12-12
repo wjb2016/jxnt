@@ -184,11 +184,14 @@ public class StatisticController extends BaseController {
 		try{
 			paylist = payService.getPayList(pay);
 			totalCount = payService.getTotalCount(pay);
+			double payBack = 0;
 			for(Pay s:paylist){
+				payBack += s.getPayBackPrice();
 				s.setPayTimes(DateUtil.longFormat(s.getPayTime()));
 				if(s.getPayBackTime() != null)
 			    	s.setPayBackTimes(DateUtil.sortFormat(s.getPayBackTime()));
 			}
+			pay.setPayBackPrice(payBack);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
