@@ -252,6 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        		}
 	        	}else{
 	        		html += "<option>无工程列表</option>";
+	        		//$('#noProject').removeAttr('style','display');
 	        	}
 	        	if(data.obj){
 		        	//项目类型
@@ -470,8 +471,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <label class="jx_ntLove_Fount">工程列表</label>
             <select class="selectpicker" data-live-search="true" id="proList" onchange="selectPro()">
             	<option>请先选择合同编号</option>
-            </select>                      
-        </div>
+            </select>
+<!--             <div id="noProject" style="display:none;"><span style="color: red;margin-top: 20px;">*后台正在给您划分工程团队，请稍等</span></div>                      
+ -->        </div>
         <div id="orderInfo" style="display: none;">
 	        <div class="jx_margin">
 		        <table class="table table-striped jx_ntFount" style="border-bottom:1px solid #db891e;">
