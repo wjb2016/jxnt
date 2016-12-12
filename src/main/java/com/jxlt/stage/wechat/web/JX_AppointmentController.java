@@ -33,7 +33,9 @@ public class JX_AppointmentController {
 	@ResponseBody
 	@RequestMapping(value="appointtemtInfo.do")
 	public JsonResult<Order> appointtemtOrder(Order order,HttpServletResponse resp){
-		resp.setHeader("Access-Control-Allow-Origin","*");
+		//resp.setHeader("Access-Control-Allow-Origin","*");
+		/*resp.setHeader("Access-Control-Allow-Methods","POST");
+		resp.setHeader("Access-Control-Allow-Methods","x-requested,content-type");*/
 		JsonResult<Order> result = new JsonResult<Order>();
 		result = userAppointmentService.addOrderInfo(order);
 		return result;

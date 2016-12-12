@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           $.ajax({
           		url:"Appointment/appointtemtInfo.do",
           		type:"POST",
-          		dataType:"JSONP",
+          		dataType:"JSON",
           		data:formData,
           		success: function(data){         		
           		   if(data.code == 1){
