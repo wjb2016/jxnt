@@ -65,8 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           var formData = $('#appointmentInfo').serialize();
           $.ajax({
           		url:"Appointment/appointtemtInfo.do",
-          		type:"post",
-          		dataType:"json",
+          		type:"POST",
+          		dataType:"JSONP",
           		data:formData,
           		success: function(data){         		
           		   if(data.code == 1){
