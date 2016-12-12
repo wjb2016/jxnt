@@ -252,6 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        		}
 	        	}else{
 	        		html += "<option>无工程列表</option>";
+	        		alert("工程后台规划中，请等待！");
 	        	}
 	        	if(data.obj){
 		        	//项目类型

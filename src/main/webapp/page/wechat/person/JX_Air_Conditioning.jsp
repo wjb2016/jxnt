@@ -34,8 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div id="JS_header_page_title" class="text">中央空调</div>
         </div>
     </header>
-   
-   <jsp:include page="/page/wechat/footer.jsp"></jsp:include>
+   	<div style="width:80%;margin:10px auto;">
+	    <img alt="积分规则" src="<%=basePath%>source/images/kt.jpg"/>
+    </div>
 </div>
 </body>
 </html>
