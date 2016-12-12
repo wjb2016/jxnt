@@ -68,4 +68,6 @@ public interface JX_ProjectService {
 
 	String getGroupLeaderPhone(Integer groupId);
 
+	User getUserById(Integer id);
+
 }

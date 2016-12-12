@@ -180,4 +180,9 @@ public class JX_ProjectServiceImpl implements JX_ProjectService {
 	public String getGroupLeaderPhone(Integer groupId) {
 		return groupMapper.getGroupLeaderPhone(groupId);
 	}
+
+	@Override
+	public User getUserById(Integer id) {
+		return userMapper.selectByPrimaryKey(id);
+	}
 }

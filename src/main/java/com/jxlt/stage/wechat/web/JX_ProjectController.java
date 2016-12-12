@@ -83,7 +83,12 @@ public class JX_ProjectController {
 		try {
 			String contractNum = (String)req.getParameter("contractNum");
 			User user = (User)req.getSession().getAttribute("loginUser"); 
-			listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
+			user = jxProjectService.getUserById(user.getId());
+			if(user != null){
+				listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
+				System.out.println(user.getUtype());
+				System.out.println(user.getId());
+			}
 			
 			if(user.getUtype() == 1){
 				Order order = jxProjectService.getOrderByConNum(contractNum);
