@@ -131,7 +131,7 @@ function refresh(){
 								<span>订单查询：</span>
 							</td>
 							<td width="200px" height="32px">
-								<input id="searchName" type="text" name="searchName" class="easyui-validatebox"	placeholder="用户名/手机号/合同号搜索" value="${Order.searchName}" style="width: 178px;height:28px;"/>
+								<input id="searchName" type="text" onblur="valueTrim(this);" name="searchName" class="easyui-validatebox"	placeholder="用户名/手机号/合同号搜索" value="${Order.searchName}" style="width: 178px;height:28px;"/>
 							</td>
 							<td width="200px" height="32px">
 								<select id="ordertype" class="easyui-combobox" data-options="editable:false,onSelect:function(record){ $('#orderTypeId').val(record.value) }" style="width:177px;height: 32px;">

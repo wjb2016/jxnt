@@ -172,7 +172,7 @@ function deleteItem(id,count,flag){
 				<div class="pd10">
 					<div class="fr"> 
 						<span class="ml26">品牌查询：</span>
-						<input type="text" name="searchName" class="easyui-validatebox"	placeholder="品牌名搜索" value="${Type.searchName}" /> 
+						<input type="text" name="searchName" onblur="valueTrim(this);" class="easyui-validatebox"	placeholder="品牌名搜索" value="${Type.searchName}" /> 
 						<span class="yw-btn bg-blue ml30 cur" onclick="search();" style="display:inline-block;width: 65px;text-align: center;">搜索</span>
 					</div>
 					<div class="cl"></div>
