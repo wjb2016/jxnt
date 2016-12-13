@@ -84,7 +84,7 @@ function fillItemList(lst){
 		html += "<td>"+(lst[i].name == null ? "":lst[i].name)+"</td>";		
 		html += "<td>"+(lst[i].parentName == null ? "":lst[i].parentName)+"</td>";
 		html += "<td style='text-align:left;'>"+(lst[i].description == null ? "":lst[i].description)+"</td>";
-		html += "<td>"+"<a href='javascript:void(0);' style='color:blue;' onclick=window.location.href='<%=basePath %>Order/typeInfo.do?typeId="+lst[i].id+"'>详情</a>"+(lst[i].flag == 0 ?"<a style='margin-left:15px;color:red;' href='javascript:void(0);' onclick='deleteItem("+lst[i].id+","+lst[i].childrenCount+","+lst[i].flag+");'>启用</a>":"<a style='margin-left:15px;color:red;' href='javascript:void(0);' onclick='deleteItem("+lst[i].id+","+lst[i].childrenCount+","+lst[i].flag+");'>停用</a>")+"</td>";
+		html += "<td>"+"<a href='javascript:void(0);' style='color:blue;' onclick=window.location.href='<%=basePath %>Order/typeInfo.do?typeId="+lst[i].id+"'>详情</a>"+(lst[i].flag == 0 ?"<a style='margin-left:15px;color:green;' href='javascript:void(0);' onclick='deleteItem("+lst[i].id+","+lst[i].childrenCount+","+lst[i].flag+");'>启用</a>":"<a style='margin-left:15px;color:red;' href='javascript:void(0);' onclick='deleteItem("+lst[i].id+","+lst[i].childrenCount+","+lst[i].flag+");'>停用</a>")+"</td>";
 		html += "</tr>";
 	}
 	$("#typeList").html(html);
@@ -217,7 +217,7 @@ function deleteItem(id,count,flag){
 							<td>
 								<a href="javascript:void(0);" style="color:blue;" onclick="window.location.href='<%=basePath %>Order/typeInfo.do?typeId=${item.id}'">详情</a>
 								<c:if test="${item.flag == 0 }">
-									<a style="margin-left:15px;color:red;" href="javascript:void(0);"  onclick="deleteItem(${item.id},${item.childrenCount},${item.flag })">启用</a> 
+									<a style="margin-left:15px;color:green;" href="javascript:void(0);"  onclick="deleteItem(${item.id},${item.childrenCount},${item.flag })">启用</a> 
 								</c:if>
 								<c:if test="${item.flag == 1 }">
 									<a style="margin-left:15px;color:red;" href="javascript:void(0);"  onclick="deleteItem(${item.id},${item.childrenCount},${item.flag })">停用</a> 
