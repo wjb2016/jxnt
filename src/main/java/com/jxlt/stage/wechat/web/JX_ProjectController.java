@@ -1,5 +1,6 @@
 package com.jxlt.stage.wechat.web;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,23 +82,34 @@ public class JX_ProjectController {
 		js.setCode(1);
 		List<Project> listPro = new ArrayList<Project>();
 		try {
-			String contractNum = (String)req.getParameter("contractNum");
+			StringBuilder buffer = new StringBuilder();
+	        BufferedReader reader = req.getReader();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            buffer.append(line);
+	        }
+	        String data = buffer.toString();
+	        System.out.println(data);
+			String contractNum = new String(data.getBytes("iso-8859-1"),"utf-8");
+			System.out.println(contractNum);
 			User user = (User)req.getSession().getAttribute("loginUser"); 
 			user = jxProjectService.getUserById(user.getId());
 			if(user != null){
-				listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
 				System.out.println(user.getUtype());
 				System.out.println(user.getId());
+				listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
 			}
 			
 			if(user.getUtype() == 1){
 				Order order = jxProjectService.getOrderByConNum(contractNum);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				if(order.getServiceEnd() != null){
-					order.setServiceEnds(sdf.format(order.getServiceEnd()));
-				}
-				if(order.getServiceStart() != null){
-					order.setServiceStarts(sdf.format(order.getServiceStart()));
+				if(order != null){
+					if(order.getServiceEnd() != null){
+						order.setServiceEnds(sdf.format(order.getServiceEnd()));
+					}
+					if(order.getServiceStart() != null){
+						order.setServiceStarts(sdf.format(order.getServiceStart()));
+					}
 				}
 				js.setObj(order);
 			}
@@ -121,13 +133,13 @@ public class JX_ProjectController {
 	@ResponseBody
 	@RequestMapping("/jsonLoadPro.do")
 	public JsonResult<ProjectImage> jsonLoadPro(
+			@RequestParam(value="proId",required=true)Integer proId,
 			HttpServletRequest req,HttpServletResponse resp
 			){
 		JsonResult<ProjectImage> js = new JsonResult<ProjectImage>();
 		js.setCode(1);
 		js.setMessage("加载工程出错！");
 		try {
-			Integer proId = Integer.valueOf(req.getParameter("proId"));
 			Project pro = jxProjectService.getProjectById(proId);
 			if(pro != null){
 				Order order = jxProjectService.getOrderById(pro.getOrderId());
