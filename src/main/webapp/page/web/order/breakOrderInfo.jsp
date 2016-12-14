@@ -35,6 +35,16 @@ function cancelBreak(orderId){
 function savePro(orderId){
 	var reason = $("#reason").val();
 	var amount = $("#amount").val();
+	var preAmount = $("#preAmount").val();
+	if(!isNaN(amount)){
+	   if(amount - preAmount > 0){
+		$.messager.alert('错误提示',"退款金额不能超过总金额",'error');
+		return;
+	   }	
+	}else{
+	   $.messager.alert('错误提示',"退款金额必须为数字",'error');
+	   return;
+	}
 	$.ajax({
 		url:"<%=basePath %>/Order/jsonUpdateCancelOrder.do?orderId="+orderId+"&amount="+amount+"&reason="+reason,
 		type:"post",
@@ -162,7 +172,7 @@ function savePro(orderId){
 					<tr>
 						 <td width="120px;" align="right">订单金额：</td>
 						 <td>
-						 	<input readonly="readonly" type="text" value="${order.amount}" class="easyui-numberbox" data-options="min:0,precision:2" style="width:254px;height:28px;" />
+						 	<input readonly="readonly" type="text" value="${order.amount}" class="easyui-numberbox" data-options="min:0,precision:2" style="width:254px;height:28px;" id="preAmount"/>
 						 </td>
 						 <td width="120px;" align="right">合同编号：</td>
 						 <td>
