@@ -396,7 +396,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <div style="display: none;">
 	            <input type="file" name="file" id="file" onchange="showName(this)">
 	        </div>
-	        <div style="margin-top:10px;text-align: center;display:none;" id="pro_btn">
+	        <div style="margin-top:30px;text-align: center;display:none;" id="pro_btn">
 	            <input class="btn btn-success fileinput-button jx_userInfo_button" id="btn_pro" readonly="readonly"></input>
 	        </div>
         </div>
