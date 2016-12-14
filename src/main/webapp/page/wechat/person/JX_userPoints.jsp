@@ -186,7 +186,12 @@ function getNowTime(){
 	    <c:forEach var="grade" items="${gradeObj}">
 		        <tr>
 		            <td align="left">${grade.description}</td>
-		            <td align="center" style="color: red;" width="40px">${grade.grade}</td>
+		            <c:if test="${grade.grade < 0}">
+		                <td align="center" style="color: red;" width="40px">${grade.grade}</td>
+		            </c:if>
+		            <c:if test="${grade.grade > 0}">
+		                <td align="center" style="color: #12a709;" width="40px">+${grade.grade}</td>
+		            </c:if>
 		            <td align="right" width="100px;">${grade.createTimes}</td>
 		        </tr>        
 	    </c:forEach>
