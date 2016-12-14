@@ -121,10 +121,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		// 选中的合同编号
 		var contractNum = $('#contract').val();
 		$.ajax({
-			url : "<%=basePath%>Project/jsonLoadProList.do",
+			url : "<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum,
 	        type:"POST",
 	        dataType:"JSON",
-	        data:{contractNum:contractNum},
 	        success: function (data){
 	        	$("#proList").find("option").remove();
 	        	var html = "";
@@ -149,10 +148,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   // 选中的工程编号
 	   var proId = $("#proList").val();
 	   $.ajax({
-	        url:"<%=basePath%>Project/jsonLoadPro.do",
+	        url:"<%=basePath%>Project/jsonLoadPro.do?proId="+proId,
 	        type:"POST",
 	        dataType:"JSON",
-	        data:{proId:proId},
 	        success: function (data){
 	        	if(data.code == 0){
 	        		$("#typeName").text(data.obj.typeName);
