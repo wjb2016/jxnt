@@ -239,8 +239,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   var contractNum = $('#contract').val();
 	   
 	   var url="<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum;
-        $.jsonp({
+	   $.ajax({
            "url": url,
+           "dataType":"json",
+           "type":"post",
            "success": function(data) {
 	        	$("#proList").find("option").remove();
 	        	var html = "";
@@ -250,8 +252,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        			html += "<option value='"+data.list[i].id+"'>"+data.list[i].name+"</option>" 
 	        		}
 	        	}else{
-	        		html += "<option>无工程列表</option>";
-	        		alert("工程后台规划中，请等待！");
+	        		if(contractNum == 0){
+	        			html += "<option>请先选择合同编号</option>";
+	        			alert("请选择合同编号！");
+	        		}else{
+		        		html += "<option>无工程列表</option>";
+		        		alert("工程后台规划中，请等待！");
+	        		}
 	        	}
 	        	if(data.obj){
 		        	//项目类型
