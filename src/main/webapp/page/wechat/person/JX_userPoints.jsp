@@ -176,7 +176,7 @@ function getNowTime(){
     
     <div class="jx_margin userPoint_font">
         <span style="margin-left: 10px;">积分: <span id="afterGrade">${user.grade}</span></span>
-        <a href="javascript:void(0)" style="float: right;margin-right: 30px;"><span onclick="cashing()">兑换</span></a>
+        <a href="javascript:void(0)" style="float: right;margin-right: 30px;"><span onclick="cashing()">申请兑换</span></a>
     </div>
    
     <div class="jx_margin userPoint_font">
