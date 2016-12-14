@@ -229,7 +229,7 @@
     <if test="userType != 1">
 	    and tgi.is_leader in (1,2) 
     </if>
-    where tgi.user_id = #{userId}
+    where tgi.user_id = #{userId} and tpj.status in(0,1)
   </select>
   <!-- 查找同一个项目里同名的工程数量 -->
   <select id="getExistProjectByName" parameterType="com.jxlt.stage.model.Project" resultMap="BaseResultMap">
