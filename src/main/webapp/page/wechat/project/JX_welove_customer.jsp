@@ -237,11 +237,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   $("#orderInfo").hide();
 	   // 选中的合同编号
 	   var contractNum = $('#contract').val();
+	   
+	   var url="<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum;
 	   $.ajax({
-	        url:"<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum,
-	        type:"POST",
-	        dataType:"JSON",
-	        success: function (data){
+           "url": url,
+           "dataType":"json",
+           "type":"post",
+           "success": function(data) {
 	        	$("#proList").find("option").remove();
 	        	var html = "";
 	        	if(data.code == 0){
@@ -250,8 +252,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        			html += "<option value='"+data.list[i].id+"'>"+data.list[i].name+"</option>" 
 	        		}
 	        	}else{
-	        		html += "<option>无工程列表</option>";
-	        		alert("工程后台规划中，请等待！");
+	        		if(contractNum == 0){
+	        			html += "<option>请先选择合同编号</option>";
+	        			alert("请选择合同编号！");
+	        		}else{
+		        		html += "<option>无工程列表</option>";
+		        		alert("工程后台规划中，请等待！");
+	        		}
 	        	}
 	        	if(data.obj){
 		        	//项目类型

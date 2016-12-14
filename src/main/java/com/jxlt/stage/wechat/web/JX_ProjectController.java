@@ -83,21 +83,11 @@ public class JX_ProjectController {
 		js.setCode(1);
 		List<Project> listPro = new ArrayList<Project>();
 		try {
-			StringBuilder buffer = new StringBuilder();
-	        BufferedReader reader = req.getReader();
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            buffer.append(line);
-	        }
-	        String data = buffer.toString();
-	        System.out.println(data);
-			String contractNum = new String(data.getBytes("iso-8859-1"),"utf-8");
-			System.out.println(contractNum);
+			String contractNum = req.getParameter("contractNum");
+			contractNum = new String(contractNum.getBytes("iso-8859-1"),"utf-8");
 			User user = (User)req.getSession().getAttribute("loginUser"); 
 			user = jxProjectService.getUserById(user.getId());
 			if(user != null){
-				System.out.println(user.getUtype());
-				System.out.println(user.getId());
 				listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
 			}
 			
