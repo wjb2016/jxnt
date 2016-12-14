@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<title>净水系统</title>
+<title>精欣暖通-净水系统</title>
 <script src="${pageContext.request.contextPath}/source/bootstrap/js/jquery-1.9.1.js"></script>
 <script src="${pageContext.request.contextPath}/source/bootstrap/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/source/bootstrap/js/common.js"></script>

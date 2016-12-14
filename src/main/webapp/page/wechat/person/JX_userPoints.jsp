@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <base href="<%=basePath%>"> 
     <meta charset="UTF-8">
-    <title>积分记录</title>
+    <title>精欣暖通-积分详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="format-detection" content="telephone=no">
@@ -186,7 +186,12 @@ function getNowTime(){
 	    <c:forEach var="grade" items="${gradeObj}">
 		        <tr>
 		            <td align="left">${grade.description}</td>
-		            <td align="center" style="color: red;" width="40px">${grade.grade}</td>
+		            <c:if test="${grade.grade < 0}">
+		                <td align="center" style="color: red;" width="40px">${grade.grade}</td>
+		            </c:if>
+		            <c:if test="${grade.grade > 0}">
+		                <td align="center" style="color: #12a709;" width="40px">+${grade.grade}</td>
+		            </c:if>
 		            <td align="right" width="100px;">${grade.createTimes}</td>
 		        </tr>        
 	    </c:forEach>
