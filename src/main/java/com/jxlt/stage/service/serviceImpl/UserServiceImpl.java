@@ -152,7 +152,10 @@ public class UserServiceImpl extends BaseController implements UserService {
 			grade.setCreateTime(new Date());
 			grade.setGrade(grades);
 			gradeMapper.insert(grade);
-		}		
+		}	
+		//团队成员信息删除
+		if(user.getUtype() == 11 || user.getUtype() == 12)
+		    groupItemMapper.deleteByUserId(id);
 		js.setObj(user.getUtypeName()+user.getName());
 		js.setCode(0);
 		js.setMessage("删除成功!");

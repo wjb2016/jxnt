@@ -87,7 +87,7 @@
       gi.id, gi.group_id, gi.user_id, gi.is_leader,u.name as name,u.mobile as mobile
       from t_group_item gi
       left join t_user u on u.id = gi.user_id 
-     where gi.group_id = #{0}
+     where gi.group_id = #{0} 
       order by gi.is_leader DESC
   </select>
   <select id="getItemListWithUserId" parameterType="com.jxlt.stage.model.GroupItem" resultMap="BaseResultMap">
