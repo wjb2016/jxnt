@@ -28,4 +28,6 @@ public interface GroupMapper {
 
 	//获取团队领导人手机号
 	String getGroupLeaderPhone(Integer groupId);
+	//获取项目经理当前团队
+	List<Group> getGroupListByLeader(Integer userId);
 }

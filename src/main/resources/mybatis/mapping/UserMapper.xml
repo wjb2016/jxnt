@@ -246,4 +246,11 @@
     and  month(birth)=month(NOW()) 
      and day(birth)=day(now())
   </select>
+  
+  <select id="getUserMessageByMobile"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+  from t_user
+  where mobile=#{0}
+  </select>
 </mapper>
