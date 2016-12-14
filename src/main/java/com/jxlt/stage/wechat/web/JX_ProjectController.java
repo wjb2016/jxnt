@@ -1,6 +1,5 @@
 package com.jxlt.stage.wechat.web;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.jxlt.stage.common.JsonResult;
 import com.jxlt.stage.common.utils.FileUtil;
-import com.jxlt.stage.common.utils.StringUtil;
 import com.jxlt.stage.model.Grade;
 import com.jxlt.stage.model.Order;
 import com.jxlt.stage.model.OrderType;
@@ -245,6 +243,7 @@ public class JX_ProjectController {
 	public JsonResult<Project> jsonLoadFile(
 			@RequestParam(value = "file", required = false)CommonsMultipartFile file,
 			@RequestParam(value = "id", required = true)Integer id,
+			@RequestParam(value="userId",required = true)Integer userId,
 			HttpServletRequest request,HttpServletResponse resp
 			){
 		JsonResult<Project> js = new JsonResult<Project>();
@@ -255,9 +254,9 @@ public class JX_ProjectController {
 				js.setMessage("请选择照片！");
 				return js;
 			}
-			User user = (User)request.getSession().getAttribute("loginUser");
+			//User user = (User)request.getSession().getAttribute("loginUser");
 			ProjectImage projectImage = new ProjectImage();
-			projectImage.setOperId(user.getId());
+			projectImage.setOperId(userId);
 			projectImage.setProjectId(id);
 		    //照片保存
 			if(file.getSize() > 0){
@@ -374,6 +373,7 @@ public class JX_ProjectController {
 			@RequestParam(value="id",required=true)Integer id,
 			@RequestParam(value="message",required=true)String message,
 			@RequestParam(value="open",required=true)Integer open,
+			@RequestParam(value="userId",required=true)Integer userId,
 			HttpServletRequest req,HttpServletResponse resp
 			){
 		 JsonResult<ProjectImage> js = new  JsonResult<ProjectImage>();
@@ -386,7 +386,7 @@ public class JX_ProjectController {
 			pro.setPermission(open);
 			//积分规则，公开工程图片则加用户100积分,并将积分详情插入积分表
 			if(open == 1){
-				User user = (User)req.getSession().getAttribute("loginUser");
+				User user = jxProjectService.getUserById(userId);
 				user.setGrade(user.getGrade()+100);
 				jxProjectService.saveUser(user);
 				Grade grade = new Grade();
@@ -421,6 +421,7 @@ public class JX_ProjectController {
 			@RequestParam(value="grade",required=true)Integer grade,
 			@RequestParam(value="message",required=true)String message,
 			@RequestParam(value="permission",required=true)Integer permission,
+			@RequestParam(value="userId",required=true)Integer userId,
 			HttpServletRequest req,HttpServletResponse resp
 			){
 		JsonResult<Project> js = new  JsonResult<Project>();
@@ -432,7 +433,7 @@ public class JX_ProjectController {
 			pro.setAssessValue(grade);
 			pro.setAssessMessage(mes);
 			pro.setPermission(permission);
-			User user = (User)req.getSession().getAttribute("loginUser");
+			User user = jxProjectService.getUserById(userId);
 			pro.setAssessUserId(user.getId());
 			//积分规则，公开工程则加用户500积分,并将积分详情插入积分表
 			if(permission == 1){

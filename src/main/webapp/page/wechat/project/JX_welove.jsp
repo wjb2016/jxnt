@@ -238,8 +238,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			dataType:"json",
 			success:function(data){
 				$("#proInfo").hide();
-				$("#erropMsg").text(data.message).show();
-				setTimeout("selectPro();",3000);
+				alert(data.message);
+				//setTimeout("selectPro();",3000);
+				reload();
 			}
 		})
 	}
@@ -285,6 +286,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		              }else{
 		              	  clearProgress();
 		              	  dealWithAlert(jsondata.message);
+		              	  setTimeout("selectPro();",3000);
 		              }
 		          } 
 		     });  
@@ -387,6 +389,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	        <div style="margin-top:10px;text-align: center;display: none;" id="img_btn">
 	        	<input type="hidden" id="id" name="id"/>
+	        	<input type="hidden" name="userId" value="${sessionScope.loginUser.id}"/>
 	            <input class="btn btn-success fileinput-button jx_userInfo_button" value="工程图上传" onclick="$('#file').click();" readonly="readonly">
 		         </input>
 	        </div>

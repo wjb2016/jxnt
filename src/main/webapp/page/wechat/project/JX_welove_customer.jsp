@@ -411,8 +411,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return;
 		}
 		var open = $("input:radio[name='openimg']:checked").val();
+		var userId = "${sessionScope.loginUser.id}";
 		$.ajax({
-			url:"<%=basePath%>Project/jsonSaveProImg.do?id="+id+"&message="+message+"&open="+open,
+			url:"<%=basePath%>Project/jsonSaveProImg.do?id="+id+"&message="+message+"&open="+open+"&userId="+userId,
 			type:"post",
 			dataType:"json",
 			success:function(data){
@@ -435,8 +436,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return;
 		}
 		var permission = $("input:radio[name='permission']:checked").val();
+		var userId = "${sessionScope.loginUser.id}";
 		$.ajax({
-			url:"<%=basePath%>Project/jsonSaveProMsg.do?id="+id+"&grade="+grade+"&message="+promessage+"&permission="+permission,
+			url:"<%=basePath%>Project/jsonSaveProMsg.do?id="+id+"&grade="+grade+"&message="+promessage+"&permission="+permission+"&userId="+userId,
 			type:"post",
 			dataType:"json",
 			success:function(data){
