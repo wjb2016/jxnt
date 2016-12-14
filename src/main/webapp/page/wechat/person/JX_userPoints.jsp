@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <base href="<%=basePath%>"> 
     <meta charset="UTF-8">
-    <title>积分记录</title>
+    <title>精欣暖通-积分详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="format-detection" content="telephone=no">
