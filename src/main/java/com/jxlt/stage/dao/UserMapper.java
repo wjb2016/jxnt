@@ -34,5 +34,7 @@ public interface UserMapper {
 	
 	//按手机号查询所有等同用户
 	List<User> getUserOnlyByMobile(User user);
+    //手机号获取用户信息
+	User getUserMessageByMobile(String mobile);
 
 }

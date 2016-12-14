@@ -148,4 +148,11 @@
   	left join t_user tu on tgi.user_id = tu.id
   	where tgp.id = #{id} and tgi.is_leader = 2
   </select>
+   <select id="getGroupListByLeader"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_group tgp
+    left join t_group_item tgi on tgi.group_id = tgp.id and tgi.is_leader = 2
+    where tgp.flag = 1 and tgi.user_id = #{0}
+  </select>
 </mapper>

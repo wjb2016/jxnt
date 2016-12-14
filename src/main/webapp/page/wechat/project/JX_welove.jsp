@@ -120,10 +120,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#proInfo").hide();
 		// 选中的合同编号
 		var contractNum = $('#contract').val();
+		var userId = "${sessionScope.loginUser.id}";
+	    var url="<%=basePath%>Project/jsonLoadProList.do";
 		$.ajax({
-			url : "<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum,
-	        type:"POST",
-	        dataType:"JSON",
+			"url": url,
+	        "type":"POST",
+	        "dataType":"JSON",
+	        "data":{"contractNum":contractNum,"userId":userId},
 	        success: function (data){
 	        	$("#proList").find("option").remove();
 	        	var html = "";
@@ -133,8 +136,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        			html += "<option value='"+data.list[i].id+"'>"+data.list[i].name+"</option>" 
 	        		}
 	        	}else{
-	        		html += "<option>无工程列表</option>";
-	        		alert("工程后台规划中，请等待！");
+	        		if(contractNum == 0){
+	        			html += "<option>请先选择合同编号</option>";
+	        			alert("请选择合同编号！");
+	        		}else{
+		        		html += "<option>无工程列表</option>";
+		        		alert("工程后台规划中，请等待！");
+	        		}
 	        	}
         		$("#proList").html(html);
         		$("#proList").selectpicker('refresh');

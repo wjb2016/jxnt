@@ -237,12 +237,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   $("#orderInfo").hide();
 	   // 选中的合同编号
 	   var contractNum = $('#contract').val();
-	   
-	   var url="<%=basePath%>Project/jsonLoadProList.do?contractNum="+contractNum;
+	   var userId = "${sessionScope.loginUser.id}";
+	   var url="<%=basePath%>Project/jsonLoadProList.do";
 	   $.ajax({
            "url": url,
            "dataType":"json",
            "type":"post",
+           "data":{"contractNum":contractNum,"userId":userId},
            "success": function(data) {
 	        	$("#proList").find("option").remove();
 	        	var html = "";

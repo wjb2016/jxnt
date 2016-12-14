@@ -1489,6 +1489,14 @@ public class OrderController extends BaseController {
 		return js;
 	}
 
+	/**
+	 * 取消订单
+	 * @param id
+	 * @param flag
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/jsonSaveFalseOrder.do")
 	public JsonResult<Order> falseOrder(

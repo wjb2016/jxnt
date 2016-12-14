@@ -226,7 +226,7 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 					return result;
 				}
 				// 解绑手机检测手机号数据库是否存在；
-				User user2 = userMapper.getUserByMobile(user);
+				User user2 = userMapper.getUserMessageByMobile(user.getMobile());
 				if(user2 != null){
 					result.setCode(0);
 					result.setMessage("解绑新的手机号存在，不能解绑！");

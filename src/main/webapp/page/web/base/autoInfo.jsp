@@ -63,7 +63,7 @@ function saveAuto(obj){
 					<div id="tab1" class="yw-tab">
 					<table class="yw-cm-table font16" id="autoTable">
 						<tr>
-							<td align="left">&nbsp;关&nbsp;键&nbsp;字&nbsp;:
+							<td align="left">&nbsp;&nbsp;关&nbsp;键&nbsp;字&nbsp;:
 							    <input id="keyword" class="easyui-validatebox" name="keyword" type="text" onblur="valueTrim(this);"  doc="autoInfo" value="${Auto.keyword}" required="true"  validType="Length[1,100]" style="width:354px;height:28px;"/>
 								<input type="hidden" id="hid_autoId" name="id" doc="autoInfo" value="${Auto.id}"/>
 								<input type="hidden" name="flag" value="${Auto.flag}"/>
