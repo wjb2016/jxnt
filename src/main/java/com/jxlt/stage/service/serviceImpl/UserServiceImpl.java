@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 
 
 
+
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,10 @@ import com.jxlt.stage.common.utils.StringUtil;
 import com.jxlt.stage.controller.BaseController;
 import com.jxlt.stage.dao.GradeMapper;
 import com.jxlt.stage.dao.GroupItemMapper;
+import com.jxlt.stage.dao.GroupMapper;
 import com.jxlt.stage.dao.UserMapper;
 import com.jxlt.stage.model.Grade;
+import com.jxlt.stage.model.Group;
 import com.jxlt.stage.model.GroupItem;
 import com.jxlt.stage.model.User;
 import com.jxlt.stage.service.UserService;
@@ -41,6 +45,9 @@ public class UserServiceImpl extends BaseController implements UserService {
 	
 	@Resource 
 	private GradeMapper gradeMapper;
+	
+	@Resource 
+	private GroupMapper groupMapper;
 	
 	@Resource 
 	private GroupItemMapper groupItemMapper;
@@ -138,6 +145,18 @@ public class UserServiceImpl extends BaseController implements UserService {
 			js.setMessage("权限不足！");
 			return js;
 		}
+		//团队成员信息删除
+		if(user.getUtype() == 11 )
+		    groupItemMapper.deleteByUserId(id);
+		if(user.getUtype() == 12 ){
+			List<Group> grouplist = new ArrayList<Group>();
+			grouplist = groupMapper.getGroupListByLeader(id);
+			if(grouplist.size() > 0){
+				js.setMessage("当前项目经理带有"+grouplist.size()+"个团队，不能删除！");
+				return js;
+			}
+		    groupItemMapper.deleteByUserId(id);
+		}
 		//逻辑删除并清零积分
 		user.setFlag(0);
 		int grades = 0-user.getGrade();
@@ -153,9 +172,7 @@ public class UserServiceImpl extends BaseController implements UserService {
 			grade.setGrade(grades);
 			gradeMapper.insert(grade);
 		}	
-		//团队成员信息删除
-		if(user.getUtype() == 11 || user.getUtype() == 12)
-		    groupItemMapper.deleteByUserId(id);
+		
 		js.setObj(user.getUtypeName()+user.getName());
 		js.setCode(0);
 		js.setMessage("删除成功!");
