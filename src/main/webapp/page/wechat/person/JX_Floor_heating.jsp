@@ -64,7 +64,7 @@ ul{
 	<header id="JS_mll_header" class="mll-header borderOnePx">
         <a class="layout-back" onclick="javascript:history.go(-1);">返回</a>
         <div class="layout-middle">
-            <div id="JS_header_page_title" class="text">地暖</div>
+            <div id="JS_header_page_title" class="text"><span style="letter-spacing: 8px;">地暖</span></div>
         </div>
     </header>
 	<div class="page">
