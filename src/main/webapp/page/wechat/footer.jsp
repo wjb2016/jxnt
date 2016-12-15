@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="jx-footer-icp">ICP备案证书号：蜀ICP备14016313号-1</div>
-        <div style="text-align: center;font-size: 12px;line-height: 12px;color: #db891e;">
+        <div style="text-align: center;font-size: 12px;line-height: 12px;color: #db891e;padding: 5px 0;">
               <span style="font-size: 10px;">Copyright©2016 优创引力研发</span>
         </div>
                       

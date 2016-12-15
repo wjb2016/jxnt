@@ -153,14 +153,9 @@ body {
 
     <table style="margin: 10px 10px;font-size: 14px;" id="message">
          <tr>
-            <td>客服小妹：亲，欢迎您的光临，有什么问题需要咨询我的吗？</td>
+            <td>客服小妹：亲，终于等到您了，请在对话框录入关键词，比如：精欣、地暖、中央空调等，我们都有诚意答复哦，若需人工服务，请拨打028-85554462，精欣暖通乐意为您解答。</td>
          </tr>
-         <!-- <tr>
-            <td><div style="margin-top:10px;"></div></td>
-         </tr>  -->
-         <tr>           
-            <td>客服小妹：亲，如果我没能帮上您的忙，请拨打公司电话(028)85554462</td>
-         </tr>             
+                   
     </table>
 	<div style="height: 70px;"> 
 	 
