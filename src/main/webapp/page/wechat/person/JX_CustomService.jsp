@@ -162,19 +162,8 @@ body {
 	</div> 
     <div id="footer">
       <input type="text" id="question" placeholder="请选择怎么勾搭客服小妹" onKeyDown="eKeyup(event)" style="width: 80%;line-height: 40px;height: 40px;border-radius: 0px;"/>
-      <a href="javascript:void(0);"></a><span class="custom" style=""
-       onclick="showSendMessage()">发送</span>
+      <a href="javascript:void(0);"></a><span class="custom" onclick="showSendMessage()">发送</span>
       
-      <!-- <table>
-        <tr>
-           <td width = "85%;">
-              <input type="text" id="question" placeholder="请选择怎么勾搭客服小妹" onKeyDown="eKeyup(event)" style="width: 100%;line-height: 40px;height: 40px;border-radius: 0px;"/>
-           </td>
-           <td width = "15%;">
-              <a href="javascript:void(0);"></a><span class="custom" style="display:inline-block;width: 100%;height: 40px;color:white;margin-top:-10px;" onclick="showSendMessage()">发送</span>
-           </td>
-        </tr>
-      </table> -->
      </div> 
     </div> 
   </body>
