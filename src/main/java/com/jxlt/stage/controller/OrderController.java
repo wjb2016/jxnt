@@ -801,7 +801,7 @@ public class OrderController extends BaseController {
 				type = "净水系统";
 			}
     		String[] message = {name,type};
-    		MessageUtil.sendMobileMessage(mobile,"142420", message);
+    		MessageUtil.sendMobileMessage(mobile,"142667", message);
 			//order = orderService.getOrderById(id);
 			logService.writeLog("确认用户"+order.getName()+"的项目工程划分完毕");
 		} catch (Exception e) {

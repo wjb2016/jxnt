@@ -82,11 +82,11 @@ public class JX_ProjectController {
 		List<Project> listPro = new ArrayList<Project>();
 		try {
 			String contractNum = req.getParameter("contractNum");
-			System.out.println(contractNum);
+			//System.out.println(contractNum);
 			contractNum = new String(contractNum.getBytes("iso-8859-1"),"utf-8");
-			System.out.println(contractNum);
+			//System.out.println(contractNum);
 			String userId = req.getParameter("userId");
-			System.out.println(userId);
+			//System.out.println(userId);
 			User user = jxProjectService.getUserById(Integer.valueOf(userId));
 			if(user != null){
 				listPro = jxProjectService.getProjectListByConNum(contractNum,user.getUtype(),user.getId());
