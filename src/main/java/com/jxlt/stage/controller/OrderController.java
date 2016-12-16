@@ -31,6 +31,7 @@ import com.jxlt.stage.common.JsonResult;
 import com.jxlt.stage.common.utils.Constants;
 import com.jxlt.stage.common.utils.DateUtil;
 import com.jxlt.stage.common.utils.FileUtil;
+import com.jxlt.stage.common.utils.MessageUtil;
 import com.jxlt.stage.common.utils.StringUtil;
 import com.jxlt.stage.model.Grade;
 import com.jxlt.stage.model.Group;
@@ -788,8 +789,20 @@ public class OrderController extends BaseController {
 			orderService.saveOrder(order);
 			js.setCode(0);
 			js.setMessage("工程划分完毕确认成功！");
-			
-			order = orderService.getOrderById(id);
+			//推送短信
+			String mobile = order.getMobile();
+			String name = order.getName();
+			String type = "";
+			if(order.getOrderTypeId() == 1){
+				type = "地暖";
+			}else if(order.getOrderTypeId() == 2){
+				type = "中央空调";
+			}else if(order.getOrderTypeId() == 3){
+				type = "净水系统";
+			}
+    		String[] message = {name,type};
+    		MessageUtil.sendMobileMessage(mobile,"142420", message);
+			//order = orderService.getOrderById(id);
 			logService.writeLog("确认用户"+order.getName()+"的项目工程划分完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
