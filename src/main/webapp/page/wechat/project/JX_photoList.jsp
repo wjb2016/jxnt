@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </header>
     <c:forEach var="projectImage" items="${imageList}" varStatus="status">
-        <div style="text-align: center;font-size: 16px;font-weight: bold;margin-top: 10px;">工程:${projectImage.description}
+        <div style="text-align: center;font-size: 16px;font-weight: bold;margin-top: 10px;">工程:${projectImage.projectName}
         	<input type="button" class="btn btn-default" id="del-button${status.index}" style="line-height:10px;" value="工程描述..." onclick="projectDescript(${status.index})"/>
         </div>
 	    
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div id="thumbs">	         	         
 		     <a id="photos" href='${projectImage.imagePath }' style="background-image:url('${projectImage.imagePath }');margin:auto;"></a>	         
 	    </div>
-	    <div style="margin-top: 20px;margin-left: 30px;">
+	    <div style="margin-left: 30px;">
 	             <c:if test="${projectImage.message != null && projectImage.message != ''}">
 		             <p style="width: 340px;" >${projectImage.userMobile}<span>:</span>${projectImage.message}</p>
 	             </c:if>
