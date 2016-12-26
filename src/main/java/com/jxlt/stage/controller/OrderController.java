@@ -1568,7 +1568,41 @@ public class OrderController extends BaseController {
 		
 	}
 	
-	
+    /**
+	* 新订单确认更新
+	* @param id
+	* @param req
+	* @param resp
+	* @return
+	*/
+	@ResponseBody
+	@RequestMapping("/jsonSaveExamineOrder.do")
+	public JsonResult<Order> examineOrder(
+			@RequestParam(value="id",required=true)Integer id,
+			HttpServletRequest req,HttpServletResponse resp
+			){
+		JsonResult<Order> js = new JsonResult<Order>();
+		js.setCode(1);
+		js.setMessage("确认查看新订单失败！");
+		Order order = new Order();
+		try {
+			order = orderService.getOrderById(id);
+			if(order.getStatus() > 0){
+				js.setMessage("订单状态已更新！");
+				return js;
+			}
+			User user = this.getLoginUser();
+			order.setStatus(1);
+			order.setOperId(user.getId());
+			orderService.saveOrder(order);
+			js.setCode(0);
+			js.setMessage("更新订单状态成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return js;
+	}
+
 	
     /**
      * 添加积分
