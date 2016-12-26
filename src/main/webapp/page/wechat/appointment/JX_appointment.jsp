@@ -73,7 +73,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           		      var info = "提交成功!";
           		      dealWithAlert(info)
           		      //location.reload();    // 刷新当前页面
-          		      reload();
+          		      //reload();
+          		      window.location.href = "PerCentral/jxPerson.do";
           		   }
           		},
           });
@@ -120,12 +121,13 @@ body {
 	border-radius: 4px;
 }
 .custom{
-    width: 60px;
+    width: 75px;
     height: 100%;
     border-radius: 100px;
     background-color: #fff;
     border: 0;
     vertical-align: middle;
+    margin-right: 40px;
 }
 </style>
 <body>
@@ -183,14 +185,14 @@ body {
             <div class="form-group"><span id="ref_phoneErrInfo" class="errFont"></span></div>
         </div>
         <div class="form-group " style="float: right;">
-	        <a href="PerCentral/jxCustomService.do"><img alt="客服" src="source/images/custom.jpg" class="custom"></a>
+	        <a href="PerCentral/jxCustomService.do"><img alt="客服" src="source/images/kf.png" class="custom"></a>
 	    </div>
-		<div class="" style="margin-top: 60px;margin-left:auto;margin-right:auto;text-align: center;">
+		<div class="" style="margin-top: 80px;margin-left:auto;margin-right:auto;text-align: center;">
               <input style="width:220px;" type="button" class="jx_userInfo_button btn-default" data-loading-text="Loading..." autocomplete="off" id="btn_login" onclick="saveInfo()"value="提交"/>
         </div>
         
 	    <div style="margin-top: 30px;">
-	        <span style="display: block;">咨询热线：(028)85554462,13689004567 </span>
+	        <span style="display: block;">咨询热线：<a href="tel://028-85554433">028-85554433</a>,<a href="tel://13689004567">13689004567</a> </span>
             <span style="display: block;">公司名称：成都市精欣暖通工程有限公司 </span>
             <span style="display: block;">公司地址：四川省成都市武侯区金履一路 </span>                                         
             <span style="display: block; margin-left: 63px;">218号优博广场2栋4层2-403</span>

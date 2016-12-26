@@ -26,4 +26,8 @@ public interface GradeService {
 
 	List<Grade> getExsitGrade(int refGrades, int refUserId);
 
+	int getFalseOrderCount(String mobile);
+
+	int getSureOrderCount(String mobile);
+
 }

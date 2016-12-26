@@ -140,4 +140,16 @@ public class GradeServiceImpl implements GradeService {
 		return gradeMapper.getExsitGrade(grade);
 	}
 
+	@Override
+	public int getFalseOrderCount(String mobile) {
+		// TODO Auto-generated method stub
+		return gradeMapper.getFalseOrderCount(mobile);
+	}
+
+	@Override
+	public int getSureOrderCount(String mobile) {
+		// TODO Auto-generated method stub
+		return gradeMapper.getSureOrderCount(mobile);
+	}
+
 }
