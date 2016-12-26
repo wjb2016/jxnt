@@ -180,4 +180,17 @@
     and 0 > tg.grade
     and DATEDIFF(now(),tg.create_time) > 1
   </select>
+  <select id="getSureOrderCount"  resultType="java.lang.Integer">
+    select count(t.id)
+	from t_grade t
+	left join t_user u on t.user_id = u.id
+	where u.mobile = #{0}
+	and t.description like '%签订订单合同%'
+  </select>
+  <select id="getFalseOrderCount"  resultType="java.lang.Integer">
+    select count(t.id)
+	from t_grade t
+	where t.mobile = #{0}
+	and t.description like '%真实有效%'
+  </select>
 </mapper>

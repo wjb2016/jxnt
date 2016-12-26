@@ -429,7 +429,7 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 	 * 兑换积分
 	 */
 	@Override
-	public JsonResult<Grade> cashingPoint(Integer userId, Integer grade) {
+	public JsonResult<Grade> cashingPoint(Integer userId, Integer grade, String pointDes) {
 		JsonResult<Grade> result = new JsonResult<Grade>();
 		result.setCode(0);
 		result.setMessage("兑换失败！");
@@ -440,7 +440,7 @@ public class JX_UserPersonCenterServiceImpl implements JX_UserPersonCenterServic
 				grades.setUserId(userId);        // 用户id
 				grades.setGrade(-grade);          // 兑换的积分
 				grades.setCreateTime(new Date());// 创建时间
-				grades.setDescription("申请兑换积分"); // 描述
+				grades.setDescription(pointDes); // 描述
 				gradeMapper.insertSelective(grades);
 				// 用户当前积分减去兑换积分
 				User user = userMapper.selectByPrimaryKey(userId);

@@ -207,8 +207,9 @@ public class JX_PersonCenterController {
 		//String id =  (String) request.getSession().getAttribute("ID");
 		Integer userId = Integer.parseInt(request.getParameter("id"));
 		Integer grade = Integer.parseInt(request.getParameter("grade"));
+		String pointDes = request.getParameter("pointDes");
 		JsonResult<Grade> result = new JsonResult<Grade>();
-		result = userPersonCenterService.cashingPoint(userId,grade);
+		result = userPersonCenterService.cashingPoint(userId,grade,pointDes);
 		return result;
 		
 	}

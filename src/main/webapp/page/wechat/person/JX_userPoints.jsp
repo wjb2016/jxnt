@@ -76,7 +76,7 @@ i, ol, ul {
     list-style: none;
 }
 .point{
-    width: 50px;
+    width: 150px;
     border-radius: 0px;
     
 }
@@ -101,6 +101,7 @@ function cancelAssess(){
      $('#win').css('display','none');
      $('#JS_mask').css('display','none');
      $("#cash").val("");
+     $("#pointDes").val("");
      $("#pointErrorInfo").text("");
 }
 // 确定兑换积分
@@ -127,11 +128,16 @@ function submitCashing(id){
    	 	$('#pointErrorInfo').text('*积分达到1000分后才可以进行兑换！');
         return false;
    	 }
+   	 var pointDes = $("#pointDes").val();
+   	 if(!pointDes){
+   	 	$('#pointErrorInfo').text('*请输入积分兑换描述！');
+        return false;
+   	 }
      $.ajax({
         url:"PerCentral/cashingPoint.do",
         type:"POST",
         dataType:"JSON",
-        data:{grade:point,id:id},
+        data:{grade:point,id:id,pointDes:pointDes},
         success: function(data){
            if(data.code == 1){
 			   cancelAssess();
@@ -142,7 +148,7 @@ function submitCashing(id){
 			   $("#afterGrade").text(allPoint-point);
 			   $("#canUsedGrade").text(allPoint-point);
 			   $("#allPoint").val(allPoint-point);
-			   var html = "<tr><td align='left'>申请兑换积分</td><td align='center' style='color: red' width='40px;'>"+(-point)+"</td><td align='right' width='100px;'>";
+			   var html = "<tr><td align='left'>"+ pointDes +"</td><td align='center' style='color: red' width='40px;'>"+(-point)+"</td><td align='right' width='100px;'>";
 			   html += getNowTime() + "</td></tr>";
 			   $("#gradeTable").prepend(html);
            }else{               
@@ -206,6 +212,7 @@ function getNowTime(){
 			        <div style="margin-left: 30px;">
 				        <div style="margin-top: 10px;">可用积分： <span id="canUsedGrade">${user.grade}</span></div> 
 				        <div style="margin-top: 10px;">本次兑换：<input type="text" id="cash" class="point" style="border: 1px solid #cec0c0;"/></div>
+				        <div style="margin-top: 10px;">兑换描述：<textarea class="point" style="border: 1px solid #cec0c0;resize:none;border-radius:5px;" id="pointDes"></textarea></div>
 				        <span id="pointErrorInfo" class="errFont"></span>
 				    </div> 
 			    </div>

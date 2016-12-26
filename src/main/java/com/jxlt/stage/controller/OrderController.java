@@ -648,12 +648,20 @@ public class OrderController extends BaseController {
 				addGrade(grade,user,10000,refUser);
 			}else{
 				user = listUser.get(0);
+				int SureCount = 0;
+				//判断用户是否已签订过订单
+				SureCount = gradeService.getSureOrderCount(order.getMobile());
 				if(refListUser.size() > 0){
 					refUser = refListUser.get(0);
 				}else{
 					refUser.setId(0);
 				}
-				addGrade(grade,user,0,refUser);
+				if(SureCount > 0){
+					addGrade(grade,user,0,refUser);
+				}else{
+					addGrade(grade,user,10000,refUser);
+				}
+				
 			}
 			
 			//插入支付记录到支付表
@@ -1406,29 +1414,23 @@ public class OrderController extends BaseController {
 			ProjectImage pji,
 			HttpServletRequest req,HttpServletResponse resp
 			){
-		//已公开的照片
-		List<ProjectImage> openList = new ArrayList<ProjectImage>();
-		//未公开的照片集合(客户允许)
-		List<ProjectImage> unOpenList = new ArrayList<ProjectImage>();
-		//未公开的照片数量
+		//照片集合
+		List<ProjectImage> imgList = new ArrayList<ProjectImage>();
+		//照片数量
 		int count = 0;
-		
 		try {
-			ProjectImage open = new ProjectImage();
-			open.setPermission(2);
-			openList = orderService.getImageList(open);
-			
 			if(pji.getPageNo() == null){
 				pji.setPageNo(1);
 			}
 			pji.setPageSize(Constants.DEFAULT_PAGE_SIZE);
-			pji.setPermission(1);
-			unOpenList = orderService.getImageList(pji);
+			if(pji.getPermission() != null && pji.getPermission() == 3){
+				pji.setPermission(null);
+			}
+			imgList = orderService.getImageList(pji);
 			count = orderService.getImageCount(pji);
 			pji.setTotalCount(count);
-			req.setAttribute("openList", openList);
+			req.setAttribute("imgList", imgList);
 			req.setAttribute("ProjectImage", pji);
-			req.setAttribute("unOpenList", unOpenList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1529,6 +1531,9 @@ public class OrderController extends BaseController {
 				List<User> listUser = new ArrayList<User>();
 				List<User> refListUser = new ArrayList<User>();
 				listUser = orderService.getUserByMobile(order.getMobile());
+				if(StringUtil.isMobileNumber(order.getRefMobile())){
+					refListUser = orderService.getUserByMobile(order.getRefMobile());
+				}
 				//无用户,则插入用户
 				if(listUser.size() == 0){
 					user.setId(0);
@@ -1537,10 +1542,7 @@ public class OrderController extends BaseController {
 					user.setGrade(0);
 					user.setUtype(1);
 					user.setFlag(0);
-					orderService.saveUser(user);
-					if(StringUtil.isMobileNumber(order.getRefMobile())){
-						refListUser = orderService.getUserByMobile(order.getRefMobile());
-					}
+					orderService.saveUser(user);					
 					//推荐人积分添加
 					if(refListUser.size() > 0){
 						refUser = refListUser.get(0);
@@ -1549,6 +1551,19 @@ public class OrderController extends BaseController {
 					}
 					//积分规则：推荐一个有效新客户增加推荐人500积分
 					addGrade(0,user,500,refUser);
+				}else{
+					user = listUser.get(0);
+					if(refListUser.size() > 0){
+						refUser = refListUser.get(0);
+					}else{
+						refUser.setId(0);
+					}
+					int historyFalse = 0;
+					//判断该用户是否被推荐过
+					historyFalse = gradeService.getFalseOrderCount(order.getMobile());
+					if(historyFalse == 0){
+						addGrade(0,user,500,refUser);
+					}
 				}
 				order.setOperMessage("订单信息有效");
 	        }else{
@@ -1568,7 +1583,41 @@ public class OrderController extends BaseController {
 		
 	}
 	
-	
+    /**
+	* 新订单确认更新
+	* @param id
+	* @param req
+	* @param resp
+	* @return
+	*/
+	@ResponseBody
+	@RequestMapping("/jsonSaveExamineOrder.do")
+	public JsonResult<Order> examineOrder(
+			@RequestParam(value="id",required=true)Integer id,
+			HttpServletRequest req,HttpServletResponse resp
+			){
+		JsonResult<Order> js = new JsonResult<Order>();
+		js.setCode(1);
+		js.setMessage("确认查看新订单失败！");
+		Order order = new Order();
+		try {
+			order = orderService.getOrderById(id);
+			if(order.getStatus() > 0){
+				js.setMessage("订单状态已更新！");
+				return js;
+			}
+			User user = this.getLoginUser();
+			order.setStatus(1);
+			order.setOperId(user.getId());
+			orderService.saveOrder(order);
+			js.setCode(0);
+			js.setMessage("更新订单状态成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return js;
+	}
+
 	
     /**
      * 添加积分
@@ -1582,13 +1631,13 @@ public class OrderController extends BaseController {
 	private int addGrade(int grades,User user,int refGrades,User refUser){
 		int temp = -1;
 		try{
-			String description = "订单合同签订";
+			String description = "签订订单合同";
 			//签订合同添加用户积分
 			if(grades > 0 && user.getId() > 0){
 				//生日当月享双倍积分
 				if(DateUtil.isBirthMonth(user.getBirth())){
 					grades *= 2;
-					description = "订单合同签订(生日当月双倍积分)";
+					description = "签订订单合同(生日当月双倍积分)";
 				}
 				//消费积分添加
 				user.setGrade(user.getGrade()+grades);

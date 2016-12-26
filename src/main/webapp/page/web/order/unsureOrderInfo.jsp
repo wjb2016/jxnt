@@ -41,17 +41,27 @@ $(function(){
 		$('#createDate').datetimebox('setValue', nowTime);
 	}
 	
-	//预约时间
+	//交付时间
 	var appointTime =  $("#appoint").val();
 	if (appointTime) {
 		$('#appointTime').datetimebox('setValue', appointTime);
 	} else {
 		var d = new Date();
 		var vYear = d.getFullYear();
-		var vMon = d.getMonth() + 1;
+		var vMon = d.getMonth() + 4;
 		var vDay = d.getDate();
 		var h = d.getHours();
 		var m = d.getMinutes();
+		if(vMon > 12){
+		   vMon -= 12;
+		   vYear++;
+		}
+		if(vDay == 31){
+		   vDay = 30;
+		}
+		if(vMon == 2){
+		   vDay = 28;
+		} 
 		var nowTime = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon)
 				+ "-" + (vDay < 10 ? "0" + vDay : vDay) + " " + (h < 10 ? "0" + h : h)
 				+ ":" + (m < 10 ? "0" + m : m);
@@ -120,6 +130,31 @@ function falseOrder(){
    }); 
    
 }
+function examineOrder(){
+   var id= $("#hid_id").val()
+   $.messager.sureCheck('查看订单确认','确认该新订单已分发相关人员？',function(r){    
+	    if(r){  
+	        flag = 1;  
+	    }
+	    showProcess(true, '温馨提示', '正在提交数据...');
+	    $.ajax({
+	        	url:"<%=basePath %>Order/jsonSaveExamineOrder.do?id="+id,
+	        	type:"post",
+	        	dataType:"json",
+	        	success:function(data){
+	        		showProcess(false);
+	        		if(data.code == 0){
+	        			$.messager.alert("操作提示",data.message,"info",function(){
+					        window.location.href="<%=basePath %>Order/orderInfo.do?id="+id; 
+	        			})
+	        		}else{
+	        			$.messager.alert("操作提示",data.message,"error");
+	        		}
+	        	}
+	        });  
+   }); 
+   
+}
 </script>
 </head>
 <body>
@@ -136,6 +171,9 @@ function falseOrder(){
 					<span class="yw-bi-now">订单详情</span>
 				</div>			
 				<div class="fr">
+				<c:if test="${order.status == 0 }">
+				    <span class="yw-btn bg-green mr10" id="saveBtn" onclick="examineOrder(this);">已查看</span>
+				</c:if>
 				    <span class="yw-btn bg-yellow mr10" id="saveBtn" onclick="falseOrder();">取消订单</span> 				    
 				    <span class="yw-btn bg-green mr10" id="saveBtn" onclick="saveOrder(this);">确认订单</span> 
 				    <span class="yw-btn bg-red mr10"  onclick="$('#i_back').click();">返回</span>

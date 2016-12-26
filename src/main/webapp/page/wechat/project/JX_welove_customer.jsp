@@ -386,7 +386,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#fadeshow").show();
 				}else{
 					$(".div_li").text("提交评价").attr("onclick","saveMessage("+id+");");
-					$($("[name=openimg]:radio").get(0)).prop("checked",true); 
+					$($("[name=openimg]:radio").get(1)).prop("checked",true); 
 					$("#imgRadio").show();
 					$("#lightshow").show();
 					$("#fadeshow").show();
@@ -588,8 +588,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       		<textarea class="form-control" style="width: 340px;" rows="3" id="promessage" placeholder="请输入工程评价"></textarea>
 		        </div>
 		        <div style="text-align: center;width:360px;margin:10px auto;"> 
-					<input type="radio" name="permission" value="0" style="vertical-align:text-bottom; margin-bottom:2px;" checked="checked"/> 不公开
-					<input type="radio" name="permission" value="1" style="vertical-align:text-bottom; margin-bottom:2px;"/> 公开
+					<input type="radio" name="permission" value="0" style="vertical-align:text-bottom; margin-bottom:2px;"/> 不公开
+					<input type="radio" name="permission" value="1" style="vertical-align:text-bottom; margin-bottom:2px;" checked="checked"/> 公开
 				</div>
 		        <div style="margin-top: 10px;text-align: center;">
 		             <input class="btn btn-success fileinput-button jx_userInfo_button" readonly="readonly" id="btn_saveMessage" value="保存评价"/>
@@ -608,8 +608,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div>
 			<div style="margin-right: 10px;float:right;display: none" id="imgRadio"> 
-				<input type="radio" name="openimg" value="0" style="vertical-align:text-bottom; margin-bottom:2px;" checked="checked"/> 不公开
-				<input type="radio" name="openimg" value="1" style="vertical-align:text-bottom; margin-bottom:2px;"/> 公开
+				<input type="radio" name="openimg" value="0" style="vertical-align:text-bottom; margin-bottom:2px;"/> 不公开
+				<input type="radio" name="openimg" value="1" style="vertical-align:text-bottom; margin-bottom:2px;" checked="checked"/> 公开
 			</div>
 			<div style="margin-right: 10px;float:right;display: none;color:#8d8585" id="imgInput"> 
 			</div>

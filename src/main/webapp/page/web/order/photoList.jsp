@@ -23,6 +23,12 @@ $(document).ready(function() {
 		buttonClickCallback : PageClick
 	/* 表示点击分页数按钮调用的方法 */
 	});
+	
+	//订单状态
+	var permission =$("#permission").val();
+	if(permission != null && permission != ""){
+		$("#permissiontype").combobox("setValue",permission);
+	}
 });
 
 PageClick = function(pageclickednumber) {
@@ -91,76 +97,45 @@ function openimg(id){
 					照片管理
 				</span>
 			</div>
-			<form id="PhotoForm" name="PhotoForm" action="<%=basePath%>Order/photoList.do" method="post" style="display: none;">
-				<div class="pd10">
-					<input type="hidden" id="pageNumber" name="pageNo" value="${ProjectImage.pageNo}" />
-				</div>
+		</div>
+		<div class="fr yw-lump mt10" style="margin-bottom: 10px;">
+			<form id="PhotoForm" name="PhotoForm" action="<%=basePath%>Order/photoList.do" method="post">
+					<div class="pd10">
+						<div class="fr">
+							<select id="permissiontype" class="easyui-combobox" data-options="editable:false,onSelect:function(record){ $('#permission').val(record.value) }" style="width:177px;height: 32px;">
+								 <option value="3">=请选择工程照片状态=</option>
+								 <option value="0">客户未公开</option>
+								 <option value="1">客户已公开</option>
+								 <option value="2">后台已公开</option>
+							</select>
+							<span class="yw-btn bg-blue  cur" onclick="search();" style="margin-left:8px;">搜索</span>
+							<input type="hidden" id="pageNumber" name="pageNo" value="${ProjectImage.pageNo}" />
+							<input type="hidden" id="permission" name="permission" value="${ProjectImage.permission}" />
+						</div>
+						<div class="cl"></div>
+					</div>
 			</form>
 		</div>
-		<div style="margin-top: 8px;width:48%;margin-right: 10px;display:inline-table;border-right: 5px solid #D2D7DC;">
-			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">待公开照片</span>
-			<c:forEach var="image" items="${unOpenList }" varStatus="status">
-				<div style="width: 48%;display: inline-block;">
-					<c:if test="${status.index % 2 == 0 }">
-						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
-							<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-							<c:if test="${image.message == null || image.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">无评价</textarea>
-							</c:if>
-							<c:if test="${image.message != null && image.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">${image.message }</textarea>
-							</c:if>
-							<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
-						</div>
+		<div class="fl yw-lump">
+			<c:forEach var="image" items="${imgList }" varStatus="status">
+				<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom:20px;border:1px solid #ddd;height: 330px;">
+					<img alt="照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
+					<span style="display: block;width: 198px;height: 30px;line-height: 30px;text-align: center;border-left:1px solid silver;border-right:1px solid silver;font-size: 14px;">${image.projectName }</span>
+					<c:if test="${image.message == null || image.message == '' }">
+						<textarea readonly="readonly" rows="5" style="width:194px;resize:none;height: 59px;">无评价</textarea>
 					</c:if>
-					<c:if test="${status.index % 2 != 0 }">
-						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
-							<img alt="公开照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-							<c:if test="${image.message == null || image.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">无评价</textarea>
-							</c:if>
-							<c:if test="${image.message != null && image.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width:195px;resize:none">${image.message }</textarea>
-							</c:if>
-							<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;"/>
-						</div>
+					<c:if test="${image.message != null && image.message != '' }">
+						<textarea readonly="readonly" rows="5" style="width:194px;resize:none;height: 59px;">${image.message }</textarea>
+					</c:if>
+					<c:if test="${image.permission == 1}">
+						<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;"/>
+					</c:if>
+					<c:if test="${image.permission == 2}">
+						<input type="button" value="取消公开" onclick="canOpen(${image.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;"/>
 					</c:if>
 				</div>
 			</c:forEach>
-			<c:if test="${ProjectImage.totalCount > 0}">
-			    <div class="page" id="pager" style="clear: both;"></div>
-			</c:if>
-		</div>
-		<div style="margin-top: 8px;width:48%;display:inline-table;">
-			<span style="display: block;width: 100%;height: 28px;margin: 10px 0px;">已公开照片</span>
-			<c:forEach var="item" items="${openList }" varStatus="status">
-				<div style="width: 48%;display: inline-block;">
-					<c:if test="${status.index % 2 == 0 }">
-						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
-							<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-							<c:if test="${item.message == null || item.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">无评价</textarea>
-							</c:if>
-							<c:if test="${item.message != null && item.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">${item.message }</textarea>
-							</c:if>
-							<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
-						</div>
-					</c:if>
-					<c:if test="${status.index % 2 != 0 }">
-						<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom: 3px;">
-							<img alt="公开照片" src="<%=basePath%>${item.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-							<c:if test="${item.message == null || item.message == '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">无评价</textarea>
-							</c:if>
-							<c:if test="${item.message != null && item.message != '' }">
-								<textarea readonly="readonly" rows="5" style="width: 195px;resize:none">${item.message }</textarea>
-							</c:if>
-							<input type="button" value="取消公开" onclick="canOpen(${item.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;"/>
-						</div>
-					</c:if>
-				</div>
-			</c:forEach>
+			<div class="page" id="pager"></div>
 		</div>
 	</div>
 </body>
