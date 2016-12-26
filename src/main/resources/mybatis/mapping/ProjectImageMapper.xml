@@ -10,6 +10,7 @@
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="INTEGER" />
     <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="projectName" property="projectName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, project_id, image_path, description, oper_id, message, permission
@@ -120,10 +121,11 @@
   </update>
   
   <sql id="common">
-  	from t_project_image
+  	from t_project_image t
+  	left join t_project tp on t.project_id = tp.id
   	where 1=1
   	<if test="permission != null">
-  		and permission = #{permission,jdbcType=INTEGER}
+  		and t.permission = #{permission,jdbcType=INTEGER}
   	</if>
   </sql>
   <select id="getImageById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -135,16 +137,16 @@
   
   <select id="getImageList" parameterType="com.jxlt.stage.model.ProjectImage" resultMap="BaseResultMap">
   	select 
-  	<include refid="Base_Column_List" />
+  	<include refid="Base_Column_List1" />,tp.name as projectName
   	<include refid="common"/>
-  	order by id DESC
+  	order by t.id DESC
  	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
        limit #{pageStart}, #{pageSize}
     </if>
   </select>
   
   <select id="getImageCount" parameterType="com.jxlt.stage.model.ProjectImage" resultType="java.lang.Integer">
-  	select count(id)
+  	select count(t.id)
   	<include refid="common"/>
   </select>
   <select id="getProjectImageListInfo" resultMap="BaseResultMap">

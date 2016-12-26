@@ -66,9 +66,10 @@ public interface JX_UserPersonCenterService {
 	/**
 	 * 兑换积分
 	 * @param userId
+	 * @param pointDes 
 	 * @return
 	 */
-	JsonResult<Grade> cashingPoint(Integer userId,Integer grade);
+	JsonResult<Grade> cashingPoint(Integer userId,Integer grade, String pointDes);
 
 	/**
 	 * 自动应答 （客服）

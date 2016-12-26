@@ -1406,29 +1406,23 @@ public class OrderController extends BaseController {
 			ProjectImage pji,
 			HttpServletRequest req,HttpServletResponse resp
 			){
-		//已公开的照片
-		List<ProjectImage> openList = new ArrayList<ProjectImage>();
-		//未公开的照片集合(客户允许)
-		List<ProjectImage> unOpenList = new ArrayList<ProjectImage>();
-		//未公开的照片数量
+		//照片集合
+		List<ProjectImage> imgList = new ArrayList<ProjectImage>();
+		//照片数量
 		int count = 0;
-		
 		try {
-			ProjectImage open = new ProjectImage();
-			open.setPermission(2);
-			openList = orderService.getImageList(open);
-			
 			if(pji.getPageNo() == null){
 				pji.setPageNo(1);
 			}
 			pji.setPageSize(Constants.DEFAULT_PAGE_SIZE);
-			pji.setPermission(1);
-			unOpenList = orderService.getImageList(pji);
+			if(pji.getPermission() != null && pji.getPermission() == 3){
+				pji.setPermission(null);
+			}
+			imgList = orderService.getImageList(pji);
 			count = orderService.getImageCount(pji);
 			pji.setTotalCount(count);
-			req.setAttribute("openList", openList);
+			req.setAttribute("imgList", imgList);
 			req.setAttribute("ProjectImage", pji);
-			req.setAttribute("unOpenList", unOpenList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
