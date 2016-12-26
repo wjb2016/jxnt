@@ -41,6 +41,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
 	$('#thumbs a').touchTouch();
 });
+    function projectDescript(id){
+       var descriptionName = $('#del-button'+id).val();
+       if(descriptionName == "工程描述..."){
+           $('#description'+id).removeAttr('style');
+           $('#del-button'+id).val("工程描述关闭");
+       }else{
+       	   $('#description'+id).css('display','none');
+       	   $('#del-button'+id).val("工程描述...");
+       }
+       
+    }
 </script>
 <body class="userInfo_font">
 
@@ -52,14 +63,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </header>
     <c:forEach var="projectImage" items="${imageList}" varStatus="status">
-	    <div id="thumbs">
-		     <a id="photos" href='${projectImage.imagePath }' style="background-image:url('${projectImage.imagePath }');margin:auto;" title="照片${status.count}"></a>
-	         <div style="margin-top: 10px;">
+        <div style="text-align: center;font-size: 16px;font-weight: bold;margin-top: 10px;">工程:${projectImage.description}
+        	<input type="button" class="btn btn-default" id="del-button${status.index}" style="line-height:10px;" value="工程描述..." onclick="projectDescript(${status.index})"/>
+        </div>
+	    
+	    <div id="description${status.index}" style="display: none;">        
+	    	<p style="margin-left: 30px;">${projectImage.description}</p>
+	    </div>
+	    <div id="thumbs">	         	         
+		     <a id="photos" href='${projectImage.imagePath }' style="background-image:url('${projectImage.imagePath }');margin:auto;"></a>	         
+	    </div>
+	    <div style="margin-top: 20px;margin-left: 30px;">
 	             <c:if test="${projectImage.message != null && projectImage.message != ''}">
 		             <p style="width: 340px;" >${projectImage.userMobile}<span>:</span>${projectImage.message}</p>
 	             </c:if>
-	         </div>
-	    </div>
+        </div>
     </c:forEach>
 </div>
   </body>

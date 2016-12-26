@@ -10,6 +10,7 @@
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="INTEGER" />
     <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, project_id, image_path, description, oper_id, message, permission
@@ -149,7 +150,7 @@
   </select>
   <select id="getProjectImageListInfo" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List1" />,t2.mobile as user_mobile
+    <include refid="Base_Column_List1" />,t2.mobile as user_mobile,t1.name as project_name
     from t_project_image t
     left join t_project t1 on t.project_id=t1.id
     left join t_order t2 on t2.id=t1.order_id

@@ -20,7 +20,9 @@ public class ProjectImage  extends Page{
     private String userMobile;
     
     private Integer orderImageId;
-
+    // 加载的工程名
+    private String projectName;
+    
     public Integer getId() {
         return id;
     }
@@ -92,4 +94,13 @@ public class ProjectImage  extends Page{
 	public void setOrderImageId(Integer orderImageId) {
 		this.orderImageId = orderImageId;
 	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
 }
