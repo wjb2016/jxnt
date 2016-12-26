@@ -27,4 +27,8 @@ public interface GradeMapper {
 	List<Grade> getGradeByUserId(Integer id);
     //超时未兑换积分
 	List<Grade> getExpiredGrade();
+	//该手机号签订订单合同次数
+	int getSureOrderCount(String mobile);
+	//该手机给推荐人加推荐分次数
+	int getFalseOrderCount(String mobile);
 }
