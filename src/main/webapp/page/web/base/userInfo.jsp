@@ -135,17 +135,21 @@ function savePsd(obj){
 						    <input type="hidden" id="utype_hid" name="utype" value="${User.utype }" />
 						 </c:if>
 						 <c:if test="${loginUser.id != User.id}">
-						   <input type="hidden" id="utypeId" name="utype" value="${User.utype }" />	 															
+						   <input type="hidden" id="utypeId" name="utype" value="${User.utype }" />	
+						   <input type="hidden" id="utypeId_old"  value="${User.utype }" /> 															
 							<tr>						 
 								 <td  align="left">用户类型：
 									 <select class="easyui-combobox"  id="utype" style="width:180px;height:28px;" 
 									  data-options="editable:false,onSelect:function(record){ $('#utypeId').val(record.value) }">
 					                 	<c:if test="${User.utype == 1}"><option  value="1" >普通用户</option></c:if>
 					                 	<c:if test="${User.utype == 13}"><option  value="13" >超级管理员</option></c:if>
-					                 	<c:if test="${User.utype == 10 || loginUser.utype == 13}"><option  value="10" >管理员</option></c:if>					                	
+					                 	<c:if test="${User.utype == 10 || (User.utype != 1 && loginUser.utype == 13)}"><option  value="10" >管理员</option></c:if>					                	
 				                 		<c:if test="${User.utype == 11 || User.utype == 12}">
 					                 		<option  value="11" >员工</option>	
 						                 	<option  value="12" >项目经理</option>		
+						                 </c:if>	
+						                 <c:if test="${User.utype != 1}">
+					                 		<option  value="1" >普通用户(不可逆)</option>	
 						                 </c:if>				                	
 					                 </select>
 								 </td>						    	
