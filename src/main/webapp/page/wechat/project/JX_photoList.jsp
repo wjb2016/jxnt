@@ -68,11 +68,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
 	    
 	    <div id="description${status.index}" style="display: none;">        
-	    	<p style="margin-left: 30px;">${projectImage.description}</p>
+	    	<p style="margin-left: 30px;">${projectImage.projectDescription}</p>
 	    </div>
 	    <div id="thumbs">	         	         
 		     <a id="photos" href='${projectImage.imagePath }' style="background-image:url('${projectImage.imagePath }');margin:auto;"></a>	         
 	    </div>
+	    <div style="margin-left: 30px;">客户评价:</div>
 	    <div style="margin-left: 30px;">
 	             <c:if test="${projectImage.message != null && projectImage.message != ''}">
 		             <p style="width: 340px;" >${projectImage.userMobile}<span>:</span>${projectImage.message}</p>

@@ -24,6 +24,9 @@ public class ProjectImage  extends Page{
     // 加载的工程名
     private String projectName;
 
+    // 工程描述
+    private String projectDescription;
+    
     public Integer getId() {
         return id;
     }
@@ -102,6 +105,14 @@ public class ProjectImage  extends Page{
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+
+	public String getProjectDescription() {
+		return projectDescription;
+	}
+
+	public void setProjectDescription(String projectDescription) {
+		this.projectDescription = projectDescription;
 	}
 
 }

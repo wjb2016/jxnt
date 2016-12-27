@@ -69,7 +69,7 @@ ul{
     </header>
 	<div class="page">
         <div class="pinch-zoom">           
-            <img src="<%=basePath%>source/images/jf.png">
+            <img src="<%=basePath%>source/images/jf1.png">
         </div>
     </div>
 
