@@ -45,7 +45,7 @@ public class GradeServiceImpl implements GradeService {
 		try{
 			Grade grade = gradeMapper.selectByPrimaryKey(id);
 			grade.setOperId(userId);
-			grade.setDescription("兑换积分成功");
+			//grade.setDescription("兑换积分成功");
 			gradeMapper.updateByPrimaryKeySelective(grade);
 			User user = userMapper.selectByPrimaryKey(grade.getUserId());
 			int num = 0 - grade.getGrade();

@@ -118,20 +118,23 @@ function openimg(id){
 		</div>
 		<div class="fl yw-lump">
 			<c:forEach var="image" items="${imgList }" varStatus="status">
-				<div style="margin-right:10px;width:200px;display: inline-block;margin-bottom:20px;border:1px solid #ddd;height: 330px;">
-					<img alt="照片" src="<%=basePath%>${image.imagePath }" style="width: 200px;height: 200px;border-radius:5px;display: block;">
-					<span style="display: block;width: 198px;height: 30px;line-height: 30px;text-align: center;border-left:1px solid silver;border-right:1px solid silver;font-size: 14px;">${image.projectName }</span>
+				<div style="margin-right:10px;width:300px;display: inline-block;margin-bottom:20px;border:1px solid #ddd;height: 430px;">
+					<img alt="照片" src="<%=basePath%>${image.imagePath }" style="width: 300px;height: 300px;border-radius:5px;display: block;">
+					<span style="display: block;width: 298px;height: 30px;line-height: 30px;text-align: center;border-left:1px solid silver;border-right:1px solid silver;font-size: 14px;">${image.projectName }</span>
 					<c:if test="${image.message == null || image.message == '' }">
-						<textarea readonly="readonly" rows="5" style="width:194px;resize:none;height: 59px;">无评价</textarea>
+						<textarea readonly="readonly" rows="5" style="width:294px;resize:none;height: 59px;">无评价</textarea>
 					</c:if>
 					<c:if test="${image.message != null && image.message != '' }">
-						<textarea readonly="readonly" rows="5" style="width:194px;resize:none;height: 59px;">${image.message }</textarea>
+						<textarea readonly="readonly" rows="5" style="width:294px;resize:none;height: 59px;">${image.message }</textarea>
 					</c:if>
 					<c:if test="${image.permission == 1}">
-						<input type="button" value="公开" onclick="openimg(${image.id})" style="float:right;background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;"/>
+						<input type="button" value="公开" onclick="openimg(${image.id})" style="background-color: #75B74B;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;float:right;"/>
 					</c:if>
 					<c:if test="${image.permission == 2}">
-						<input type="button" value="取消公开" onclick="canOpen(${image.id})" style="float:right;background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;"/>
+						<input type="button" value="取消公开" onclick="canOpen(${image.id})" style="background-color: #D9534F;color: white;border:none;height: 28px;cursor: pointer;margin-right: 3px;float:right;"/>
+					</c:if>
+					<c:if test="${image.permission == null || image.permission == ''}">
+						<input type="button" style="background-color: #D9534F;color: white;border:none;height: 16px;cursor: pointer;margin-right: 3px;visibility: hidden;"/>
 					</c:if>
 				</div>
 			</c:forEach>
