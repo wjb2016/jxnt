@@ -114,4 +114,6 @@ public interface OrderService {
 	List<OrderType> getItemListByParentId(OrderType item);
 
 	int getTotalCountByParentId(OrderType item);
+
+	void updateByPrimaryKeySelective(Order order);
 }

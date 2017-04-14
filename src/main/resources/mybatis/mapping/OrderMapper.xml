@@ -296,7 +296,7 @@
   <!-- 公共sql -->
   <sql id="common">
   	from t_order tod
-  	where 1=1
+  	where 1=1 and tod.status != 12
   	<if test="searchName != '' and searchName != null">
   		and (
 	  		tod.name like concat("%",#{searchName,jdbcType=VARCHAR},"%")
@@ -352,7 +352,7 @@
   <select id="getOrderListByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List"/>
-    from t_order tod
+    from t_order tod 
     where tod.mobile = #{mobile,jdbcType=VARCHAR}
   </select>
   <select id="getUnsureOrderCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">

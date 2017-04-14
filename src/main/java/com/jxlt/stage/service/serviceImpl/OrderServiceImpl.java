@@ -354,4 +354,10 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderTypeMapper.getTotalCountByParentId(item);
 	}
+
+	@Override
+	public void updateByPrimaryKeySelective(Order order) {
+		// TODO Auto-generated method stub
+		orderMapper.updateByPrimaryKeySelective(order);
+	}
 }

@@ -106,6 +106,27 @@ function refresh(){
     $("#orderStatus").val("-1");
     search();
 }
+function deleteOrder(id,oName){
+$.messager.confirm("操作确认","确认删除客户："+oName+" 的订单？",function(r){  
+		    if (r){   
+			  	$.ajax({
+			  		url:'<%=basePath%>Order/jsonDeleteOrder.do?id='+id,
+			  		type : "post",
+			          dataType:"json", 
+			          success : function(data) { 
+				           showProcess(false); 
+			               if(data.code == 0){
+			                   $.messager.alert('获取信息', data.message, 'info',function() {
+			                       window.location.href="<%=basePath %>Order/orderList.do?pageNo="+$("#pageNumber").val();
+			                   });
+				           }else{
+			                   $.messager.alert('操作信息', data.message, 'error');
+			               }
+			         }
+			     });
+	    }  
+	}); 
+}
 </script>
 </head>
 <body>
@@ -149,7 +170,7 @@ function refresh(){
 									 <option value="4">施工中</option>
 									 <option value="6">已完成</option>
 									 <option value="8">已中断</option>
-									 <option value="10">已作废</option>
+									 <option value="10">已作废</option> 
 								</select>
 							</td>
 						</tr>
@@ -179,7 +200,7 @@ function refresh(){
 		<div class="fl yw-lump">
 			<table class="yw-cm-table yw-center yw-bg-hover">
 				<tr style="background-color:#D6D3D3;font-weight: bold;">
-					<th width="10%">用户名</th>
+					<th width="5%">用户名</th>
 					<th width="10%">手机号</th>
 					<th width="10%">合同号</th>
 					<th width="15%">下单时间</th>
@@ -187,7 +208,7 @@ function refresh(){
 					<th width="20%" style="text-align: left!important;">地址</th>
 					<th width="10%">订单类型</th>
 					<th width="10%">订单状态</th>
-					<th width="5%">操作</th>
+					<th width="10%">操作</th>
 				</tr>
 				<c:forEach var="item" items="${OrderList}">
 					<tr>
@@ -246,6 +267,7 @@ function refresh(){
 						</td>
 						<td style="text-align: center;">
 							<a href="javascript:void(0);" style="color:blue;" onclick="window.location.href='<%=basePath%>Order/orderInfo.do?id=${item.id}'">详情</a>
+						    <a href="javascript:void(0);" style="color:red;margin-left:15px;" onclick="deleteOrder(${item.id},'${item.name}');">删除</a>
 						</td>
 					</tr>
 				</c:forEach>

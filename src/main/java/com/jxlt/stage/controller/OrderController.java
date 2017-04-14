@@ -492,7 +492,37 @@ public class OrderController extends BaseController {
 		}
 		return js;
 	}
-	
+
+	/**
+	 * 中断工程取消
+	 * @param orderId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/jsonDeleteOrder.do")
+	public JsonResult<Order> jsonDeleteOrder(
+			Order order
+			){
+		JsonResult<Order> js = new JsonResult<Order>();
+		js.setCode(1);
+		js.setMessage("删除订单失败！");
+		User user = this.getLoginUser();
+		try {
+			if(null != order && order.getId() != null && order.getId()>0){
+				order = orderService.getOrderById(order.getId());
+				if(order != null){
+					order.setStatus(12);
+					orderService.updateByPrimaryKeySelective(order);
+					js.setCode(0);
+					js.setMessage("删除订单成功！");
+				}
+			} 
+			logService.writeLog(user.getName() +" 删除了订单 "+order.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return js;
+	}
 	/**
 	 * 作废工程
 	 * @param orderId
