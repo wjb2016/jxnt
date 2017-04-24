@@ -14,8 +14,8 @@
         </commentGenerator>
         
         <jdbcConnection driverClass="org.gjt.mm.mysql.Driver" 
-        connectionURL="jdbc:mysql://121.40.171.43:3306/jx"  
-         userId="root" password="8a5c94af1d"/>
+        connectionURL="jdbc:mysql://120.76.152.243:3306/jxtest"  
+         userId="root" password="jxntcd666"/>
          
         <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->  
         <javaTypeResolver>  
@@ -40,7 +40,7 @@
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>  
 	       
-	       <table tableName="t_pay" domainObjectName="Pay"
+	       <table tableName="t_order_item" domainObjectName="OrderItem"
            enableSelectByExample="false"
 	       enableDeleteByExample="false"
 	       enableCountByExample="false"

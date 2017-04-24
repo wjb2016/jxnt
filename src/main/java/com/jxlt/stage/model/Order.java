@@ -64,6 +64,18 @@ public class Order  extends Page{
     //维修截止时间展示
     private String serviceEnds;
     
+    
+    //类型多选(地暖、中央空调、净水系统)
+    private Integer typeDN;
+    private Integer typeKT;
+    private Integer typeJS;
+    private Double amountDN;
+    private Double amountKT;
+    private Double amountJS;
+    //订单类型
+    private String typeNames;
+    private String typeName;
+    
     public Integer getId() {
         return id;
     }
@@ -278,4 +290,92 @@ public class Order  extends Page{
 	public void setServiceEnds(String serviceEnds) {
 		this.serviceEnds = serviceEnds;
 	}
+
+	public Double getAmountKT() {
+		return amountKT;
+	}
+
+	public void setAmountKT(Double amountKT) {
+		this.amountKT = amountKT;
+	}
+
+	public Double getAmountDN() {
+		return amountDN;
+	}
+
+	public void setAmountDN(Double amountDN) {
+		this.amountDN = amountDN;
+	}
+
+	public Integer getTypeDN() {
+		return typeDN;
+	}
+
+	public void setTypeDN(Integer typeDN) {
+		this.typeDN = typeDN;
+	}
+
+	public Integer getTypeKT() {
+		return typeKT;
+	}
+
+	public void setTypeKT(Integer typeKT) {
+		this.typeKT = typeKT;
+	}
+
+	public Integer getTypeJS() {
+		return typeJS;
+	}
+
+	public void setTypeJS(Integer typeJS) {
+		this.typeJS = typeJS;
+	}
+
+	public Double getAmountJS() {
+		return amountJS;
+	}
+
+	public void setAmountJS(Double amountJS) {
+		this.amountJS = amountJS;
+	}
+
+	public String getTypeNames() {
+		return typeNames;
+	}
+
+	public void setTypeNames(String typeNames) {
+		this.typeNames = typeNames;
+	}
+
+	public String getTypeName() {
+		if(typeNames != null && typeNames !=""){
+			if(typeNames.contains("1")){
+				if(typeName == null){
+					typeName = "地暖";
+				}else{
+					typeName += ",地暖";
+				}
+			}
+			if(typeNames.contains("2")){
+				if(typeName == null){
+					typeName = "中央空调";
+				}else{
+					typeName += ",中央空调";
+				}
+			}
+			if(typeNames.contains("3")){
+				if(typeName == null){
+					typeName = "净水系统";
+				}else{
+					typeName += ",净水系统";
+				}
+			}
+		}
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
 }

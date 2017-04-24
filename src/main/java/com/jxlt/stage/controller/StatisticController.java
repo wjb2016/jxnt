@@ -3,6 +3,7 @@ package com.jxlt.stage.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,6 +73,10 @@ public class StatisticController extends BaseController {
 		try{
 			pay = CheckSearch(pay);
 			salelist = payService.getSaleAmount(pay);
+			for(PayVM p:salelist){
+				BigDecimal q = BigDecimal.valueOf(p.getPayAmount()).setScale(2);
+				p.setAmount(q);
+			}
 			if(pay.getFlag() != null && pay.getFlag() == 1){
 				//导出销售统计:成功2，失败4
 				pay = exportSale(pay,salelist);	
@@ -186,6 +191,8 @@ public class StatisticController extends BaseController {
 			totalCount = payService.getTotalCount(pay);
 			double payBack = 0;
 			for(Pay s:paylist){
+				BigDecimal q = BigDecimal.valueOf(s.getPayPrice()).setScale(2);
+				s.setAmount(q);
 				payBack += s.getPayBackPrice();
 				s.setPayTimes(DateUtil.longFormat(s.getPayTime()));
 				if(s.getPayBackTime() != null)

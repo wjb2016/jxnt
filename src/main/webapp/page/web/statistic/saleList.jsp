@@ -132,7 +132,7 @@ function exportSale(){
 							<td ><span >${item.orderCount}</span></td> 							
 							<td ><span >${item.orderAmount}</span></td> 
 							<%-- <td ><span>${item.payCount}</span></td> --%>  
-							<td ><span>${item.payAmount}</span></td>  
+							<td ><span>${item.amount}</span></td>  
 							<td ><span >${item.assessCount}</span></td> 
 							<td ><span>${item.assess}</span></td>  
 								

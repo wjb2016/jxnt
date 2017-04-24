@@ -263,15 +263,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        	}
 	        	if(data.obj){
 		        	//项目类型
-		        	if(data.obj.orderTypeId == 1){
+		        	/* if(data.obj.orderTypeId == 1){
 		        		$("#orderType").text("地暖")
 		        	}else if(data.obj.orderTypeId == 2){
 		        		$("#orderType").text("中央空调")
 		        	}else if(data.obj.orderTypeId == 3){
 		        		$("#orderType").text("净水系统")
 		        	}else{
-		        	}
-		        	
+		        	} */
+		        	$("#orderType").text(data.obj.typeName);
 		        	//项目状态
 		        	if(data.obj.status == 0 || data.obj.status == 1){
 		        		$("#orderStatus").text("待确认");

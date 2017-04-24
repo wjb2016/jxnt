@@ -220,7 +220,7 @@ function surePro(obj,id){
 							<span>施工类型：</span>
 						</td>
 						<td>
-							<c:if test="${order.orderTypeId == 1 }">
+							<%-- <c:if test="${order.orderTypeId == 1 }">
 								<input readonly="readonly" type="text" value="地暖" class="easyui-validatebox" style="width:254px;height:28px;" />
 							</c:if>
 							<c:if test="${order.orderTypeId == 2 }">
@@ -228,7 +228,8 @@ function surePro(obj,id){
 							</c:if>
 							<c:if test="${order.orderTypeId == 3 }">
 								<input readonly="readonly" type="text" value="净水系统" class="easyui-validatebox" style="width:254px;height:28px;" />
-							</c:if>
+							</c:if> --%>
+						    <input readonly="readonly" type="text" value="${order.typeName}" class="easyui-validatebox" style="width:254px;height:28px;" />
 						</td>
 						<td width="120px;" align="right">交付时间：</td>
 						 <td>

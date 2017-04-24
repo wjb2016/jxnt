@@ -12,12 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1  ,maximum-scale=1, user-scalable=no" />
 <script type="text/javascript">
 $(function(){
-	//订单类型
+	/* //订单类型
 	var orderTypeId =$("#orderTypeId").val();
 	if(orderTypeId){
 		$("#ordertype").combobox("setValue",orderTypeId);
-	}
-	
+	} */
+	/*  $(":radio").click(function(){
+       alert("您是..." + $(this).val());
+      }); */
 	//户型
 	var houseType =$("#houseType").val();
 	if(houseType){
@@ -73,6 +75,32 @@ $(function(){
 //保存订单
 function saveOrder(obj){
 	//获取单选按钮的值并赋值给隐藏文本域
+	var typeDN = $("input[name='typeDNs']:checked").val();
+	$("#typeDN").val(typeDN);
+	var typeKT = $("input[name='typeKTs']:checked").val();
+	$("#typeKT").val(typeKT);
+	var typeJS = $("input[name='typeJSs']:checked").val();
+	$("#typeJS").val(typeJS);
+	var amountDN = $("#amountDN").val();
+	var amountKT = $("#amountKT").val();
+	var amountJS = $("#amountJS").val();
+	if(typeDN == 0 && typeKT == 0 && typeJS == 0){
+	   alert("请选择至少一种订单类型！");
+	   return js;
+	}
+	if(typeDN == 1 && amountDN <= 0){
+	   alert("请输入地暖有效收费金额！");
+	   return js;
+	}
+	if(typeKT == 1 && amountKT <= 0){
+	   alert("请输入中央空调有效收费金额！");
+	   return js;
+	}
+	if(typeJS == 1 && amountJS <= 0){
+	   alert("请输入净水系统有效收费金额！");
+	   return js;
+	}
+	
 	var measure = $("input[name='measure']:checked").val();
 	$("#measureFlag").val(measure);
 	var depost = $("input[name='depost']:checked").val();
@@ -214,9 +242,70 @@ function examineOrder(){
 								</c:if>
 								<input id="create" type="hidden" value="${order.createDate}"/>
 							</td>
-						</tr>	
+						</tr>
 						<tr>
 							<td width="120px;" align="right">
+								<span>地暖订单？</span>
+							</td>
+							<td>
+								<c:if test="${order.typeDN == null || order.typeDN == 0}">
+									<input type="radio" name="typeDNs" value="0" checked="checked">否
+									<input type="radio" name="typeDNs"  value="1">是
+								</c:if>
+								<c:if test="${order.typeDN == 1}">
+									<input type="radio" name="typeDNs" value="0">否
+									<input type="radio" name="typeDNs"  value="1" checked="checked">是
+								</c:if>
+						    </td>
+						    <td width="120px;" align="right">
+								<span>地暖金额：</span>
+							</td>
+							<td> 	
+							    <input id="amountDN" name="amountDN" value="${order.amountDN}" placeholder="请输入订单金额" onblur="valueTrim(this);" type="text" class="easyui-numberbox" data-options="min:0,precision:2" style="width:254px;height:28px;" />							 	
+						    </td>	
+						<tr>
+						<tr>
+							<td width="120px;" align="right">
+								<span>空调订单？</span>
+							</td>
+							<td>
+							    <c:if test="${order.typeKT == null || order.typeKT == 0}">
+									<input type="radio" name="typeKTs" value="0" checked="checked">否
+									<input type="radio" name="typeKTs"  value="1">是
+								</c:if>
+								<c:if test="${order.typeKT == 1}">
+									<input type="radio" name="typeKTs" value="0">否
+									<input type="radio" name="typeKTs"  value="1" checked="checked">是
+								</c:if>
+						    </td>
+						    <td width="120px;" align="right">
+								<span>空调金额：</span>
+							</td>
+							<td> 	
+							    <input id="amountKT" name="amountKT" value="${order.amountKT}" placeholder="请输入订单金额" onblur="valueTrim(this);" type="text" class="easyui-numberbox" data-options="min:0,precision:2"  style="width:254px;height:28px;" />							 	
+						    </td>	
+						<tr>
+						<tr>
+							<td width="120px;" align="right">
+								<span>净水订单？</span>
+							</td>
+							<td>
+							    <c:if test="${order.typeJS == null || order.typeJS == 0}">
+									<input type="radio" name="typeJSs" value="0" checked="checked">否
+									<input type="radio" name="typeJSs"  value="1">是
+								</c:if>
+								<c:if test="${order.typeJS == 1}">
+									<input type="radio" name="typeJSs" value="0">否
+									<input type="radio" name="typeJSs"  value="1" checked="checked">是
+								</c:if>
+						    <td width="120px;" align="right">
+								<span>净水金额：</span>
+							</td>
+							<td> 	
+							    <input id="amountJX" name="amountJS" value="${order.amountJS}"  placeholder="请输入订单金额" onblur="valueTrim(this);" type="text" class="easyui-numberbox" data-options="min:0,precision:2" style="width:254px;height:28px;" />							 	
+						    </td>	
+						<tr>
+							<%-- <td width="120px;" align="right">
 								<span>施工类型：</span>
 							</td>
 							<td>
@@ -227,7 +316,11 @@ function examineOrder(){
 									 <option value="3">净水系统</option>
 								</select>
 								<input id="orderTypeId" name="orderTypeId" type="hidden" value="${order.orderTypeId}"/>
-							</td>
+							</td> --%>					
+							 <td width="120px;" align="right">合同编号：</td>
+							 <td>
+							 	<input id="contractNumber" name="contractNumber" placeholder="请输入合同编号" onblur="valueTrim(this);" type="text" value="${order.contractNumber}" class="easyui-validatebox" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
+							 </td>
 							<td width="120px;" align="right">交付时间：</td>
 							 <td>
 							 	<input id="appointTime" name="appointTime" onblur="valueTrim(this);" type="text" value="${order.appointTime}" class="easyui-datetimebox" data-options="showSeconds:false,editable:false" validType="Length[1,20]" style="width:254px;height:28px;" />
@@ -254,7 +347,7 @@ function examineOrder(){
 								<input id="houseType" name="houseType" type="hidden" value="${order.houseType}"/>
 							 </td>
 						</tr>	
-						<tr>
+						<%-- <tr>
 							 <td width="120px;" align="right">订单金额：</td>
 							 <td>
 							 	<c:if test="${order.amount == 0 }">
@@ -268,7 +361,7 @@ function examineOrder(){
 							 <td>
 							 	<input id="contractNumber" name="contractNumber" placeholder="请输入合同编号" onblur="valueTrim(this);" type="text" value="${order.contractNumber}" class="easyui-validatebox" required="true" validType="Length[1,20]" style="width:254px;height:28px;" />
 							 </td>					 
-						</tr>
+						</tr> --%>
 						<tr>
 							<td width="120px;" align="right">
 								<span>保修起始：</span>
@@ -340,6 +433,10 @@ function examineOrder(){
 								<input id="refMobile" name="refMobile" type="hidden" value="${order.refMobile}"/>
 								<%--<input id="status" name="status" type="hidden" value="${order.status}"/>--%>
 								<input id="hid_id" name="id" type="hidden" value="${order.id}"/>
+								<input id="typeDN" name="typeDN" type="hidden" value="${order.typeDN}"/>
+								<input id="typeKT" name="typeKT" type="hidden" value="${order.typeKT}"/>
+								<input id="typeJS" name="typeJS" type="hidden" value="${order.typeJS}"/>
+								<input id="amount" name="amount" type="hidden" value="${order.amount}"/>
 							</td>
 						</tr>
 					</table> 						

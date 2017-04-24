@@ -114,7 +114,7 @@ function savePro(orderId){
 							<span>施工类型：</span>
 						</td>
 						<td>
-							<c:if test="${order.orderTypeId == 0 || order.orderTypeId == null}">
+							<%-- <c:if test="${order.orderTypeId == 0 || order.orderTypeId == null}">
 								<input readonly="readonly" type="text" value="其他" class="easyui-validatebox" style="width:254px;height:28px;" />
 							</c:if>
 							<c:if test="${order.orderTypeId == 1 }">
@@ -125,7 +125,13 @@ function savePro(orderId){
 							</c:if>
 							<c:if test="${order.orderTypeId == 3 }">
 								<input readonly="readonly" type="text" value="净水系统" class="easyui-validatebox" style="width:254px;height:28px;" />
-							</c:if>
+							</c:if> --%>
+						    <c:if test="${order.typeName != null && order.typeName != ''}">
+								<input readonly="readonly" type="text" value="${order.typeName}" class="easyui-validatebox" style="width:254px;height:28px;" />
+						    </c:if>
+						    <c:if test="${order.typeName = null || order.typeName == ''}">
+								<input readonly="readonly" type="text" value="${order.其他}" class="easyui-validatebox" style="width:254px;height:28px;" />
+						    </c:if>
 						</td>
 					</tr>	
 					<tr>

@@ -414,11 +414,39 @@ public class OrderController extends BaseController {
 					}
 				}
 				
+//				//获取订单品牌类型所属的所有品牌
+//				if(order.getOrderTypeId() != null){
+//					List<OrderType> listOrderType = orderService.getTypeByParentId(order.getOrderTypeId());
+//					req.setAttribute("listOrderType", listOrderType);
+//				}
+				List<OrderType> listOrderType = new ArrayList<OrderType>();
 				//获取订单品牌类型所属的所有品牌
-				if(order.getOrderTypeId() != null){
-					List<OrderType> listOrderType = orderService.getTypeByParentId(order.getOrderTypeId());
-					req.setAttribute("listOrderType", listOrderType);
+				if(order.getTypeNames() != null){
+					if(order.getTypeNames().contains("1")){
+						order.setTypeDN(1);
+						List<OrderType> listOrderType1 = orderService.getTypeByParentId(1);
+						for(OrderType p:listOrderType1){
+							listOrderType.add(p);
+						}
+					}
+					if(order.getTypeNames().contains("2")){
+						order.setTypeKT(1);
+						List<OrderType> listOrderType2 = orderService.getTypeByParentId(2);
+						for(OrderType p:listOrderType2){
+							listOrderType.add(p);
+						}
+					}
+					if(order.getTypeNames().contains("3")){
+						order.setTypeJS(1);
+						List<OrderType> listOrderType3 = orderService.getTypeByParentId(3);
+						for(OrderType p:listOrderType3){
+							listOrderType.add(p);
+						}
+					}					
 				}
+				if(listOrderType.size() > 0){
+					req.setAttribute("listOrderType", listOrderType);
+			    }
 				
 				//获取订单的工程列表
 				List<Project> listProject = orderService.getProjectListById(order.getId());
@@ -443,6 +471,18 @@ public class OrderController extends BaseController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		if(order.getAmountDN() == null || order.getAmountDN() == 0){
+			order.setTypeDN(0);
+			order.setAmountDN(0.00);
+		}
+		if(order.getAmountKT() == null || order.getAmountKT() == 0){
+			order.setTypeKT(0);
+			order.setAmountKT(0.00);
+		}
+		if(order.getAmountJS() == null || order.getAmountJS() == 0){
+			order.setTypeJS(0);
+			order.setAmountJS(0.00);
 		}
 		req.setAttribute("order", order);
 		
@@ -588,17 +628,25 @@ public class OrderController extends BaseController {
 		js.setMessage("确认订单失败！");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");		
 		try {
-			if(order.getId() == null)
+			if(order.getId() == null || order.getId() == 0){
 				order.setId(0);
-			Order old = new Order();
-			old= orderService.getOrderById(order.getId());
-			if(old != null && old.getStatus() > 1){
-				js.setMessage("订单已更新！");
-				js.setObj(order);
-				return js;
-			}
-			if(order.getOrderTypeId() == null || order.getOrderTypeId() == 0){
-				js.setMessage("请选择订单类型！");
+			}else{				
+				Order old = new Order();
+				old= orderService.getOrderById(order.getId());
+				if(old != null && old.getStatus() > 1){
+					js.setMessage("订单已更新！");
+					js.setObj(order);
+					return js;
+				}
+			}			
+//			if(order.getOrderTypeId() == null || order.getOrderTypeId() == 0){
+//				js.setMessage("请选择订单类型！");
+//				return js;
+//			}
+			if((order.getTypeDN() == null || order.getTypeDN() == 0)
+				&& (order.getTypeJS() == null || order.getTypeJS() == 0)
+				&& (order.getTypeKT() == null || order.getTypeKT() == 0)){
+				js.setMessage("请选择最少一种订单类型！");
 				return js;
 			}
 			if(order.getAppointTime() == null || order.getAppointTime() == ""){
@@ -644,6 +692,20 @@ public class OrderController extends BaseController {
 				order.setCreateTime(new Date());
 			}else{
 				order.setCreateTime(sdf.parse(order.getCreateDate()));
+			}
+			//计算总金额
+		    double amount = 0;
+			if(order.getAmountDN() != null){
+				amount += order.getAmountDN(); 
+			}
+			if(order.getAmountKT() != null){
+				amount += order.getAmountKT(); 
+			}
+			if(order.getAmountJS() != null){
+				amount += order.getAmountJS(); 
+			}
+			if(amount > 0){
+				order.setAmount(amount);
 			}
 			orderService.saveOrder(order);
 			
@@ -693,14 +755,16 @@ public class OrderController extends BaseController {
 				}
 				
 			}
-			
 			//插入支付记录到支付表
+			orderList = orderService.getOrderList(contractOrder);
 			Pay pay = new Pay();
-			pay.setOrderId(order.getId());
-			pay.setPayPrice(order.getAmount());
 			pay.setPayTime(new Date());
 			pay.setPayType(2);
-			orderService.savePay(pay);
+			for(Order p:orderList){
+				pay.setOrderId(order.getId());
+				pay.setPayPrice(order.getAmount());
+				orderService.savePay(pay);				
+			}			
 			js.setCode(0);
 			js.setObj(order);
 			js.setMessage("确认订单成功！");

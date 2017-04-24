@@ -35,5 +35,7 @@ public interface OrderMapper {
 
 	//获取用户的合同号
 	List<String> getContractNumList(Integer id);
+	//订单详情
+	Order getOrderInfoById(Integer orderId);
 
 }

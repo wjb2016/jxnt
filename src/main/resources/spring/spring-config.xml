@@ -33,7 +33,7 @@
     <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://120.76.152.243:3306/jx?useUnicode=true&amp;characterEncoding=UTF-8&amp;useServerPrepStmts=false"/>
+        <property name="url" value="jdbc:mysql://120.76.152.243:3306/jxtest?useUnicode=true&amp;characterEncoding=UTF-8&amp;useServerPrepStmts=false"/>
         <property name="username" value="root"/>
         <property name="password" value="jxntcd666"/>
         

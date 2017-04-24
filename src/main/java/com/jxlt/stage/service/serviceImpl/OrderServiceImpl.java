@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jxlt.stage.dao.GroupMapper;
 import com.jxlt.stage.dao.OrderImageMapper;
+import com.jxlt.stage.dao.OrderItemMapper;
 import com.jxlt.stage.dao.OrderMapper;
 import com.jxlt.stage.dao.OrderTypeMapper;
 import com.jxlt.stage.dao.PayMapper;
@@ -16,6 +17,7 @@ import com.jxlt.stage.dao.ProjectMapper;
 import com.jxlt.stage.dao.UserMapper;
 import com.jxlt.stage.model.Group;
 import com.jxlt.stage.model.Order;
+import com.jxlt.stage.model.OrderItem;
 import com.jxlt.stage.model.OrderType;
 import com.jxlt.stage.model.Pay;
 import com.jxlt.stage.model.Project;
@@ -28,6 +30,10 @@ public class OrderServiceImpl implements OrderService {
 
 	@Resource 
 	private OrderMapper orderMapper;
+
+	@Resource 
+	private OrderItemMapper orderItemMapper;
+	
 	
 	@Resource 
 	private OrderImageMapper orderImageMapper;
@@ -133,7 +139,8 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public Order getOrderById(Integer orderId) {
-		return orderMapper.selectByPrimaryKey(orderId);
+//		return orderMapper.selectByPrimaryKey(orderId);
+		return orderMapper.getOrderInfoById(orderId);
 	}
 
 	/**
@@ -144,7 +151,34 @@ public class OrderServiceImpl implements OrderService {
 		if(order.getId() == 0){
 			orderMapper.insertSelective(order);
 		}else{
-			orderMapper.updateByPrimaryKeySelective(order);
+			orderMapper.updateByPrimaryKeySelective(order);				
+		}
+		if(order.getStatus() == 2){
+			OrderItem item = new OrderItem();
+			if(order.getTypeDN() == 1){
+				item.setOrderId(order.getId());
+				item.setOrderType(1);
+				item.setAmount(order.getAmountDN());
+				item.setId(0);
+				item.setFlag(1);
+				orderItemMapper.insertSelective(item);
+			}
+			if(order.getTypeKT() == 1){
+				item.setOrderId(order.getId());
+				item.setOrderType(2);
+				item.setAmount(order.getAmountKT());
+				item.setId(0);
+				item.setFlag(1);
+				orderItemMapper.insertSelective(item);
+			}
+			if(order.getTypeJS() == 1){
+				item.setOrderId(order.getId());
+				item.setOrderType(3);
+				item.setAmount(order.getAmountJS());
+				item.setId(0);
+				item.setFlag(1);
+				orderItemMapper.insertSelective(item);
+			}
 		}
 	}
 

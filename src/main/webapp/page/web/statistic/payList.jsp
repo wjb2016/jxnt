@@ -135,7 +135,7 @@ function refresh(){
 							<td  style="display:none">${item.id}</td>							
 							<td ><span >${item.contract}</span></td> 
 							<td ><span>${item.payAccount}</span></td>  
-							<td ><span >${item.payPrice}</span></td> 
+							<td ><span >${item.amount}</span></td> 
 							<td ><span>${item.payTimes}</span></td>
 							<c:if test="${Pay.payBackPrice > 0}">  
 							 <td ><span >${item.payBackPrice}</span></td> 

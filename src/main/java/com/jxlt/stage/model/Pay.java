@@ -1,5 +1,6 @@
 package com.jxlt.stage.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.jxlt.stage.common.utils.Page;
@@ -17,6 +18,7 @@ public class Pay extends Page{
     private String cContract;
 
     private Double payPrice;
+	private BigDecimal amount;
 
     private Date payTime;
     //支付时间依赖
@@ -186,5 +188,13 @@ public class Pay extends Page{
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 }

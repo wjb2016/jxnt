@@ -235,7 +235,7 @@ $.messager.confirm("操作确认","确认删除客户："+oName+" 的订单？",
 						</td>
 						<td style="text-align: left;">${item.homeAddress}</td>
 						<td style="text-align: center;">
-							<c:if test="${item.orderTypeId == 1}">
+							<%-- <c:if test="${item.orderTypeId == 1}">
 								地暖
 							</c:if>
 							<c:if test="${item.orderTypeId == 2}">
@@ -243,7 +243,8 @@ $.messager.confirm("操作确认","确认删除客户："+oName+" 的订单？",
 							</c:if>
 							<c:if test="${item.orderTypeId == 3}">
 								净水系统
-							</c:if>
+							</c:if> --%>
+							${item.typeName}
 						</td>
 						<td style="text-align: center;">
 							<c:if test="${item.status == 0 || item.status == 1}">

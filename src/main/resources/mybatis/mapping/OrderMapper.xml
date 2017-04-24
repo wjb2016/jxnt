@@ -24,6 +24,10 @@
     <result column="ref_mobile" property="refMobile" jdbcType="VARCHAR" />
     <result column="contract_number" property="contractNumber" jdbcType="VARCHAR" />
     <result column="house_type" property="houseType" jdbcType="VARCHAR" />
+    <result column="amountDN" property="amountDN" jdbcType="DOUBLE" />
+    <result column="amountKT" property="amountKT" jdbcType="DOUBLE" />
+    <result column="amountJS" property="amountJS" jdbcType="DOUBLE" />
+    <result column="typeNames" property="typeNames" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     tod.id, tod.name,tod.appointment, tod.create_time, tod.order_type_id, tod.area, tod.home_address, tod.message, 
@@ -296,6 +300,9 @@
   <!-- 公共sql -->
   <sql id="common">
   	from t_order tod
+  	<if test="orderTypeId != null and orderTypeId > 0">
+  		left join t_order_item toi on toi.order_id = tod.id
+  	</if>
   	where 1=1 and tod.status != 12
   	<if test="searchName != '' and searchName != null">
   		and (
@@ -306,8 +313,11 @@
 	  		tod.contract_number = #{searchName,jdbcType=VARCHAR}
   		)
   	</if>
-  	<if test="orderTypeId != null and orderTypeId != 0">
+  	<!-- <if test="orderTypeId != null and orderTypeId != 0">
   		and tod.order_type_id = #{orderTypeId,jdbcType=INTEGER}
+  	</if> -->
+  	<if test="orderTypeId != null and orderTypeId > 0">
+  		and toi.order_type = #{orderTypeId,jdbcType=INTEGER}
   	</if>
   	<if test="status != null and status != -1">
   		<!-- 未确认及已导出未确认订单 -->
@@ -342,7 +352,11 @@
   <!-- 根据条件获取订单列表 -->
   <select id="getOrderList" parameterType="com.jxlt.stage.model.Order" resultMap="BaseResultMap">
   	select 
-  	<include refid="Base_Column_List"/>
+  	<include refid="Base_Column_List"/>,
+  	(select group_concat(toi.order_type)  
+		from t_order_item toi  
+		where toi.order_id = tod.id and toi.flag = 1
+  	)as typeNames
   	<include refid="common"/>
   	order by tod.id DESC
  	<if test="pageStart != null and pageSize != null and pageStart>-1 and pageSize>-1">
@@ -363,9 +377,13 @@
   
   <select id="getOrderByConNum" parameterType="java.lang.String" resultMap="BaseResultMap">
   	select 
-  	<include refid="Base_Column_List"/>
+  	<include refid="Base_Column_List"/>,
+  	(select group_concat(toi.order_type)  
+		from t_order_item toi  
+		where toi.order_id = tod.id and toi.flag = 1
+  	)as typeNames
   	from t_order tod
-  	where tod.contract_number = #{num}
+  	where tod.contract_number = #{num} and tod.status != 12
   </select>
   
    <select id="getExpiredOrder" resultMap="BaseResultMap">
@@ -381,5 +399,15 @@
   	from t_order tod
   	join t_user tus on tod.mobile = tus.mobile
   	where tus.id = #{id} and tod.contract_number IS NOT NULL
+  </select>
+  <select id="getOrderInfoById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />,
+    (select group_concat(toi.order_type)  
+		from t_order_item toi  
+		where toi.order_id = tod.id and toi.flag = 1
+  	)as typeNames
+    from t_order tod
+    where tod.id = #{0}
   </select>
 </mapper>

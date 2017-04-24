@@ -152,7 +152,7 @@
   	 from t_pay tp
   	 left join t_contract tc on tp.contract_id = tc.id
   	 left join t_order tod on tp.order_id = tod.id
-  	 where 1=1
+  	 where 1=1 and tod.status != 12 
     <if test="searchName != null and searchName != ''">
 		and (tc.contract_number like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
 		    or tod.contract_number like CONCAT('%',#{searchName,jdbcType=VARCHAR},'%') )
@@ -204,17 +204,25 @@
     <!-- 支付表记录数(查询条件:支付、退款时间,订单类型) -->
     select count(tp.id) as payCount,
      <!-- 支付表记录总金额(查询条件:支付、退款时间,订单类型) -->
-     sum(tp.pay_price - tp.pay_back_price) as payAmount,
+      <if test="orderType == null or orderType == 0">
+        sum(tp.pay_price - tp.pay_back_price) as payAmount,
+      </if>
+      <if test="orderType != null and orderType > 0">
+        sum(toi.amount) as payAmount,
+      </if>
      <!-- 有效订单总数(查询条件:下单时间,订单类型) -->
     (select count(tod.id) 
-	    from t_order tod 
+	    from t_order tod	    
+    	<include refid="order_item_left"/>
 	    where 1=1 and tod.status >= 2
 	    <include refid="sale_searchType" />
 	    <include refid="sale_searchCreateTime" />
     ) as allCount,
     <!-- 工程表记录评价总条数(查询条件:订单类型（同一订单存在多段工程评价）) -->
      (select count(t2.id) 
-	     from t_project t2 left join t_order tod on t2.order_id = tod.id
+	     from t_project t2 
+	     left join t_order tod on t2.order_id = tod.id
+	     <include refid="order_item_left"/>
           where 1=1 
           and t2.assess_value > 0 
           <include refid="sale_searchType" />
@@ -222,7 +230,9 @@
      ) as assessCount,
       <!-- 工程表记录总值(查询条件:订单类型（同一订单存在多段工程评价）) -->
      (select sum(t2.assess_value) 
-           from t_project t2 left join t_order tod on t2.order_id = tod.id
+           from t_project t2 
+           left join t_order tod on t2.order_id = tod.id
+           <include refid="order_item_left"/>
           where 1=1
           and t2.assess_value > 0 
           <include refid="sale_searchType" />
@@ -230,7 +240,9 @@
       ) as assessValue,
       <!-- 支付表已成交订单记录数(查询条件:订单类型，支付、退款时间) -->
 	(select count(tp.id) 
-			from t_pay tp left join t_order tod on tod.id = tp.order_id 
+			from t_pay tp 
+			left join t_order tod on tod.id = tp.order_id 
+			<include refid="order_item_left"/>
 			where 1=1 
 			and tod.`status` = '6'
 	       <include refid="sale_searchType" /> 
@@ -238,25 +250,34 @@
 	 )as orderCount,
 	   <!-- 支付表已成交订单总金额(查询条件:订单类型，支付、退款时间) -->
 	(select sum(tp.pay_price - tp.pay_back_price)
-		 from t_pay tp left join t_order tod on tod.id = tp.order_id 
+		 from t_pay tp left join t_order tod on tod.id = tp.order_id 	 
+	      <include refid="order_item_left"/>
 		 where 1=1 
 		 and tod.`status` = '6'
 		 <include refid="sale_searchType" /> 
 		 <include refid="sale_searchTime" />
 	 )as orderAmount
-	from t_pay tp left join t_order tod on tod.id = tp.order_id
-	where 1=1
+	from t_pay tp 
+	left join t_order tod on tod.id = tp.order_id
+	<include refid="order_item_left"/>
+	where 1=1 and tod.status != 12
 	<include refid="sale_searchType" />
 	<include refid="sale_searchTime" />
   </select>
   
+  <sql id="order_item_left">
+	  <if test="orderType != null or orderType > 0">
+		  left join t_order_item toi on toi.order_id = tod.id
+	</if>
+ </sql>
+  
   <sql id="sale_searchType">
    <if test="orderType != null and orderType > 0">
-       and tod.order_type_id = #{orderType,jdbcType=INTEGER}
+       and toi.order_type = #{orderType,jdbcType=INTEGER} and toi.flag = 1
     </if>
-    <if test="orderType == null or orderType == 0">
+  <!--   <if test="orderType == null or orderType == 0">
        and tod.order_type_id in (1,2,3)
-    </if>
+    </if> -->
  </sql>
  <sql id="sale_searchTime">
    <if test="startTime != null and endTime != ''">
